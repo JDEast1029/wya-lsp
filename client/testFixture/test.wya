@@ -1,0 +1,27 @@
+<template>
+	<view wx:for="{{ true }}" /view>
+	<wxs>
+		function() {
+			const a = '123';
+		}
+	</wxs>
+</template>
+
+<script>
+Component({
+	
+})
+</script>
+
+<style lang="scss">
+.test {
+	position: 'absolute';
+	top: 1
+}
+</style>
+
+<config>
+{
+	"test": 11
+}
+</config>
