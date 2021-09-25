@@ -32,6 +32,12 @@
 				"aliases": ["Wya", "wya"],
 				"extensions": [".wya"],
 				"configuration": "./languages/wya-language-configuration.json"
+			}, {
+				"id": "wya-html",
+				"aliases": [
+					"wya-html"
+				],
+				"configuration": "./languages/wya-html-language-configuration.json"
 			}
 		],
 		"grammars": [
@@ -46,6 +52,14 @@
 					"source.css": "css",
 					"source.css.scss": "scss",
 					"source.json": "json"
+				}
+			},
+			{
+				"language": "wya-html",
+				"scopeName": "text.html.wya-html",
+				"path": "./syntaxes/wya-html.tmLanguage.json",
+				"embeddedLanguages": {
+					"source.js": "javascript"
 				}
 			}
 		],
