@@ -189,24 +189,24 @@
 		"string-double-quoted": {
 			"name": "string.quoted.double.html",
 			"begin": "\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.html"
+				}
+			},
 			"end": "\"",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.html"
+				}
+			},
 			"patterns": [{
 					"include": "#wya-interpolations"
 				},
 				{
 					"include": "#entities"
 				}
-			],
-			"beginCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.begin.html"
-				}
-			},
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.end.html"
-				}
-			}
+			]
 		}
 	},
 	"uuid": "ca2e4260-5d62-45bf-8cf1-d8b5cc19c8f9",
