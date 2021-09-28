@@ -1,14 +1,14 @@
 {
 	"name": "wls",
-	"description": "A language server example",
-	"author": "Microsoft Corporation",
+	"description": "wya language server",
+	"author": "JD",
 	"license": "MIT",
 	"version": "1.0.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Microsoft/vscode-extension-samples"
 	},
-	"publisher": "vscode-samples",
+	"publisher": "JD",
 	"categories": [],
 	"keywords": [
 		"multi-root ready"
@@ -48,7 +48,7 @@
 				"embeddedLanguages": {
 					"text.html": "html",
 					"text.html.wya-html": "wya-html",
-					"source.js": "js",
+					"source.js": "javascript",
 					"source.css": "css",
 					"source.css.scss": "scss",
 					"source.json": "json"
