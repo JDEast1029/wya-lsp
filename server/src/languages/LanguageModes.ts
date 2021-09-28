@@ -1,11 +1,11 @@
-import { IEmbeddedRegion, LanguageId, parseWyaDocumentRegions } from '../parser/region/wyaDocumentRegionParser';
-import { ILanguageMode } from './ILanguageMode';
-import { JSONLanguageMode } from './JSONLanguageMode';
-import { WXMLLanguageMode } from './WXMLLanguageMode';
+import { IEmbeddedRegion, LanguageId, parseWyaDocumentRegions } from '../parser/region/WyaDocumentRegionParser';
+import { ILanguageMode } from './modes/ILanguageMode';
+import { JSONLanguageMode } from './modes/JSONLanguageMode';
+import { WXMLLanguageMode } from './modes/WXMLLanguageMode';
 import { LanguageModeCache } from './LanguageModeCache';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { CompletionContext, Position } from 'vscode-languageserver/node';
-import { WyaDocumentRegions, getWyaDocumentRegions } from '../parser/region/WyaRegion';
+import { WyaDocumentRegions, getWyaDocumentRegions } from '../parser/region/WyaDocumentRegions';
 
 export const nullMode: ILanguageMode = {
 	doComplete: () => []
@@ -18,10 +18,10 @@ export class LanguageModes {
 		scss: nullMode,
 		json: nullMode,
 	};
-	documentRegions: LanguageModeCache<WyaDocumentRegions>;
+	languageModeCache: LanguageModeCache<WyaDocumentRegions>;
 
 	constructor() {
-		this.documentRegions = new LanguageModeCache<WyaDocumentRegions>(10, 60, document => getWyaDocumentRegions(document));
+		this.languageModeCache = new LanguageModeCache<WyaDocumentRegions>(10, 60, document => getWyaDocumentRegions(document));
 
 		// this.modes['wxml'] = new JSONLanguageMode();
 		// this.modes['javascript'] = new JSONLanguageMode();
@@ -30,7 +30,8 @@ export class LanguageModes {
 	}
 
 	getModeAtPosition(document: TextDocument, position: Position): ILanguageMode | undefined {
-		const languageId = this.documentRegions.refreshAndGet(document).getLanguageAtPosition(position);
+		const wyaDocumentRegion = this.languageModeCache.refreshAndGetMode(document);
+		const languageId = wyaDocumentRegion.getLanguageAtPosition(position);
 
 		return this.modes?.[languageId];
 	}

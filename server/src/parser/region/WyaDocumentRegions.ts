@@ -1,5 +1,5 @@
 import { Position, TextDocument } from 'vscode-languageserver-textdocument';
-import { IEmbeddedRegion, LanguageId, parseWyaDocumentRegions } from './wyaDocumentRegionParser';
+import { IEmbeddedRegion, LanguageId, parseWyaDocumentRegions } from './WyaDocumentRegionParser';
 
 
 export interface WyaDocumentRegions {

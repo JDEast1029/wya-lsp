@@ -1,6 +1,6 @@
 import { TextDocument } from 'vscode-languageserver-textdocument';
 
-export interface LanguageModelCache<T> {
+export interface LanguageModeCache<T> {
 	/**
 	 * - Feed updated document
 	 * - Use `parse` function to re-compute model
@@ -12,7 +12,7 @@ export interface LanguageModelCache<T> {
 }
 
 export class LanguageModeCache<T> {
-	languageModels: { [uri: string]: { version: number; languageId: string; cTime: number; languageModel: T } } = {};
+	languageModes: { [uri: string]: { version: number; languageId: string; cTime: number; languageMode: T } } = {};
 	nModels = 0;
 	cleanupInterval: NodeJS.Timer | undefined;
 	parse: (document: TextDocument) => T;
@@ -26,11 +26,11 @@ export class LanguageModeCache<T> {
 		if (this.cleanupIntervalTimeInSec > 0) {
 			this.cleanupInterval = setInterval(() => {
 				const cutoffTime = Date.now() - this.cleanupIntervalTimeInSec * 1000;
-				const uris = Object.keys(this.languageModels);
+				const uris = Object.keys(this.languageModes);
 				for (const uri of uris) {
-					const languageModelInfo = this.languageModels[uri];
-					if (languageModelInfo.cTime < cutoffTime) {
-						delete this.languageModels[uri];
+					const languageModeInfo = this.languageModes[uri];
+					if (languageModeInfo.cTime < cutoffTime) {
+						delete this.languageModes[uri];
 						this.nModels--;
 					}
 				}
@@ -38,42 +38,42 @@ export class LanguageModeCache<T> {
 		}
 	}
 
-	refreshAndGet(document: TextDocument): T {
+	refreshAndGetMode(document: TextDocument): T {
 		const version = document.version;
 		const languageId = document.languageId;
-		const languageModelInfo = this.languageModels[document.uri];
-		if (languageModelInfo && languageModelInfo.version === version && languageModelInfo.languageId === languageId) {
-			languageModelInfo.cTime = Date.now();
-			return languageModelInfo.languageModel;
+		const languageModeInfo = this.languageModes[document.uri];
+		if (languageModeInfo && languageModeInfo.version === version && languageModeInfo.languageId === languageId) {
+			languageModeInfo.cTime = Date.now();
+			return languageModeInfo.languageMode;
 		}
-		const languageModel = this.parse(document);
-		this.languageModels[document.uri] = { languageModel, version, languageId, cTime: Date.now() };
-		if (!languageModelInfo) {
+		const languageMode = this.parse(document);
+		this.languageModes[document.uri] = { languageMode, version, languageId, cTime: Date.now() };
+		if (!languageModeInfo) {
 			this.nModels++;
 		}
 
 		if (this.nModels === this.maxEntries) {
 			let oldestTime = Number.MAX_VALUE;
 			let oldestUri = null;
-			for (const uri in this.languageModels) {
-				const languageModelInfo = this.languageModels[uri];
-				if (languageModelInfo.cTime < oldestTime) {
+			for (const uri in this.languageModes) {
+				const languageModeInfo = this.languageModes[uri];
+				if (languageModeInfo.cTime < oldestTime) {
 					oldestUri = uri;
-					oldestTime = languageModelInfo.cTime;
+					oldestTime = languageModeInfo.cTime;
 				}
 			}
 			if (oldestUri) {
-				delete this.languageModels[oldestUri];
+				delete this.languageModes[oldestUri];
 				this.nModels--;
 			}
 		}
-		return  languageModel;
+		return  languageMode;
 	}
 
 	onDocumentRemoved(document: TextDocument) {
 		const uri = document.uri;
-		if (this.languageModels[uri]) {
-			delete this.languageModels[uri];
+		if (this.languageModes[uri]) {
+			delete this.languageModes[uri];
 			this.nModels--;
 		}
 	}
@@ -82,7 +82,7 @@ export class LanguageModeCache<T> {
 		if (typeof this.cleanupInterval !== 'undefined') {
 			clearInterval(this.cleanupInterval);
 			this.cleanupInterval = null as any;
-			this.languageModels = {};
+			this.languageModes = {};
 			this.nModels = 0;
 		}
 	}
