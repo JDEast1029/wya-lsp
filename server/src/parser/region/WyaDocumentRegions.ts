@@ -25,5 +25,5 @@ const getLanguageAtPosition = (document: TextDocument, regions: IEmbeddedRegion[
 			break;
 		}
 	}
-	return 'wxml';
+	return 'wya';
 };

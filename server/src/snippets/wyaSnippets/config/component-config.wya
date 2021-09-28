@@ -1,0 +1,8 @@
+<config>
+{
+\t"component": true,
+\t"usingComponents: {
+\t\t${0}
+}
+}
+</config>

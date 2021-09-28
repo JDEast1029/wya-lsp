@@ -6,6 +6,7 @@ import { LanguageModeCache } from './LanguageModeCache';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { CompletionContext, Position } from 'vscode-languageserver/node';
 import { WyaDocumentRegions, getWyaDocumentRegions } from '../parser/region/WyaDocumentRegions';
+import { WYALanguageMode } from './modes/WYALanguageMode';
 
 export const nullMode: ILanguageMode = {
 	doComplete: () => []
@@ -13,6 +14,7 @@ export const nullMode: ILanguageMode = {
 
 export class LanguageModes {
 	private modes: { [k in LanguageId]: ILanguageMode } = {
+		wya: nullMode,
 		wxml: nullMode,
 		javascript: nullMode,
 		scss: nullMode,
@@ -26,6 +28,7 @@ export class LanguageModes {
 		// this.modes['wxml'] = new JSONLanguageMode();
 		// this.modes['javascript'] = new JSONLanguageMode();
 		// this.modes['scss'] = new JSONLanguageMode();
+		this.modes['wya'] = new WYALanguageMode();
 		this.modes['json'] = new JSONLanguageMode();
 	}
 

@@ -3,7 +3,7 @@ import { TokenType } from '../scanner/constants';
 import { Scanner } from '../scanner/Scanner';
 
 export type RegionType = 'template' | 'script' | 'style' | 'config';
-export type LanguageId = 'wxml' | 'javascript' | 'scss' | 'json'
+export type LanguageId = 'wya' | 'wxml' | 'javascript' | 'scss' | 'json'
 
 export interface IEmbeddedRegion {
 	languageId: LanguageId,

@@ -17,6 +17,7 @@
 	},
 	"scripts": {},
 	"devDependencies": {
+		"vscode-css-languageservice": "^5.1.6",
 		"vscode-emmet-helper": "^2.6.4"
 	}
 }
