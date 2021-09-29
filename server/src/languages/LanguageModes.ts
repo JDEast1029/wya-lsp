@@ -1,12 +1,13 @@
 import { IEmbeddedRegion, LanguageId, parseWyaDocumentRegions } from '../parser/region/WyaDocumentRegionParser';
+import { TextDocument } from 'vscode-languageserver-textdocument';
+import { CompletionContext, Position } from 'vscode-languageserver/node';
+import { LanguageModeCache } from './LanguageModeCache';
+import { WyaDocumentRegions, getWyaDocumentRegions } from '../parser/region/WyaDocumentRegions';
 import { ILanguageMode } from './modes/ILanguageMode';
 import { JSONLanguageMode } from './modes/JSONLanguageMode';
 import { WXMLLanguageMode } from './modes/WXMLLanguageMode';
-import { LanguageModeCache } from './LanguageModeCache';
-import { TextDocument } from 'vscode-languageserver-textdocument';
-import { CompletionContext, Position } from 'vscode-languageserver/node';
-import { WyaDocumentRegions, getWyaDocumentRegions } from '../parser/region/WyaDocumentRegions';
 import { WYALanguageMode } from './modes/WYALanguageMode';
+import { SCSSLanguageMode } from './modes/SCSSLanguageMode';
 
 export const nullMode: ILanguageMode = {
 	doComplete: () => []
@@ -27,7 +28,7 @@ export class LanguageModes {
 
 		// this.modes['wxml'] = new JSONLanguageMode();
 		// this.modes['javascript'] = new JSONLanguageMode();
-		// this.modes['scss'] = new JSONLanguageMode();
+		this.modes['scss'] = new SCSSLanguageMode(this.languageModeCache);
 		this.modes['wya'] = new WYALanguageMode();
 		this.modes['json'] = new JSONLanguageMode();
 	}

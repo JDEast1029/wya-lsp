@@ -1,28 +1,35 @@
 import { ILanguageMode } from './ILanguageMode';
 import { CompletionItem } from 'vscode-languageserver-types';
-import { CompletionParams } from 'vscode-languageserver/node';
+import { CompletionContext, CompletionParams } from 'vscode-languageserver/node';
 import * as emmet from 'vscode-emmet-helper';
-import { TextDocument } from 'vscode-languageserver-textdocument';
-
-export enum Priority {
-	Emmet,
-	Platform
-}
-  
+import { Position, TextDocument } from 'vscode-languageserver-textdocument';
+import {
+	getSCSSLanguageService,
+	LanguageService,
+	Stylesheet
+} from 'vscode-css-languageservice';
+import { LanguageModeCache } from '../LanguageModeCache';
+import { WyaDocumentRegions } from '../../parser/region/WyaDocumentRegions';
 export class SCSSLanguageMode implements ILanguageMode {
-// 	constructor(private document: TextDocument) {}
+	languageService: LanguageService;
+	languageModeCache: LanguageModeCache<WyaDocumentRegions>;
+	embeddedLanguageModeCache: LanguageModeCache<TextDocument>;
+	stylesheetsModeCache: LanguageModeCache<Stylesheet>;
 
-// 	doComplete(params: CompletionParams): CompletionItem[] {
-// 		// this.env.getConfig().emmet
-// 		const emmetCompletions = emmet.doComplete(this.document, params.position, 'sass', {});
-// 		if (!emmetCompletions) {
-// 			return [];
-// 		}
-// 		return emmetCompletions.items.map(i => {
-// 			return {
-// 				...i,
-// 				sortText: Priority.Emmet + i.label
-// 			};
-// 		});
-// 	}
+	constructor(languageModeCache: LanguageModeCache<WyaDocumentRegions>) {
+		this.languageService = getSCSSLanguageService();
+		this.languageModeCache = languageModeCache;
+		this.embeddedLanguageModeCache = new LanguageModeCache<TextDocument>(10, 60, document => 
+			this.languageModeCache.refreshAndGetMode(document).getSingleLanguageDocument('scss')
+		);
+		this.stylesheetsModeCache = new LanguageModeCache<Stylesheet>(10, 60, document => this.languageService.parseStylesheet(document));
+	}
+
+	doComplete(document: TextDocument, position: Position, context: CompletionContext | undefined): CompletionItem[] {
+		const embedded = this.embeddedLanguageModeCache.refreshAndGetMode(document);
+		const lsCompletions = this.languageService.doComplete(embedded, position, this.stylesheetsModeCache.refreshAndGetMode(embedded));
+		// TODO: 编辑器设置内的代码提示
+		
+		return lsCompletions.items;
+	}
 }
