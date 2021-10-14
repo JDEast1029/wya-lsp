@@ -15,32 +15,32 @@ export const LCR = '{'.charCodeAt(0);
 export const RCR = '}'.charCodeAt(0);
 
 export enum TokenType {
-	StartCommentTag,
-	Comment,
-	EndCommentTag,
-	StartTagOpen,
-	StartTagClose,
-	StartTagSelfClose,
-	StartTag,
-	StartInterpolation,
-	EndTagOpen,
-	EndTagClose,
-	EndTag,
-	EndInterpolation,
-	DelimiterAssign,
-	AttributeName,
-	AttributeValue,
-	StartDoctypeTag,
-	Doctype,
-	EndDoctypeTag,
-	Content,
-	InterpolationContent,
-	Whitespace,
-	Unknown,
-	Script,
-	Styles,
-	Config,
-	EOS
+	StartCommentTag, // 0
+	Comment, // 1
+	EndCommentTag, // 2
+	StartTagOpen, // 3
+	StartTagClose, // 4
+	StartTagSelfClose, // 5
+	StartTag, // 6
+	StartInterpolation, // 7
+	EndTagOpen, // 8
+	EndTagClose, // 9
+	EndTag, // 10
+	EndInterpolation, // 11
+	DelimiterAssign, // 12
+	AttributeName, // 13
+	AttributeValue, // 14
+	StartDoctypeTag, // 15
+	Doctype, // 16
+	EndDoctypeTag, // 17
+	Content, // 18
+	InterpolationContent, // 19
+	Whitespace, // 20
+	Unknown, // 21
+	Script, // 22
+	Styles, // 23
+	Config, // 24
+	EOS, // 25
 }
 export enum ScannerState {
 	WithinContent,

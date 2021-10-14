@@ -9,14 +9,14 @@ import {
 	Stylesheet
 } from 'vscode-css-languageservice';
 import { LanguageModeCache } from '../LanguageModeCache';
-import { WyaDocumentRegions } from '../../parser/region/WyaDocumentRegions';
+import { IWyaDocumentRegions } from '../../parser/region/WyaDocumentRegions';
 export class SCSSLanguageMode implements ILanguageMode {
 	languageService: LanguageService;
-	languageModeCache: LanguageModeCache<WyaDocumentRegions>;
+	languageModeCache: LanguageModeCache<IWyaDocumentRegions>;
 	embeddedLanguageModeCache: LanguageModeCache<TextDocument>;
 	stylesheetsModeCache: LanguageModeCache<Stylesheet>;
 
-	constructor(languageModeCache: LanguageModeCache<WyaDocumentRegions>) {
+	constructor(languageModeCache: LanguageModeCache<IWyaDocumentRegions>) {
 		this.languageService = getSCSSLanguageService();
 		this.languageModeCache = languageModeCache;
 		this.embeddedLanguageModeCache = new LanguageModeCache<TextDocument>(10, 60, document => 

@@ -3,33 +3,11 @@ import { CompletionItem, CompletionItemKind, InsertTextFormat, Position, TextEdi
 import { CompletionContext, CompletionParams } from 'vscode-languageserver/node';
 import { Range } from 'vscode-css-languageservice';
 import { TextDocument } from 'vscode-languageserver-textdocument';
-
+import { CONFIG_FIELDS } from '../config/config';
 /**
  * <config /> 补全
  */
 export class JSONLanguageMode implements ILanguageMode {
-	private fields: Array<string> = [
-		'component',
-		'componentPlaceholder',
-		'navigationBarBackgroundColor',
-		'navigationBarTextStyle',
-		'navigationBarTitleText',
-		'navigationStyle',
-		'backgroundColor',
-		'backgroundTextStyle',
-		'backgroundColorTop',
-		'backgroundColorBottom',
-		'enablePullDownRefresh',
-		'onReachBottomDistance',
-		'pageOrientation',
-		'disableScroll',
-		'usingComponents',
-		'initialRenderingCache',
-		'style',
-		'singlePage',
-		'restartStrategy',
-		'navigationBarFit', // 在singlePage下
-	];
 	
 	doComplete(document: TextDocument, position: Position, context: CompletionContext | undefined): CompletionItem[] {
 		const offset = document.offsetAt(position);
@@ -42,7 +20,7 @@ export class JSONLanguageMode implements ILanguageMode {
 				document.positionAt(offset - currentLine.length),
 				document.positionAt(offset + 1), // 输入 " 会出现 "", 所以要将'""' 替换掉
 			);
-			return this.fields.map((field) => {
+			return CONFIG_FIELDS.map((field) => {
 				let insertText = '"' + field + '"' + ': ${0}';
 				if (field === 'singlePage') {
 					insertText = '"' + field + '"' + ': {\n\t${0}\n}';

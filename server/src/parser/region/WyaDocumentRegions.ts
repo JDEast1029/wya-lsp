@@ -2,12 +2,12 @@ import { Position, TextDocument } from 'vscode-languageserver-textdocument';
 import { IEmbeddedRegion, LanguageId, parseWyaDocumentRegions } from './WyaDocumentRegionParser';
 
 
-export interface WyaDocumentRegions {
+export interface IWyaDocumentRegions {
 	getSingleLanguageDocument(languageId: LanguageId): TextDocument;
 	getLanguageAtPosition(position: Position): LanguageId;
 }
 
-export const getWyaDocumentRegions = (document: TextDocument): WyaDocumentRegions => {
+export const getWyaDocumentRegions = (document: TextDocument): IWyaDocumentRegions => {
 	const regions = parseWyaDocumentRegions(document);
 
 	return {

@@ -1,0 +1,22 @@
+export const CONFIG_FIELDS = [
+	'component',
+	'componentPlaceholder',
+	'navigationBarBackgroundColor',
+	'navigationBarTextStyle',
+	'navigationBarTitleText',
+	'navigationStyle',
+	'backgroundColor',
+	'backgroundTextStyle',
+	'backgroundColorTop',
+	'backgroundColorBottom',
+	'enablePullDownRefresh',
+	'onReachBottomDistance',
+	'pageOrientation',
+	'disableScroll',
+	'usingComponents',
+	'initialRenderingCache',
+	'style',
+	'singlePage',
+	'restartStrategy',
+	'navigationBarFit', // 在singlePage下
+];

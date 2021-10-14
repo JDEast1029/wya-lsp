@@ -113,26 +113,4 @@ export class SnippetManager {
 
 		return s + t;
 	}
-
-	private computeDetailsForFileIcon(s: Snippet) {
-		switch (s.type) {
-			case 'file':
-				return s.name;
-			case 'template':
-				return s.name + ' | .html';
-			case 'style':
-				return s.name + ' | .css';
-			case 'script':
-				return s.name + ' | .js';
-			case 'config':
-				return s.name + ' | .json';
-		}
-	}
-
-	private computeDocumentation(s: Snippet): MarkupContent {
-		return {
-			kind: 'markdown',
-			value: `\`\`\`wya\n${s.content}\n\`\`\``
-		};
-	}
 }

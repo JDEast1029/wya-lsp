@@ -1,7 +1,5 @@
 <template>
-<div>
-	xx
-</div>
-</template>
+	<div v-for="" v-else >
 
-<script></script>
+	</div>
+</template>
