@@ -6,7 +6,7 @@ export const VIEW_CONTAINER_TAGS = new Map([
 		'cover-image',
 		{
 			props: ['src', 'referrer-policy'],
-			events: ['bindload', 'binderror'],
+			events: ['load', 'error'],
 			propsOptional: new Map([
 				['referrer-policy', ['origin', 'no-referrer']]
 			])
@@ -42,7 +42,7 @@ export const VIEW_CONTAINER_TAGS = new Map([
 		'moveable-view',
 		{
 			props: ["direction", "inertia", "out-of-bounds", "x", "y", "damping", "friction", "disabled", "scale", "scale-min", "scale-max", "scale-value", "animation"],
-			events: ["bindchange", "bindscale", "htouchmove", "vtouchmove"],
+			events: ["change", "scale", "htouchmove", "vtouchmove"],
 			propsOptional: new Map([
 				['direction', ['all','vertical','horizontal','none']],
 				["inertia",["true","false"]],
@@ -57,7 +57,7 @@ export const VIEW_CONTAINER_TAGS = new Map([
 		'page-container',
 		{ 
 			props: ["duration", "z-index", "position", "overlay-style", "custom-style", "show", "overlay", "round", "close-on-slideDown"], 
-			events: ["bind:beforeenter", "bind:enter", "bind:afterenter", "bind:beforeleave", "bind:leave", "bind:afterleave", "bind:clickoverlay"], 
+			events: ["beforeenter", "enter", "afterenter", "beforeleave", "leave", "afterleave", "clickoverlay"], 
 			propsOptional: new Map([
 				["position", ["top", "bottom", "right", "center"]],
 				["show", ["true", "false"]], 
@@ -71,7 +71,7 @@ export const VIEW_CONTAINER_TAGS = new Map([
 		'scroll-view',
 		{
 			props: ["upper-threshold","lower-threshold","scroll-top","scroll-left","scroll-into-view","refresher-threshold","refresher-default-style","refresher-background", "scroll-x", "scroll-y", "scroll-with-animation", "enable-back-to-top", "enable-flex", "scroll-anchoring", "refresher-enabled", "refresher-triggered", "enhanced", "bounces", "show-scrollbar", "paging-enabled", "fast-deceleration"],
-			events: ["binddragstart","binddragging","binddragend","bindscrolltoupper","bindscrolltolower","bindscroll","bindrefresherpulling","bindrefresherrefresh","bindrefresherrestore","bindrefresherabort"],
+			events: ["dragstart","dragging","dragend","scrolltoupper","scrolltolower","scroll","refresherpulling","refresherrefresh","refresherrestore","refresherabort"],
 			propsOptional: new Map([
 				["refresher-default-style", ["black", "white", "none"]],
 				["scroll-x",["true","false"]],
@@ -104,7 +104,7 @@ export const VIEW_CONTAINER_TAGS = new Map([
 		'swiper',
 		{
 			props: ["indicator-color","indicator-active-color","current","interval","duration","previous-margin","next-margin","display-multiple-items","easing-function", "indicator-dots", "autoplay", "circular", "vertical", "snap-to-edge"],
-			events: ["bindchange","bindtransition","bindanimationfinish"],
+			events: ["change","transition","animationfinish"],
 			propsOptional: new Map([
 				["indicator-dots",["true","false"]],
 				["autoplay",["true","false"]],
@@ -150,7 +150,7 @@ export const BASIC_TAGS = new Map([
 		'progress', 
 		{
 			props: ['percent', 'border-radius', 'font-size', 'stroke-width', 'color', 'activeColor', 'backgroundColor', 'active-mode', 'duration', "show-info", 'active'],
-			events: ['bindactiveend'],
+			events: ['activeend'],
 			propsOptional: new Map([
 				["show-info",["true","false"]],
 				["active",["true","false"]]
@@ -186,7 +186,7 @@ export const FORM_TAGS = new Map([
 		'button',
 		{
 			props: ['size', 'type', 'form-type', 'open-type', 'hover-class', 'hover-start-time', 'hover-stay-time', 'lang', 'session-from', 'send-message-title', 'send-message-path', 'send-message-img', 'app-parameter',"plain", "disabled", "loading", "hover-stop-propagation", "show-message-card"],
-			events: ['bindgetuserinfo', 'bindcontact', 'bindgetphonenumber', 'binderror', 'bindopensetting', 'bindlaunchapp'],
+			events: ['getuserinfo', 'contact', 'getphonenumber', 'error', 'opensetting', 'launchapp'],
 			propsOptional: new Map([
 				["plain",["true","false"]],
 				["disabled",["true","false"]],
@@ -211,7 +211,7 @@ export const FORM_TAGS = new Map([
 		'checkbox-group',
 		{
 			props: [],
-			events: ['bindchange'],
+			events: ['change'],
 			propsOptional: new Map([])
 		}
 	],
@@ -219,7 +219,7 @@ export const FORM_TAGS = new Map([
 		'editor',
 		{
 			props: ['read-only', 'placeholder', 'show-img-size', 'show-img-toolbar', 'show-img-resize'],
-			events: ['bindready', 'bindfocus', 'bindblur', 'bindinput', 'bindstatuschange'],
+			events: ['ready', 'focus', 'blur', 'input', 'statuschange'],
 			propsOptional: new Map([
 				["read-only",["true","false"]],["show-img-size",["true","false"]],["show-img-toolbar",["true","false"]],["show-img-resize",["true","false"]]
 			])
@@ -229,7 +229,7 @@ export const FORM_TAGS = new Map([
 		'form',
 		{
 			props: ['report-submit', 'report-submit-timeout'],
-			events: ['bindsubmit', 'bindreset'],
+			events: ['submit', 'reset'],
 			propsOptional: new Map([
 				["report-submit",["true","false"]]
 			])
@@ -239,7 +239,7 @@ export const FORM_TAGS = new Map([
 		'input',
 		{
 			props: ['value', 'type', 'password', 'placeholder', 'placeholder-style', 'placeholder-class', 'disabled', 'maxlength', 'cursor-spacing', 'auto-focus', 'focus', 'confirm-type', 'always-embed', 'confirm-hold', 'cursor', 'selection-start', 'selection-end', 'adjust-position', 'hold-keyboard', 'safe-password-cert-path', 'safe-password-length', 'safe-password-time-stamp', 'safe-password-nonce', 'safe-password-salt', 'safe-password-custom-hash'],
-			events: ['bindinput', 'bindfocus', 'bindblur', 'bindconfirm', 'bindkeyboardheightchange'],
+			events: ['input', 'focus', 'blur', 'confirm', 'keyboardheightchange'],
 			propsOptional: new Map([
 				["password",["true","false"]],["disabled",["true","false"]],["auto-focus",["true","false"]],["focus",["true","false"]],["always-embed",["true","false"]],["confirm-hold",["true","false"]],["adjust-position",["true","false"]],["hold-keyboard",["true","false"]]
 			])
@@ -265,7 +265,7 @@ export const FORM_TAGS = new Map([
 		'picker',
 		{
 			props: ['header-text', 'mode', 'disabled'],
-			events: ['bindcancel'],
+			events: ['cancel'],
 			propsOptional: new Map([
 				["disabled",["true","false"]]
 			])
@@ -275,7 +275,7 @@ export const FORM_TAGS = new Map([
 		'picker-view',
 		{
 			props: ['value', 'indicator-style', 'indicator-class', 'mask-style', 'mask-class'],
-			events: ['bindchange', 'bindpickstart', 'bindpickend'],
+			events: ['change', 'pickstart', 'pickend'],
 			propsOptional: new Map([])
 		}
 	],
@@ -299,7 +299,7 @@ export const FORM_TAGS = new Map([
 		'radio-group',
 		{
 			props: [],
-			events: ['bindchange'],
+			events: ['change'],
 			propsOptional: new Map([])
 		}
 	],
@@ -307,7 +307,7 @@ export const FORM_TAGS = new Map([
 		'slider',
 		{
 			props: ['min', 'max', 'step', 'disabled', 'value', 'color', 'selected-color', 'activeColor', 'backgroundColor', 'block-size', 'block-color', 'show-value'],
-			events: ['bindchange', 'bindchanging'],
+			events: ['change', 'changing'],
 			propsOptional: new Map([
 				["disabled",["true","false"]],["show-value",["true","false"]]
 			])
@@ -317,7 +317,7 @@ export const FORM_TAGS = new Map([
 		'switch',
 		{
 			props: ['checked', 'disabled', 'type', 'color'],
-			events: ['bindchange'],
+			events: ['change'],
 			propsOptional: new Map([
 				['type', ['switch', 'checkbox']],
 				["checked",["true","false"]],
@@ -329,7 +329,7 @@ export const FORM_TAGS = new Map([
 		'textarea',
 		{
 			props: ['value', 'placeholder', 'placeholder-style', 'placeholder-class', 'disabled', 'maxlength', 'auto-focus', 'focus', 'auto-height', 'fixed', 'cursor-spacing', 'cursor', 'show-confirm-bar', 'selection-start', 'selection-end', 'adjust-position', 'hold-keyboard', 'disable-default-padding', 'confirm-type', 'confirm-hold']			,
-			events: ['bindfocus', 'bindblur', 'bindlinechange', 'bindinput', 'bindconfirm', 'bindkeyboardheightchange'],
+			events: ['focus', 'blur', 'linechange', 'input', 'confirm', 'keyboardheightchange'],
 			propsOptional: new Map([
 				["disabled",["true","false"]],["auto-focus",["true","false"]],["focus",["true","false"]],["auto-height",["true","false"]],["fixed",["true","false"]],["show-confirm-bar",["true","false"]],["adjust-position",["true","false"]],["hold-keyboard",["true","false"]],["disable-default-padding",["true","false"]],["confirm-hold",["true","false"]]
 			])
@@ -341,7 +341,7 @@ export const NAVIGATION_TAGS = new Map([
 		'navigator',
 		{
 			props: ['target', 'url', 'open-type', 'delta', 'app-id', 'path', 'extra-data', 'version', 'short-link', 'hover-class', 'hover-stop-propagation', 'hover-start-time', 'hover-stay-time'],
-			events: ['bindsuccess', 'bindfail', 'bindcomplete'],
+			events: ['success', 'fail', 'complete'],
 			propsOptional: new Map([
 				["hover-stop-propagation",["true","false"]],
 				['target', ['self', 'miniProgram']],
@@ -354,7 +354,7 @@ export const NAVIGATION_TAGS = new Map([
 		'functional-page-navigator',
 		{
 			props: ['version', 'name', 'args'],
-			events: ['bindsuccess', 'bindfail', 'bindcancel'],
+			events: ['success', 'fail', 'cancel'],
 			propsOptional: new Map([
 				['version', ['develop', 'trial', 'release']],
 				['name', ['loginAndGetUserInfo', 'requestPayment', 'chooseAddress', 'chooseInvoice', 'chooseInvoiceTitle']]
@@ -379,7 +379,7 @@ export const MEDIA_TAGS = new Map([
 		'audio',
 		{
 			props: ['id', 'src', 'loop', 'controls', 'poster', 'name', 'author'],
-			events: ['binderror', 'bindplay', 'bindpause', 'bindtimeupdate', 'bindended'],
+			events: ['error', 'play', 'pause', 'timeupdate', 'ended'],
 			propsOptional: new Map([
 				["loop",["true","false"]],["controls",["true","false"]]
 			])
@@ -389,7 +389,7 @@ export const MEDIA_TAGS = new Map([
 		'camera',
 		{
 			props: ['mode', 'resolution', 'device-position', 'flash', 'frame-size'],
-			events: ['bindstop', 'binderror', 'bindinitdone', 'bindscancode'],
+			events: ['stop', 'error', 'initdone', 'scancode'],
 			propsOptional: new Map([
 				['mode', ['normal', 'scanCode']],
 				['resolution', ['low', 'medium', 'high']],
@@ -403,7 +403,7 @@ export const MEDIA_TAGS = new Map([
 		'image',
 		{
 			props: ['src', 'mode', 'webp', 'lazy-load', 'show-menu-by-longpress'],
-			events: ['binderror', 'bindload'],
+			events: ['error', 'load'],
 			propsOptional: new Map([
 				["webp",["true","false"]],["lazy-load",["true","false"]],["show-menu-by-longpress",["true","false"]],
 				['mode', ['scaleToFill', 'aspectFit', 'aspectFill', 'widthFix', 'heightFix', 'top', 'bottom', 'center', 'left', 'right', 'top left', 'top right', 'bottom left', 'bottom right']]
@@ -414,7 +414,7 @@ export const MEDIA_TAGS = new Map([
 		'live-player',
 		{
 			props: ['src', 'mode', 'autoplay', 'muted', 'orientation', 'object-fit', 'background-mute', 'min-cache', 'max-cache', 'sound-mode', 'auto-pause-if-navigate', 'auto-pause-if-open-native', 'picture-in-picture-mode', 'referrer-policy'],
-			events: ['bindaudiovolumenotify', 'bindenterpictureinpicture', 'bindleavepictureinpicture', 'bindstatechange', 'bindfullscreenchange', 'bindnetstatus'],
+			events: ['audiovolumenotify', 'enterpictureinpicture', 'leavepictureinpicture', 'statechange', 'fullscreenchange', 'netstatus'],
 			propsOptional: new Map([
 				["autoplay",["true","false"]],
 				["muted",["true","false"]],
@@ -434,7 +434,7 @@ export const MEDIA_TAGS = new Map([
 		'live-push',
 		{
 			props: ['url', 'mode', 'autopush', 'muted', 'enable-camera', 'auto-focus', 'orientation', 'beauty', 'whiteness', 'aspect', 'min-bitrate', 'max-bitrate', 'audio-quality', 'waiting-image', 'waiting-image-hash', 'zoom', 'device-position', 'background-mute', 'mirror', 'remote-mirror', 'local-mirror', 'audio-reverb-type', 'enable-mic', 'enable-agc', 'enable-ans', 'audio-volume-type', 'video-width', 'video-height', 'beauty-style', 'filter'],
-			events: ['bindstatechange', 'bindnetstatus', 'binderror', 'bindbgmstart', 'bindbgmprogress', 'bindbgmcomplete', 'bindaudiovolumenotify'],
+			events: ['statechange', 'netstatus', 'error', 'bgmstart', 'bgmprogress', 'bgmcomplete', 'audiovolumenotify'],
 			propsOptional: new Map([
 				["autopush",["true","false"]],
 				["muted",["true","false"]],
@@ -460,7 +460,7 @@ export const MEDIA_TAGS = new Map([
 		'video',
 		{
 			props: ['src', 'duration', 'controls', 'danmu-list', 'danmu-btn', 'enable-danmu', 'autoplay', 'loop', 'muted', 'initial-time', 'page-gesture', 'direction', 'show-progress', 'show-fullscreen-btn', 'show-play-btn', 'show-center-play-btn', 'enable-progress-gesture', 'object-fit', 'poster', 'show-mute-btn', 'title', 'play-btn-position', 'enable-play-gesture', 'auto-pause-if-navigate', 'auto-pause-if-open-native', 'vslide-gesture', 'vslide-gesture-in-fullscreen', 'ad-unit-id', 'poster-for-crawler', 'show-casting-button', 'picture-in-picture-mode', 'picture-in-picture-show-progress', 'enable-auto-rotation', 'show-screen-lock-button', 'show-snapshot-button', 'show-background-playback-button', 'background-poster', 'referrer-policy', 'is-drm', 'provision-url', 'certificate-url', 'license-url'],
-			events: ['bindenterpictureinpicture', 'bindleavepictureinpicture', 'bindseekcomplete', 'bindplay', 'bindpause', 'bindended', 'bindtimeupdate', 'bindfullscreenchange', 'bindwaiting', 'binderror', 'bindprogress', 'bindloadedmetadata', 'bindcontrolstoggle'],
+			events: ['enterpictureinpicture', 'leavepictureinpicture', 'seekcomplete', 'play', 'pause', 'ended', 'timeupdate', 'fullscreenchange', 'waiting', 'error', 'progress', 'loadedmetadata', 'controlstoggle'],
 			propsOptional: new Map([
 				["controls",["true","false"]],
 				["danmu-btn",["true","false"]],
@@ -499,7 +499,7 @@ export const MEDIA_TAGS = new Map([
 		'voip-room',
 		{
 			props: ['openid', 'mode', 'device-position'],
-			events: ['binderror'],
+			events: ['error'],
 			propsOptional: new Map([])
 		}
 	],
@@ -507,7 +507,7 @@ export const MEDIA_TAGS = new Map([
 export const MAP_TAGS = new Map([
 	['map', {
 		props: ['longitude', 'latitude', 'scale', 'min-scale', 'max-scale', 'markers', 'covers', 'polyline', 'circles', 'controls', 'include-points', 'show-location', 'polygons', 'subkey', 'layer-style', 'rotate', 'skew', 'enable-3D', 'show-compass', 'show-scale', 'enable-overlooking', 'enable-zoom', 'enable-scroll', 'enable-rotate', 'enable-satellite', 'enable-traffic', 'enable-poi', 'enable-building', 'setting'],
-		events: ['bindtap', 'bindmarkertap', 'bindlabeltap', 'bindcontroltap', 'bindcallouttap', 'bindupdated', 'bindregionchange', 'bindpoitap', 'bindanchorpointtap'],
+		events: ['tap', 'markertap', 'labeltap', 'controltap', 'callouttap', 'updated', 'regionchange', 'poitap', 'anchorpointtap'],
 		propsOptional: new Map([
 			["show-location",["true","false"]],
 			["enable-3D",["true","false"]],
@@ -527,7 +527,7 @@ export const MAP_TAGS = new Map([
 export const CANVAS_TAGS = new Map([
 	['canvas', {
 		props: ['type', 'canvas-id', 'disable-scroll'],
-		events: ['bindtouchstart', 'bindtouchmove', 'bindtouchend', 'bindtouchcancel', 'bindlongtap', 'binderror'],
+		events: ['touchstart', 'touchmove', 'touchend', 'touchcancel', 'longtap', 'error'],
 		propsOptional: new Map([
 			["disable-scroll",["true","false"]]
 		])
@@ -538,7 +538,7 @@ export const OPEN_TAGS = new Map([
 		'ad',
 		{
 			props: ['unit-id', 'ad-intervals', 'ad-type', 'ad-theme'],
-			events: ['bindload', 'binderror', 'bindclose'],
+			events: ['load', 'error', 'close'],
 			propsOptional: new Map([])
 		}
 	],
@@ -546,7 +546,7 @@ export const OPEN_TAGS = new Map([
 		'ad-custom',
 		{
 			props: ['unit-id', 'ad-intervals'],
-			events: ['bindload', 'binderror'],
+			events: ['load', 'error'],
 			propsOptional: new Map([])
 		}
 	],
@@ -554,7 +554,7 @@ export const OPEN_TAGS = new Map([
 		'official-account',
 		{
 			props: [],
-			events: ['bindload', 'binderror'],
+			events: ['load', 'error'],
 			propsOptional: new Map([])
 		}
 	],
@@ -562,7 +562,7 @@ export const OPEN_TAGS = new Map([
 		'open-data',
 		{
 			props: ['type', 'open-gid', 'lang', 'default-text', 'default-avatar'],
-			events: ['binderror'],
+			events: ['error'],
 			propsOptional: new Map([
 				['type', ['groupName', 'userNickName', 'userAvatarUrl', 'userGender', 'userCity', 'userProvince', 'userCountry', 'userLanguage']],
 				['lang', ['en', 'zh_CN', 'zh_TW']]
@@ -573,7 +573,7 @@ export const OPEN_TAGS = new Map([
 		'web-view',
 		{
 			props: ['src'],
-			events: ['bindmessage', 'bindload', 'binderror'],
+			events: ['message', 'load', 'error'],
 			propsOptional: new Map([])
 		}
 	],
@@ -581,7 +581,7 @@ export const OPEN_TAGS = new Map([
 export const PAGE_CONFIG_TAGS = new Map([
 	['page-meta', {
 		props: ['background-text-style', 'background-color', 'background-color-top', 'background-color-bottom', 'root-background-color', 'scroll-top', 'scroll-duration', 'page-style', 'page-font-size', 'root-font-size', 'page-orientation'],
-		events: ['bindresize', 'bindscroll', 'bindscrolldone'],
+		events: ['resize', 'scroll', 'scrolldone'],
 		propsOptional: new Map([])
 	}]
 ]);

@@ -4,7 +4,7 @@ import { CompletionContext, CompletionParams, Range, TextEdit } from 'vscode-lan
 import { Position, TextDocument } from 'vscode-languageserver-textdocument';
 import { IWXMLDocument } from '../../parser/wxml/WXMLParser';
 import { LanguageModeCache } from '../LanguageModeCache';
-import { WXML_TAGS, CONDITION_GRAMMARS, LIST_GRAMMARS } from '../config/wxml';
+import { WXML_TAGS_MAP, CONDITION_GRAMMARS, LIST_GRAMMARS } from '../config/wxml';
 import { MC_TAGS_MAP, MC_COMMON_PROPS } from '../config/mc-tags';
 import { Scanner } from '../../parser/scanner/Scanner';
 import { TokenType, ScannerState } from '../../parser/scanner/constants';
@@ -35,7 +35,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 		};
 
 		const collectSuggestOpenTags = (startPos: number, endPos: number): CompletionItem[] => {
-			return WXML_TAGS.map((tag) => {
+			return [...WXML_TAGS_MAP.keys(), ...MC_TAGS_MAP.keys()].map((tag) => {
 				const insertText = tag;
 				const range = getReplaceRange(startPos, endPos);
 				return {
@@ -80,8 +80,16 @@ export class WXMLLanguageMode implements ILanguageMode {
 
 		const collectSuggestAttributeName = (startPos: number, endPos: number): CompletionItem [] => {
 			const currentTag = scanner.lastTag;
-			const props = [...(MC_TAGS_MAP.get(currentTag)?.props ?? []), ...MC_COMMON_PROPS];
-			const events = MC_TAGS_MAP.get(currentTag)?.event ?? [];
+			const isMc = MC_TAGS_MAP.has(currentTag);
+			let props: string[] = [];
+			let events: string[] = [];
+			if (isMc) {
+				props = [...(MC_TAGS_MAP.get(currentTag)?.props ?? []), ...MC_COMMON_PROPS];
+				events = MC_TAGS_MAP.get(currentTag)?.events ?? [];
+			} else {
+				props = WXML_TAGS_MAP.get(currentTag)?.props ?? [];
+				events = WXML_TAGS_MAP.get(currentTag)?.events ?? [];
+			}
 			const attributeName = scanner.lastAttributeName;
 			const execArray = /^(wx:|bind:?)/.exec(attributeName || '');
 			const filterPrefix = execArray ? execArray[0] : '';
@@ -102,8 +110,8 @@ export class WXMLLanguageMode implements ILanguageMode {
 				start = startPos + filterPrefix.length;
 			}
 
-			return items.map((prop) => {
-				const insertText = prop;
+			return items.map((text) => {
+				const insertText = text;
 				const range = getReplaceRange(start, endPos);
 				return {
 					label: insertText,
