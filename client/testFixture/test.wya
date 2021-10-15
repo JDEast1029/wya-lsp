@@ -1,3 +1,4 @@
 <template>
-	<mc-radio color="" ></mc-radio>
+	<cover-image referrer-policy="origin"></cover-image>
+	<ad bind:tap="" ></ad>
 </template>

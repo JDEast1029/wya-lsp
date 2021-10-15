@@ -17,7 +17,7 @@ export const VIEW_CONTAINER_TAGS = new Map([
 		{
 			props: ['scroll-top'],
 			events: [],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -35,7 +35,7 @@ export const VIEW_CONTAINER_TAGS = new Map([
 		{
 			props: ['scale-area'],
 			events: [],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -212,7 +212,7 @@ export const FORM_TAGS = new Map([
 		{
 			props: [],
 			events: ['change'],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -250,7 +250,7 @@ export const FORM_TAGS = new Map([
 		{
 			props: [],
 			events: [],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -258,7 +258,7 @@ export const FORM_TAGS = new Map([
 		{
 			props: ['for'],
 			events: [],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -276,7 +276,7 @@ export const FORM_TAGS = new Map([
 		{
 			props: ['value', 'indicator-style', 'indicator-class', 'mask-style', 'mask-class'],
 			events: ['change', 'pickstart', 'pickend'],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -284,7 +284,7 @@ export const FORM_TAGS = new Map([
 		{
 			props: [],
 			events: [],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -292,7 +292,7 @@ export const FORM_TAGS = new Map([
 		{
 			props: ['value', 'checked', 'disabled', 'color'],
 			events: [],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -300,7 +300,7 @@ export const FORM_TAGS = new Map([
 		{
 			props: [],
 			events: ['change'],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -500,7 +500,7 @@ export const MEDIA_TAGS = new Map([
 		{
 			props: ['openid', 'mode', 'device-position'],
 			events: ['error'],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 ]);
@@ -539,7 +539,7 @@ export const OPEN_TAGS = new Map([
 		{
 			props: ['unit-id', 'ad-intervals', 'ad-type', 'ad-theme'],
 			events: ['load', 'error', 'close'],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -547,7 +547,7 @@ export const OPEN_TAGS = new Map([
 		{
 			props: ['unit-id', 'ad-intervals'],
 			events: ['load', 'error'],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -555,7 +555,7 @@ export const OPEN_TAGS = new Map([
 		{
 			props: [],
 			events: ['load', 'error'],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 	[
@@ -574,7 +574,7 @@ export const OPEN_TAGS = new Map([
 		{
 			props: ['src'],
 			events: ['message', 'load', 'error'],
-			propsOptional: new Map([])
+			propsOptional: new Map()
 		}
 	],
 ]);
@@ -582,7 +582,7 @@ export const PAGE_CONFIG_TAGS = new Map([
 	['page-meta', {
 		props: ['background-text-style', 'background-color', 'background-color-top', 'background-color-bottom', 'root-background-color', 'scroll-top', 'scroll-duration', 'page-style', 'page-font-size', 'root-font-size', 'page-orientation'],
 		events: ['resize', 'scroll', 'scrolldone'],
-		propsOptional: new Map([])
+		propsOptional: new Map()
 	}]
 ]);
 
@@ -591,6 +591,10 @@ export const WXML_TAGS_MAP = new Map([
 	...NAVIGATION_TAGS, ...MEDIA_TAGS, ...MAP_TAGS, ...CANVAS_TAGS,
 	...OPEN_TAGS, ...PAGE_CONFIG_TAGS,
 ]);
+
+export const WXML_COMMON_PROPS: string[] = [
+	'class', 'style'
+];
 
 export const CONDITION_GRAMMARS: string[] = [
 	'wx:if',
@@ -603,4 +607,22 @@ export const LIST_GRAMMARS: string[] = [
 	'wx:for-item', 
 	'wx:for-index',
 	'wx:key'
+];
+
+export const EVENT_PREFIX_LIST = [
+	'bind','capture-bind','mut-bind','catch','capture-catch'
+];
+export const COMMON_EVENT_GRAMMARS: string[] = [
+	'touchstart', 
+	'touchmove', 
+	'touchcancel', 
+	'touchend', 
+	'tap', 
+	'longpress', 
+	'longtap', 
+	'transitionend', 
+	'animationstart', 
+	'animationiteration', 
+	'animationend', 
+	'touchforcechange'
 ];

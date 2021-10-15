@@ -1,4 +1,5 @@
 import { 
+	CompletionList,
 	CompletionParams,
 	Connection 
 } from "vscode-languageserver";
@@ -62,10 +63,13 @@ export class WLS {
 		this.connection.onCompletionResolve(this.onCompletionResolve.bind(this));
 	}
 
-	private onCompletion(params: CompletionParams): CompletionItem[] {
+	private onCompletion(params: CompletionParams): CompletionList {
 		const project = new ProjectService(this.documentService, { globalSnippetDir: this.globalSnippetDir });
 
-		return project?.doComplete(params) ?? [];
+		return {
+			isIncomplete: false,
+			items: project?.doComplete(params) ?? []
+		};
 	}
 
 	private onCompletionResolve(item: CompletionItem): CompletionItem {
