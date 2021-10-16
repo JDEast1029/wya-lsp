@@ -26,7 +26,6 @@
 		"wya-interpolations": {
 			"patterns": [{
 				"name": "expression.embedded.wya",
-				"contentName": "markup.blob markup.heading",
 				"begin": "\\{\\{",
 				"end": "\\}\\}",
 				"patterns": [{
@@ -64,7 +63,7 @@
 		},
 		"wya-directives": {
 			"name": "meta.directive.wya",
-			"begin": "((?:\\b(v-|bind:?|catch:?|capture-bind:?|mut-bind:|capture-catch:)|(:|@))([a-zA-Z\\-\\_]+)(?:\\:([a-zA-Z\\-\\_]+))?(?:\\.([a-zA-Z\\-\\_]+))*)\\s*(=)",
+			"begin": "((?:\\b(bind:?|catch:?|capture-bind:?|mut-bind:|capture-catch:)|:)([a-zA-Z\\-\\_]+)(?:\\:([a-zA-Z\\-\\_]+))?(?:\\.([a-zA-Z\\-\\_]+))*)\\s*(=)",
 			"end": "(?<='|\")|(?=[\\s<>`])",
 			"captures": {
 				"1": {
