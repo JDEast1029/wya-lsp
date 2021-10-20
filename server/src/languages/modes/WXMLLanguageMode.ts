@@ -144,7 +144,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 		};
 
 		const collectSuggestAttributeValue = (attributeName: string, startPos: number, endPos: number = offset): CompletionItem [] => {
-			if (/^(wx:|bind:?)/.test(attributeName)) return [];
+			if (/^wx:/.test(attributeName)) return [];
 
 			const currentTag = scanner.lastTag;
 			const isMc = MC_TAGS_MAP.has(currentTag);

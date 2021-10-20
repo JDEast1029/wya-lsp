@@ -20,7 +20,7 @@ export class JSONLanguageMode implements ILanguageMode {
 				document.positionAt(offset - currentLine.length),
 				document.positionAt(offset + 1), // 输入 " 会出现 "", 所以要将'""' 替换掉
 			);
-			return CONFIG_FIELDS.map((field) => {
+			return [...CONFIG_FIELDS.keys()].map((field) => {
 				let insertText = '"' + field + '"' + ': ${0}';
 				if (field === 'singlePage') {
 					insertText = '"' + field + '"' + ': {\n\t${0}\n}';

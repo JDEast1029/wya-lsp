@@ -2,3 +2,22 @@
 	<cover-image referrer-policy="origin"></cover-image>
 	<ad bind:tap="" ></ad>
 </template>
+
+<script>
+Component({
+	
+})
+</script>
+
+<style lang="scss">
+
+</style>
+
+<config>
+{
+	"component": true,
+	"usingCompents": {
+		
+	},
+}
+</config>
