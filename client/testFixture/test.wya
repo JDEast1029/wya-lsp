@@ -15,10 +15,9 @@ Component({
 
 <config>
 {
-	
-	"backgroundTextStyle": "dark",
-	"backgroundColor": "",
-	"usingComponents": {},
-	"component": true
+	"component": true,
+	"usingComponents": {
+		
+	},
 }
 </config>

@@ -37,7 +37,7 @@ export const CONFIG_SCHEMA = {
 		},
 		"enablePullDownRefresh": {
 			"type": "boolean",
-			"enum": ["true", "false"]
+			"enum": [true, false]
 		},
 		"onReachBottomDistance": {
 			"type": "string",
@@ -48,7 +48,7 @@ export const CONFIG_SCHEMA = {
 		},
 		"disableScroll": {
 			"type": "boolean",
-			"enum": ["true", "false"]
+			"enum": [true, false]
 		},
 		"usingComponents": {
 			"type": "object",
