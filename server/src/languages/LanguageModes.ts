@@ -3,7 +3,7 @@ import { TextDocument } from 'vscode-languageserver-textdocument';
 import { CompletionContext, Position } from 'vscode-languageserver/node';
 import { LanguageModeCache } from './LanguageModeCache';
 import { IWyaDocumentRegions, getWyaDocumentRegions } from '../parser/region/WyaDocumentRegions';
-import { ILanguageMode } from './modes/ILanguageMode';
+import { ILanguageMode, IPLanguageMode } from './modes/ILanguageMode';
 import { JSONLanguageMode } from './modes/JSONLanguageMode';
 import { WXMLLanguageMode } from './modes/WXMLLanguageMode';
 import { WYALanguageMode } from './modes/WYALanguageMode';
@@ -15,7 +15,7 @@ export const nullMode: ILanguageMode = {
 };
 
 export class LanguageModes {
-	private modes: { [k in LanguageId]: ILanguageMode } = {
+	private modes: { [k in LanguageId]: ILanguageMode | IPLanguageMode } = {
 		wya: nullMode,
 		wxml: nullMode,
 		javascript: nullMode,
@@ -32,11 +32,11 @@ export class LanguageModes {
 		this.modes['wxml'] = new WXMLLanguageMode(this.wxmlDocumentCache);
 		// this.modes['javascript'] = new JSONLanguageMode();
 		this.modes['scss'] = new SCSSLanguageMode(this.languageModeCache);
+		this.modes['json'] = new JSONLanguageMode(this.languageModeCache);
 		this.modes['wya'] = new WYALanguageMode();
-		this.modes['json'] = new JSONLanguageMode();
 	}
 
-	getModeAtPosition(document: TextDocument, position: Position): ILanguageMode | undefined {
+	getModeAtPosition(document: TextDocument, position: Position): ILanguageMode | IPLanguageMode | undefined {
 		const wyaDocumentRegion = this.languageModeCache.refreshAndGetMode(document);
 		const languageId = wyaDocumentRegion.getLanguageAtPosition(position);
 

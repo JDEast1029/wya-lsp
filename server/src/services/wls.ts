@@ -63,12 +63,12 @@ export class WLS {
 		this.connection.onCompletionResolve(this.onCompletionResolve.bind(this));
 	}
 
-	private onCompletion(params: CompletionParams): CompletionList {
+	private async onCompletion(params: CompletionParams): Promise<CompletionList> {
 		const project = new ProjectService(this.documentService, { globalSnippetDir: this.globalSnippetDir });
-
+		const result = await project?.doComplete(params) ?? [];
 		return {
 			isIncomplete: false,
-			items: project?.doComplete(params) ?? []
+			items: result
 		};
 	}
 

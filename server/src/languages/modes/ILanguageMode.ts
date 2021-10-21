@@ -5,3 +5,7 @@ import { CompletionContext } from 'vscode-languageserver/node';
 export interface ILanguageMode {
 	doComplete?(document: TextDocument, position: Position, context: CompletionContext | undefined): CompletionItem[];
 }
+
+export interface IPLanguageMode {
+	doComplete?(document: TextDocument, position: Position, context: CompletionContext | undefined): Promise<CompletionItem[]>;
+}
