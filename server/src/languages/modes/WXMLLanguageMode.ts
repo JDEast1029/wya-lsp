@@ -152,39 +152,39 @@ export class WXMLLanguageMode implements ILanguageMode {
 				};
 			});
 
-			const creator = (priority: Priority, eventPrefix?: string) => (text: string) => {
+			const creatorFactory = (itemKind: CompletionItemKind) => (priority: Priority, eventPrefix?: string) => (text: string) => {
 				const insertText = `${eventPrefix ? eventPrefix + ':' : ''}${text}`;
 				const range = getReplaceRange(start, endPos);
 				return {
 					label: insertText,
-					kind: itemKind || CompletionItemKind.Property,
+					kind: itemKind || CompletionItemKind.Enum,
 					filterText: insertText,
 					insertTextFormat: InsertTextFormat.Snippet,
 					sortText: priority + insertText,
 					textEdit: TextEdit.replace(range, insertText + value)
 				};
 			};
+			const enumCreator = creatorFactory(CompletionItemKind.Enum);
+			const methodCreator = creatorFactory(CompletionItemKind.Function);
 
 			let items: CompletionItem[] = [];
 			let start = startPos;
-			let itemKind: CompletionItemKind;
-			const propsItems: CompletionItem[] = props.filter((prop) => ![...usedAttributes].includes(prop)).map(creator(propPriority));
-			const wxmlGrammarItems: CompletionItem[] = [...CONDITION_GRAMMARS, ...LIST_GRAMMARS].filter((grammar) => ![...usedAttributes].includes(grammar)).map(creator(Priority.FrameworkGrammar));
-			const eventItems: CompletionItem[] = events.filter((event) => ![...usedAttributes].includes(event)).map(creator(eventPriority, 'bind'));
+			// TODO: 优化filter
+			const propsItems: CompletionItem[] = props.filter((prop) => ![...usedAttributes].includes(prop)).map(enumCreator(propPriority));
+			const wxmlGrammarItems: CompletionItem[] = [...CONDITION_GRAMMARS, ...LIST_GRAMMARS].filter((grammar) => ![...usedAttributes].includes(grammar)).map(enumCreator(Priority.FrameworkGrammar));
+			const eventItems: CompletionItem[] = events.filter((event) => ![...usedAttributes].includes(event)).map(methodCreator(eventPriority, 'bind'));
 			items = [...propsItems, ...eventItems, ...wxmlGrammarItems];
 			const eventPrefix = EVENT_PREFIX_LIST.find((event) => filterPrefix.startsWith(event)); // 事件的前缀
 
 			if (filterPrefix === 'wx:') {
 				// 条件和列表语法的提示
 				items = wxmlGrammarItems;
-				itemKind = CompletionItemKind.Keyword;
 			} else if (eventPrefix) {
 				// 方法的提示
 				items = filterPrefix.startsWith('bind') 
-					? events.filter((event) => ![...usedAttributes].includes(event)).map(creator(eventPriority, eventPrefix)) 
-					: COMMON_EVENT_GRAMMARS.filter((event) => ![...usedAttributes].includes(event)).map(creator(Priority.FrameworkEvent, eventPrefix));
+					? events.filter((event) => ![...usedAttributes].includes(event)).map(methodCreator(eventPriority, eventPrefix)) 
+					: COMMON_EVENT_GRAMMARS.filter((event) => ![...usedAttributes].includes(event)).map(methodCreator(Priority.FrameworkEvent, eventPrefix));
 				start = startPos + filterPrefix.length;
-				itemKind = CompletionItemKind.Function;
 			}
 
 			return [...items, ...eventPrefixResult];
