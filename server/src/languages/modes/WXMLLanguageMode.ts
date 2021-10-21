@@ -58,7 +58,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 
 		const getUsedAttributes = (offset: number): Set<string> => {
 			const node = this.wxmlDocument.findNodeBefore(offset);
-			return new Set(node.attributeNames.map((i) => i));
+			return new Set(node.attributeNames.map(this.normalizeAttributeName));
 		};
 
 		const collectSuggestOpenTags = (startPos: number, endPos: number): CompletionItem[] => {
@@ -111,7 +111,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 		};
 
 		const collectSuggestAttributeName = (startPos: number, endPos: number): CompletionItem [] => {
-			// TODO: 过滤已经加过的属性和方法和语法
+			const usedAttributes = getUsedAttributes(startPos);
 			const currentTag = scanner.lastTag;
 			const isMc = MC_TAGS_MAP.has(currentTag);
 			let props: string[] = [];
@@ -140,7 +140,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 			const value = this.isFollowedBy(text, endPos, ScannerState.AfterAttributeName, TokenType.DelimiterAssign) ? '' : '="$1"';
 
 			const eventPrefixResult = EVENT_PREFIX_LIST.map((event) => {
-				const insertText = event;
+				const insertText = event + ':';
 				const range = getReplaceRange(startPos, endPos);
 				return {
 					label: insertText,
@@ -148,7 +148,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 					filterText: insertText,
 					insertTextFormat: InsertTextFormat.Snippet,
 					sortText: Priority.FrameworkGrammar + insertText,
-					textEdit: TextEdit.replace(range, insertText + ':'),
+					textEdit: TextEdit.replace(range, insertText),
 				};
 			});
 
@@ -168,9 +168,9 @@ export class WXMLLanguageMode implements ILanguageMode {
 			let items: CompletionItem[] = [];
 			let start = startPos;
 			let itemKind: CompletionItemKind;
-			const propsItems: CompletionItem[] = props.map(creator(propPriority));
-			const wxmlGrammarItems: CompletionItem[] = [...CONDITION_GRAMMARS, ...LIST_GRAMMARS].map(creator(Priority.FrameworkGrammar));
-			const eventItems: CompletionItem[] = events.map(creator(eventPriority, 'bind'));
+			const propsItems: CompletionItem[] = props.filter((prop) => ![...usedAttributes].includes(prop)).map(creator(propPriority));
+			const wxmlGrammarItems: CompletionItem[] = [...CONDITION_GRAMMARS, ...LIST_GRAMMARS].filter((grammar) => ![...usedAttributes].includes(grammar)).map(creator(Priority.FrameworkGrammar));
+			const eventItems: CompletionItem[] = events.filter((event) => ![...usedAttributes].includes(event)).map(creator(eventPriority, 'bind'));
 			items = [...propsItems, ...eventItems, ...wxmlGrammarItems];
 			const eventPrefix = EVENT_PREFIX_LIST.find((event) => filterPrefix.startsWith(event)); // 事件的前缀
 
@@ -181,8 +181,8 @@ export class WXMLLanguageMode implements ILanguageMode {
 			} else if (eventPrefix) {
 				// 方法的提示
 				items = filterPrefix.startsWith('bind') 
-					? events.map(creator(eventPriority, eventPrefix)) 
-					: COMMON_EVENT_GRAMMARS.map(creator(Priority.FrameworkEvent, eventPrefix));
+					? events.filter((event) => ![...usedAttributes].includes(event)).map(creator(eventPriority, eventPrefix)) 
+					: COMMON_EVENT_GRAMMARS.filter((event) => ![...usedAttributes].includes(event)).map(creator(Priority.FrameworkEvent, eventPrefix));
 				start = startPos + filterPrefix.length;
 				itemKind = CompletionItemKind.Function;
 			}
@@ -375,5 +375,18 @@ export class WXMLLanguageMode implements ILanguageMode {
 			offset++;
 		}
 		return offset;
+	}
+
+	private normalizeAttributeName(attr: string): string {
+		let result = attr;
+
+		const eventPrefix = EVENT_PREFIX_LIST.find((prefix) => attr.startsWith(prefix));
+		if (eventPrefix) {
+			const execArray = new RegExp(`^${eventPrefix}:?`).exec(attr);
+			const eventName = execArray ? execArray[0] : '';
+			result = attr.slice(eventName.length);
+		}
+
+		return result;
 	}
 }
