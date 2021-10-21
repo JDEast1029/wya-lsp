@@ -1,6 +1,6 @@
 <template>
 	<cover-image referrer-policy="origin"></cover-image>
-	<ad bind:tap="" ></ad>
+	<ad class="" style="" bind:tap=""></ad>
 </template>
 
 <script>

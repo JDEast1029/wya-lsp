@@ -10,6 +10,26 @@ import { MC_TAGS_MAP, MC_COMMON_PROPS } from '../config/mc-tags';
 import { Scanner } from '../../parser/scanner/Scanner';
 import { TokenType, ScannerState } from '../../parser/scanner/constants';
 
+const enum Priority {
+	UserCode,
+	Library,
+	LibraryProp,
+	LibraryEvent,
+	Framework,
+	FrameworkProp,
+	FrameworkEvent,
+	FrameworkGrammar,
+	Platform
+}
+interface PropItem {
+	prop: string, 
+	priority: Priority
+}
+interface EventItem {
+	event: string, 
+	priority: Priority
+}
+
 export class WXMLLanguageMode implements ILanguageMode {
 	languageModeCache: LanguageModeCache<IWXMLDocument>;
 	wxmlDocument!: IWXMLDocument;
@@ -26,7 +46,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 		const node = this.wxmlDocument.findNodeBefore(offset);
 		const text = document.getText();
 		const scanner = new Scanner(text, node.start);
-		let token =scanner.scan();
+		let token = scanner.scan();
 
 		const getReplaceRange = (startPos: number, endPos: number): Range => {
 			if (startPos > offset) { startPos = offset; }
@@ -36,8 +56,13 @@ export class WXMLLanguageMode implements ILanguageMode {
 			);
 		};
 
+		const getUsedAttributes = (offset: number): Set<string> => {
+			const node = this.wxmlDocument.findNodeBefore(offset);
+			return new Set(node.attributeNames.map((i) => i));
+		};
+
 		const collectSuggestOpenTags = (startPos: number, endPos: number): CompletionItem[] => {
-			return [...WXML_TAGS_MAP.keys(), ...MC_TAGS_MAP.keys()].map((tag) => {
+			const creator = (priority: Priority) => (tag: string) => {
 				const insertText = tag;
 				const range = getReplaceRange(startPos, endPos);
 				return {
@@ -45,9 +70,13 @@ export class WXMLLanguageMode implements ILanguageMode {
 					kind: CompletionItemKind.Text,
 					filterText: insertText,
 					insertTextFormat: InsertTextFormat.Snippet,
+					sortText: priority + insertText,
 					textEdit: TextEdit.replace(range, insertText)
 				};
-			});
+			};
+			let items: CompletionItem[] = [...WXML_TAGS_MAP.keys()].map(creator(Priority.Framework));
+			items = items.concat([...MC_TAGS_MAP.keys()].map(creator(Priority.Library)));
+			return items;
 		};
 
 		const collectSuggestCloseTags = (startPos: number, endPos: number): CompletionItem[] => {
@@ -82,65 +111,83 @@ export class WXMLLanguageMode implements ILanguageMode {
 		};
 
 		const collectSuggestAttributeName = (startPos: number, endPos: number): CompletionItem [] => {
+			// TODO: 过滤已经加过的属性和方法和语法
 			const currentTag = scanner.lastTag;
 			const isMc = MC_TAGS_MAP.has(currentTag);
 			let props: string[] = [];
 			let events: string[] = [];
+			let propPriority: Priority;
+			let eventPriority: Priority;
 			if (isMc) {
-				props = [...(MC_TAGS_MAP.get(currentTag)?.props ?? []), ...MC_COMMON_PROPS];
+				props = MC_TAGS_MAP.get(currentTag)?.props ?? [];
+				props = props.concat(MC_COMMON_PROPS);
 				events = MC_TAGS_MAP.get(currentTag)?.events ?? [];
+				propPriority = Priority.LibraryProp;
+				eventPriority = Priority.LibraryEvent;
 			} else {
-				props = [...(WXML_TAGS_MAP.get(currentTag)?.props ?? []), ...WXML_COMMON_PROPS];
-				events = [...(WXML_TAGS_MAP.get(currentTag)?.events ?? []), ...COMMON_EVENT_GRAMMARS];
+				props = WXML_TAGS_MAP.get(currentTag)?.props ?? [];
+				props = props.concat(WXML_COMMON_PROPS);
+				events = WXML_TAGS_MAP.get(currentTag)?.events ?? [];
+				events = events.concat(COMMON_EVENT_GRAMMARS);
+				propPriority = Priority.FrameworkProp;
+				eventPriority = Priority.FrameworkEvent;
 			}
-			const attributeName = scanner.lastAttributeName;
+			const attributeName = scanner.getTokenText();
 			const execRegExp = new RegExp(`^(wx:|(${EVENT_PREFIX_LIST.join('|')}):?)`);
 			const execArray = execRegExp.exec(attributeName || '');
 			const filterPrefix = execArray ? execArray[0] : '';
 
-			const value = this.isFollowedBy(text, endPos, ScannerState.AfterAttributeName, TokenType.DelimiterAssign)
-			? ''
-			: '="$1"';
+			const value = this.isFollowedBy(text, endPos, ScannerState.AfterAttributeName, TokenType.DelimiterAssign) ? '' : '="$1"';
 
-			const eventResult = EVENT_PREFIX_LIST.map((event) => {
+			const eventPrefixResult = EVENT_PREFIX_LIST.map((event) => {
 				const insertText = event;
 				const range = getReplaceRange(startPos, endPos);
 				return {
 					label: insertText,
-					kind: CompletionItemKind.Keyword,
+					kind: CompletionItemKind.Event,
 					filterText: insertText,
 					insertTextFormat: InsertTextFormat.Snippet,
-					textEdit: TextEdit.replace(range, insertText + ':')
+					sortText: Priority.FrameworkGrammar + insertText,
+					textEdit: TextEdit.replace(range, insertText + ':'),
 				};
 			});
 
-			let items = [...props, ...CONDITION_GRAMMARS, ...LIST_GRAMMARS];
-			let start = startPos;
-			let itemKind: CompletionItemKind;
-
-			if (filterPrefix === 'wx:') {
-				// 条件和列表语法的提示
-				items = [...CONDITION_GRAMMARS, ...LIST_GRAMMARS];
-				itemKind = CompletionItemKind.Keyword;
-			} else if (EVENT_PREFIX_LIST.findIndex((event) => filterPrefix.includes(event)) > -1) {
-				// 方法的提示
-				items = filterPrefix.startsWith('bind') ? [...events] : COMMON_EVENT_GRAMMARS;
-				start = startPos + filterPrefix.length;
-				itemKind = CompletionItemKind.Function;
-			}
-
-			const result = items.map((text) => {
-				const insertText = text;
+			const creator = (priority: Priority, eventPrefix?: string) => (text: string) => {
+				const insertText = `${eventPrefix ? eventPrefix + ':' : ''}${text}`;
 				const range = getReplaceRange(start, endPos);
 				return {
 					label: insertText,
 					kind: itemKind || CompletionItemKind.Property,
 					filterText: insertText,
 					insertTextFormat: InsertTextFormat.Snippet,
+					sortText: priority + insertText,
 					textEdit: TextEdit.replace(range, insertText + value)
 				};
-			});
-			return [...eventResult, ...result];
+			};
+
+			let items: CompletionItem[] = [];
+			let start = startPos;
+			let itemKind: CompletionItemKind;
+			const propsItems: CompletionItem[] = props.map(creator(propPriority));
+			const wxmlGrammarItems: CompletionItem[] = [...CONDITION_GRAMMARS, ...LIST_GRAMMARS].map(creator(Priority.FrameworkGrammar));
+			const eventItems: CompletionItem[] = events.map(creator(eventPriority, 'bind'));
+			items = [...propsItems, ...eventItems, ...wxmlGrammarItems];
+			const eventPrefix = EVENT_PREFIX_LIST.find((event) => filterPrefix.startsWith(event)); // 事件的前缀
+
+			if (filterPrefix === 'wx:') {
+				// 条件和列表语法的提示
+				items = wxmlGrammarItems;
+				itemKind = CompletionItemKind.Keyword;
+			} else if (eventPrefix) {
+				// 方法的提示
+				items = filterPrefix.startsWith('bind') 
+					? events.map(creator(eventPriority, eventPrefix)) 
+					: COMMON_EVENT_GRAMMARS.map(creator(Priority.FrameworkEvent, eventPrefix));
+				start = startPos + filterPrefix.length;
+				itemKind = CompletionItemKind.Function;
+			}
+
+			return [...items, ...eventPrefixResult];
 		};
 
 		const collectSuggestAttributeValue = (attributeName: string, startPos: number, endPos: number = offset): CompletionItem [] => {
@@ -256,8 +303,6 @@ export class WXMLLanguageMode implements ILanguageMode {
 								return collectSuggestAttributeName(offset, offset);
 							case ScannerState.BeforeAttributeValue:
 								return collectSuggestAttributeValue(currentAttributeName, scanner.getTokenEnd());
-							default:
-								break;
 						}
 					}
 					break;

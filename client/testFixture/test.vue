@@ -1,5 +1,5 @@
 <template>
-	<div v-if="name" ></div>
+	<div v-if="name"></div>
 </template>
 
 <script>
