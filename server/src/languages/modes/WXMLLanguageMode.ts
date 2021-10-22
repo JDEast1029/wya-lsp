@@ -9,6 +9,7 @@ import { WXML_TAGS_MAP, WXML_COMMON_PROPS, CONDITION_GRAMMARS, LIST_GRAMMARS, CO
 import { MC_TAGS_MAP, MC_COMMON_PROPS } from '../config/mc-tags';
 import { Scanner } from '../../parser/scanner/Scanner';
 import { TokenType, ScannerState } from '../../parser/scanner/constants';
+import { compose, includes } from "../../utils/utils";
 
 const enum Priority {
 	UserCode,
@@ -21,13 +22,8 @@ const enum Priority {
 	FrameworkGrammar,
 	Platform
 }
-interface PropItem {
-	prop: string, 
-	priority: Priority
-}
-interface EventItem {
-	event: string, 
-	priority: Priority
+interface AnyFunction<T = void> {
+	(...args: any[]): T;
 }
 
 export class WXMLLanguageMode implements ILanguageMode {
@@ -119,16 +115,13 @@ export class WXMLLanguageMode implements ILanguageMode {
 			let propPriority: Priority;
 			let eventPriority: Priority;
 			if (isMc) {
-				props = MC_TAGS_MAP.get(currentTag)?.props ?? [];
-				props = props.concat(MC_COMMON_PROPS);
+				props = [...(MC_TAGS_MAP.get(currentTag)?.props ?? []), ...MC_COMMON_PROPS];
 				events = MC_TAGS_MAP.get(currentTag)?.events ?? [];
 				propPriority = Priority.LibraryProp;
 				eventPriority = Priority.LibraryEvent;
 			} else {
-				props = WXML_TAGS_MAP.get(currentTag)?.props ?? [];
-				props = props.concat(WXML_COMMON_PROPS);
-				events = WXML_TAGS_MAP.get(currentTag)?.events ?? [];
-				events = events.concat(COMMON_EVENT_GRAMMARS);
+				props = [...(WXML_TAGS_MAP.get(currentTag)?.props ?? []), ...WXML_COMMON_PROPS];
+				events = [...(WXML_TAGS_MAP.get(currentTag)?.events ?? []), ...COMMON_EVENT_GRAMMARS];
 				propPriority = Priority.FrameworkProp;
 				eventPriority = Priority.FrameworkEvent;
 			}
@@ -139,7 +132,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 
 			const value = this.isFollowedBy(text, endPos, ScannerState.AfterAttributeName, TokenType.DelimiterAssign) ? '' : '="$1"';
 
-			const eventPrefixResult = EVENT_PREFIX_LIST.map((event) => {
+			const eventPrefixResults = EVENT_PREFIX_LIST.map((event) => {
 				const insertText = event + ':';
 				const range = getReplaceRange(startPos, endPos);
 				return {
@@ -152,7 +145,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 				};
 			});
 
-			const creatorFactory = (itemKind: CompletionItemKind) => (priority: Priority, eventPrefix?: string) => (text: string) => {
+			const creatorCurry = (itemKind: CompletionItemKind) => (priority: Priority, eventPrefix?: string) => (text: string) => {
 				const insertText = `${eventPrefix ? eventPrefix + ':' : ''}${text}`;
 				const range = getReplaceRange(start, endPos);
 				return {
@@ -164,15 +157,18 @@ export class WXMLLanguageMode implements ILanguageMode {
 					textEdit: TextEdit.replace(range, insertText + value)
 				};
 			};
-			const enumCreator = creatorFactory(CompletionItemKind.Enum);
-			const methodCreator = creatorFactory(CompletionItemKind.Function);
+			const enumCreator = creatorCurry(CompletionItemKind.Enum);
+			const methodCreator = creatorCurry(CompletionItemKind.Function);
+
+			const includeUsedAttributes = includes([...usedAttributes]);
+			const getUnusedAttrs = (attrs: string[]) => attrs.filter((attr: string) => !includeUsedAttributes(attr));
+			const createItems = (callback: AnyFunction) => (attrs: string[]) => attrs.map(callback);
 
 			let items: CompletionItem[] = [];
 			let start = startPos;
-			// TODO: 优化filter
-			const propsItems: CompletionItem[] = props.filter((prop) => ![...usedAttributes].includes(prop)).map(enumCreator(propPriority));
-			const wxmlGrammarItems: CompletionItem[] = [...CONDITION_GRAMMARS, ...LIST_GRAMMARS].filter((grammar) => ![...usedAttributes].includes(grammar)).map(enumCreator(Priority.FrameworkGrammar));
-			const eventItems: CompletionItem[] = events.filter((event) => ![...usedAttributes].includes(event)).map(methodCreator(eventPriority, 'bind'));
+			const propsItems: CompletionItem[] = compose(createItems(enumCreator(propPriority)), getUnusedAttrs)(props);
+			const wxmlGrammarItems: CompletionItem[] = compose(createItems(enumCreator(Priority.FrameworkGrammar)), getUnusedAttrs)([...CONDITION_GRAMMARS, ...LIST_GRAMMARS]);
+			const eventItems: CompletionItem[] = compose(createItems(methodCreator(eventPriority, 'bind')), getUnusedAttrs)(events);
 			items = [...propsItems, ...eventItems, ...wxmlGrammarItems];
 			const eventPrefix = EVENT_PREFIX_LIST.find((event) => filterPrefix.startsWith(event)); // 事件的前缀
 
@@ -182,12 +178,12 @@ export class WXMLLanguageMode implements ILanguageMode {
 			} else if (eventPrefix) {
 				// 方法的提示
 				items = filterPrefix.startsWith('bind') 
-					? events.filter((event) => ![...usedAttributes].includes(event)).map(methodCreator(eventPriority, eventPrefix)) 
-					: COMMON_EVENT_GRAMMARS.filter((event) => ![...usedAttributes].includes(event)).map(methodCreator(Priority.FrameworkEvent, eventPrefix));
+					? compose(createItems(methodCreator(eventPriority, eventPrefix)), getUnusedAttrs)(events)
+					: compose(createItems(methodCreator(Priority.FrameworkEvent, eventPrefix)), getUnusedAttrs)(COMMON_EVENT_GRAMMARS);
 				start = startPos + filterPrefix.length;
 			}
 
-			return [...items, ...eventPrefixResult];
+			return [...items, ...eventPrefixResults];
 		};
 
 		const collectSuggestAttributeValue = (attributeName: string, startPos: number, endPos: number = offset): CompletionItem [] => {
