@@ -46,7 +46,7 @@ export class LanguageModes {
 	getAllLanguageModeRangesInDocument(document: TextDocument): ILanguageModeRange[] {
 		const result: ILanguageModeRange[] = [];
 
-		const wyaDocumentRegion = this.languageModeCache.refreshAndGet(document);
+		const wyaDocumentRegion = this.languageModeCache.refreshAndGetMode(document);
 
 		wyaDocumentRegion.getAllLanguageRanges().forEach(lr => {
 			const mode = this.modes[lr.languageId];

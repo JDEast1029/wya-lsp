@@ -6,7 +6,7 @@ export interface LanguageModeCache<T> {
 	 * - Use `parse` function to re-compute model
 	 * - Return re-computed model
 	 */
-	refreshAndGet(document: TextDocument): T;
+	refreshAndGetMode(document: TextDocument): T;
 	onDocumentRemoved(document: TextDocument): void;
 	dispose(): void;
 }

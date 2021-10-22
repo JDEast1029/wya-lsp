@@ -34,6 +34,7 @@ export class SCSSLanguageMode implements ILanguageMode {
 		return lsCompletions.items;
 	}
 
+	// TODO: 格式化 不对
 	format(document: TextDocument, range: Range, formattingOptions: FormattingOptions) {
 		return [
 			TextEdit.replace(
