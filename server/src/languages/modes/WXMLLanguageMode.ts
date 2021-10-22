@@ -5,7 +5,7 @@ import { Position, TextDocument } from 'vscode-languageserver-textdocument';
 import * as emmet from 'vscode-emmet-helper';
 import { IWXMLDocument } from '../../parser/wxml/WXMLParser';
 import { LanguageModeCache } from '../LanguageModeCache';
-import { WXML_TAGS_MAP, WXML_COMMON_PROPS, CONDITION_GRAMMARS, LIST_GRAMMARS, COMMON_EVENT_GRAMMARS, EVENT_PREFIX_LIST } from '../config/wxml';
+import { WXML_TAGS_MAP, WXML_COMMON_PROPS, WXML_GRAMMARS, COMMON_EVENT_GRAMMARS, EVENT_PREFIX_LIST } from '../config/wxml';
 import { MC_TAGS_MAP, MC_COMMON_PROPS } from '../config/mc-tags';
 import { Scanner } from '../../parser/scanner/Scanner';
 import { TokenType, ScannerState } from '../../parser/scanner/constants';
@@ -167,7 +167,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 			let items: CompletionItem[] = [];
 			let start = startPos;
 			const propsItems: CompletionItem[] = compose(createItems(enumCreator(propPriority)), getUnusedAttrs)(props);
-			const wxmlGrammarItems: CompletionItem[] = compose(createItems(enumCreator(Priority.FrameworkGrammar)), getUnusedAttrs)([...CONDITION_GRAMMARS, ...LIST_GRAMMARS]);
+			const wxmlGrammarItems: CompletionItem[] = compose(createItems(enumCreator(Priority.FrameworkGrammar)), getUnusedAttrs)(WXML_GRAMMARS);
 			const eventItems: CompletionItem[] = compose(createItems(methodCreator(eventPriority, 'bind')), getUnusedAttrs)(events);
 			items = [...propsItems, ...eventItems, ...wxmlGrammarItems];
 			const eventPrefix = EVENT_PREFIX_LIST.find((event) => filterPrefix.startsWith(event)); // 事件的前缀

@@ -609,6 +609,8 @@ export const LIST_GRAMMARS: string[] = [
 	'wx:key'
 ];
 
+export const WXML_GRAMMARS: string[] = [...CONDITION_GRAMMARS, ...LIST_GRAMMARS];
+
 export const EVENT_PREFIX_LIST = [
 	'bind','capture-bind','mut-bind','catch','capture-catch'
 ];
