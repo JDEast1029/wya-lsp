@@ -1,11 +1,8 @@
 import { CompletionItem, Position } from 'vscode-languageserver-types';
 import { TextDocument } from 'vscode-languageserver-textdocument';
-import { CompletionContext } from 'vscode-languageserver/node';
+import { CompletionContext, FormattingOptions, Range, TextEdit } from 'vscode-languageserver/node';
 
 export interface ILanguageMode {
-	doComplete?(document: TextDocument, position: Position, context: CompletionContext | undefined): CompletionItem[];
-}
-
-export interface IPLanguageMode {
-	doComplete?(document: TextDocument, position: Position, context: CompletionContext | undefined): Promise<CompletionItem[]>;
+	doComplete?(document: TextDocument, position: Position, context: CompletionContext | undefined): Promise<CompletionItem[]> | CompletionItem[];
+	format?(document: TextDocument, range: Range, options: FormattingOptions): TextEdit[];
 }

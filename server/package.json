@@ -17,6 +17,7 @@
 	},
 	"scripts": {},
 	"devDependencies": {
+		"sass-formatter": "^0.7.2",
 		"vscode-css-languageservice": "^5.1.6",
 		"vscode-emmet-helper": "^2.6.4",
 		"vscode-json-languageservice": "^4.1.8"

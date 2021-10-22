@@ -1,6 +1,6 @@
 <template>
 	<cover-image referrer-policy="origin"></cover-image>
-	<ad bind:tap="" class="" catch:touchend=""></ad>
+	<ad bind:tap="" class="" catch:touchend="" ad-intervals=""></ad>
 </template>
 
 <script>

@@ -1,9 +1,9 @@
-import { IEmbeddedRegion, LanguageId, parseWyaDocumentRegions } from '../parser/region/WyaDocumentRegionParser';
+import { IEmbeddedRegion, ILanguageModeRange, LanguageId, parseWyaDocumentRegions } from '../parser/region/WyaDocumentRegionParser';
 import { TextDocument } from 'vscode-languageserver-textdocument';
-import { CompletionContext, Position } from 'vscode-languageserver/node';
+import { Position } from 'vscode-languageserver/node';
 import { LanguageModeCache } from './LanguageModeCache';
 import { IWyaDocumentRegions, getWyaDocumentRegions } from '../parser/region/WyaDocumentRegions';
-import { ILanguageMode, IPLanguageMode } from './modes/ILanguageMode';
+import { ILanguageMode } from './modes/ILanguageMode';
 import { JSONLanguageMode } from './modes/JSONLanguageMode';
 import { WXMLLanguageMode } from './modes/WXMLLanguageMode';
 import { WYALanguageMode } from './modes/WYALanguageMode';
@@ -15,7 +15,7 @@ export const nullMode: ILanguageMode = {
 };
 
 export class LanguageModes {
-	private modes: { [k in LanguageId]: ILanguageMode | IPLanguageMode } = {
+	private modes: { [k in LanguageId]: ILanguageMode } = {
 		wya: nullMode,
 		wxml: nullMode,
 		javascript: nullMode,
@@ -36,10 +36,25 @@ export class LanguageModes {
 		this.modes['wya'] = new WYALanguageMode();
 	}
 
-	getModeAtPosition(document: TextDocument, position: Position): ILanguageMode | IPLanguageMode | undefined {
+	getModeAtPosition(document: TextDocument, position: Position): ILanguageMode | undefined {
 		const wyaDocumentRegion = this.languageModeCache.refreshAndGetMode(document);
 		const languageId = wyaDocumentRegion.getLanguageAtPosition(position);
 
 		return this.modes?.[languageId];
+	}
+
+	getAllLanguageModeRangesInDocument(document: TextDocument): ILanguageModeRange[] {
+		const result: ILanguageModeRange[] = [];
+
+		const wyaDocumentRegion = this.languageModeCache.refreshAndGet(document);
+
+		wyaDocumentRegion.getAllLanguageRanges().forEach(lr => {
+			const mode = this.modes[lr.languageId];
+			if (mode) {
+				result.push({ mode, ...lr});
+			}
+		});
+
+		return result;
 	}
 }

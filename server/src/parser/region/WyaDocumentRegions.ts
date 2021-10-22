@@ -1,9 +1,10 @@
 import { Position, TextDocument } from 'vscode-languageserver-textdocument';
-import { IEmbeddedRegion, LanguageId, parseWyaDocumentRegions } from './WyaDocumentRegionParser';
+import { IEmbeddedRegion, ILanguageRange, LanguageId, parseWyaDocumentRegions } from './WyaDocumentRegionParser';
 
 
 export interface IWyaDocumentRegions {
 	getSingleLanguageDocument(languageId: LanguageId): TextDocument;
+	getAllLanguageRanges(): ILanguageRange[];
 	getLanguageAtPosition(position: Position): LanguageId;
 }
 
@@ -12,15 +13,16 @@ export const getWyaDocumentRegions = (document: TextDocument): IWyaDocumentRegio
 
 	return {
 		getSingleLanguageDocument: (languageId: LanguageId) => getSingleLanguageDocument(document, regions, languageId),
+		getAllLanguageRanges: () => getAllLanguageRanges(document, regions),
 		getLanguageAtPosition: (position: Position) => getLanguageAtPosition(document, regions, position),
 	};
 };
 
-export function getSingleLanguageDocument(
-	document: TextDocument,
-	regions: IEmbeddedRegion[],
+const getSingleLanguageDocument = (
+	document: TextDocument, 
+	regions: IEmbeddedRegion[], 
 	languageId: LanguageId
-): TextDocument {
+): TextDocument => {
 	const oldContent = document.getText();
 	let newContent = oldContent
 		.split('\n')
@@ -34,7 +36,17 @@ export function getSingleLanguageDocument(
 	}
 
 	return TextDocument.create(document.uri, languageId, document.version, newContent);
-}
+};
+
+const getAllLanguageRanges = (document: TextDocument, regions: IEmbeddedRegion[]): ILanguageRange[] => {
+	return regions.map(r => {
+		return {
+			languageId: r.languageId,
+			start: document.positionAt(r.start),
+			end: document.positionAt(r.end)
+		};
+	});
+};
 
 const getLanguageAtPosition = (document: TextDocument, regions: IEmbeddedRegion[], position: Position) => {
 	const offset = document.offsetAt(position);

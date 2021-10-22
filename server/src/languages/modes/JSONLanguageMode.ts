@@ -1,6 +1,6 @@
-import { IPLanguageMode } from './ILanguageMode';
+import { ILanguageMode } from './ILanguageMode';
 import { CompletionItem, Position } from 'vscode-languageserver-types';
-import { CompletionContext } from 'vscode-languageserver/node';
+import { CompletionContext, FormattingOptions, Range, TextEdit } from 'vscode-languageserver/node';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import {
 	getLanguageService as getHTMLLanguageService, 
@@ -13,7 +13,7 @@ import { IWyaDocumentRegions } from '../../parser/region/WyaDocumentRegions';
 /**
  * <config /> 补全
  */
-export class JSONLanguageMode implements IPLanguageMode {
+export class JSONLanguageMode implements ILanguageMode {
 	languageModeCache: LanguageModeCache<IWyaDocumentRegions>;
 	embeddedLanguageModeCache: LanguageModeCache<TextDocument>;
 	languageService!: LanguageService;
@@ -33,6 +33,10 @@ export class JSONLanguageMode implements IPLanguageMode {
 		const lsCompletions = await this.languageService.doComplete(embedded, position, this.jsonModeCache.refreshAndGetMode(embedded));
 
 		return lsCompletions?.items ?? [];
+	}
+
+	format(document: TextDocument, range: Range, options: FormattingOptions): TextEdit[] {
+		return this.languageService.format(document, range, options);
 	}
 
 	private initJsonService() {

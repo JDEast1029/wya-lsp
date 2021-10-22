@@ -1,6 +1,6 @@
 import { ILanguageMode } from './ILanguageMode';
 import { CompletionItem } from 'vscode-languageserver-types';
-import { CompletionContext, CompletionParams } from 'vscode-languageserver/node';
+import { CompletionContext, CompletionParams, FormattingOptions, Range, TextEdit } from 'vscode-languageserver/node';
 import * as emmet from 'vscode-emmet-helper';
 import { Position, TextDocument } from 'vscode-languageserver-textdocument';
 import {
@@ -8,6 +8,7 @@ import {
 	LanguageService,
 	Stylesheet
 } from 'vscode-css-languageservice';
+import { SassFormatter, SassFormatterConfig } from 'sass-formatter';
 import { LanguageModeCache } from '../LanguageModeCache';
 import { IWyaDocumentRegions } from '../../parser/region/WyaDocumentRegions';
 export class SCSSLanguageMode implements ILanguageMode {
@@ -31,5 +32,14 @@ export class SCSSLanguageMode implements ILanguageMode {
 		// TODO: 编辑器设置内的代码提示
 		
 		return lsCompletions.items;
+	}
+
+	format(document: TextDocument, range: Range, formattingOptions: FormattingOptions) {
+		return [
+			TextEdit.replace(
+				range,
+				SassFormatter.Format(document.getText(range), { ...formattingOptions }), // ...this.env.getConfig()?.sass?.format
+			)
+		];
 	}
 }

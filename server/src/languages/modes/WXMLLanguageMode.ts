@@ -35,6 +35,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 		this.languageModeCache = languageModeCache;
 	}
 
+	// unimplemented： ">" 自动关闭标签，"/" 自关闭标签
 	doComplete(document: TextDocument, position: Position, context: CompletionContext | undefined): CompletionItem[] {
 		const offset =  document.offsetAt(position);
 
@@ -76,6 +77,7 @@ export class WXMLLanguageMode implements ILanguageMode {
 		};
 
 		const collectSuggestCloseTags = (startPos: number, endPos: number): CompletionItem[] => {
+			const range = getReplaceRange(startPos, endPos);
 			const tags = [];
 			let currentNode = node;
 			if (currentNode.tag) {
@@ -88,7 +90,6 @@ export class WXMLLanguageMode implements ILanguageMode {
 			
 			return tags.map((tag, index) => {
 				const insertText = '/' + tag;
-				const range = getReplaceRange(startPos, endPos);
 				return {
 					label: insertText,
 					kind: CompletionItemKind.Text,

@@ -1,7 +1,8 @@
 import { 
 	CompletionList,
 	CompletionParams,
-	Connection 
+	Connection, 
+	DocumentFormattingParams
 } from "vscode-languageserver";
 import { 
 	createConnection,
@@ -20,6 +21,7 @@ import {
 import { DocumentService } from './document';
 import { initResult } from './config';
 import { ProjectService } from './project';
+import { TextEdit } from 'vscode-languageserver-textdocument';
 
 export class WLS {
 	public connection: Connection;
@@ -61,6 +63,8 @@ export class WLS {
 	private setupWLSHandlers() {
 		this.connection.onCompletion(this.onCompletion.bind(this));
 		this.connection.onCompletionResolve(this.onCompletionResolve.bind(this));
+
+		this.connection.onDocumentFormatting(this.onDocumentFormatting.bind(this));
 	}
 
 	private async onCompletion(params: CompletionParams): Promise<CompletionList> {
@@ -73,13 +77,12 @@ export class WLS {
 	}
 
 	private onCompletionResolve(item: CompletionItem): CompletionItem {
-		if (item.data === 1) {
-			item.detail = 'TypeScript details';
-			item.documentation = 'TypeScript documentation';
-		} else if (item.data === 2) {
-			item.detail = 'JavaScript details';
-			item.documentation = 'JavaScript documentation';
-		}
 		return item;
+	}
+
+	async onDocumentFormatting(params: DocumentFormattingParams): Promise<TextEdit[]> {
+		const project = new ProjectService(this.documentService, { globalSnippetDir: this.globalSnippetDir });
+	
+		return project?.onDocumentFormatting(params) ?? [];
 	}
 }

@@ -1,10 +1,18 @@
-import { TextDocument } from 'vscode-languageserver-textdocument';
+import { Range, TextDocument } from 'vscode-languageserver-textdocument';
+import { ILanguageMode } from '../../languages/modes/ILanguageMode';
 import { TokenType } from '../scanner/constants';
 import { Scanner } from '../scanner/Scanner';
 
 export type RegionType = 'template' | 'script' | 'style' | 'config';
 export type LanguageId = 'wya' | 'wxml' | 'javascript' | 'scss' | 'json'
 
+export interface ILanguageRange extends Range {
+	languageId: LanguageId;
+	attributeValue?: boolean;
+}
+export interface ILanguageModeRange extends ILanguageRange {
+	mode: ILanguageMode;
+}
 export interface IEmbeddedRegion {
 	languageId: LanguageId,
 	start: number,

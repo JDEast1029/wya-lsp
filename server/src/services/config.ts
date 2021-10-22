@@ -1,12 +1,15 @@
-import { TextDocumentSyncKind, InitializeResult } from 'vscode-languageserver/node';
+import { TextDocumentSyncKind, InitializeResult, CodeActionKind } from 'vscode-languageserver/node';
 
 export const initResult: InitializeResult = {
 	capabilities: {
 		textDocumentSync: TextDocumentSyncKind.Incremental,
+		// 自动提示
 		completionProvider: {
 			resolveProvider: true,
 			triggerCharacters: [':', '<', '"', "'", '/', ' ']
-		}
+		},
+		// 格式化代码
+		documentFormattingProvider : true,
 	}
 };
 

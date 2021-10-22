@@ -1,4 +1,4 @@
-import { CompletionParams } from 'vscode-languageserver/node';
+import { CompletionParams, DocumentFormattingParams, TextEdit } from 'vscode-languageserver/node';
 import { BasicComponentInfo, WLSFullConfig } from './config';
 import { DocumentService } from './document';
 import { LanguageModes } from '../languages/LanguageModes';
@@ -35,5 +35,33 @@ export class ProjectService {
 			return mode.doComplete(doc, position, context);
 		}
 		return [];
+	}
+
+	async onDocumentFormatting(params: DocumentFormattingParams): Promise<TextEdit[]> {
+		const { textDocument, options } = params;
+		const doc = this.documentService.getDocument(textDocument.uri)!;
+		const modeRanges = this.languageModes.getAllLanguageModeRangesInDocument(doc);
+		const allEdits: TextEdit[] = [];
+
+		const errMessages: string[] = [];
+		modeRanges.forEach(modeRange => {
+			if (modeRange.mode && modeRange.mode.format) {
+				try {
+					const edits = modeRange.mode.format(doc, { start: modeRange.start, end: modeRange.end }, options);
+					for (const edit of edits) {
+						allEdits.push(edit);
+					}
+				} catch (err: any) {
+					errMessages.push(err.toString());
+				}
+			}
+		});
+
+		if (errMessages.length !== 0) {
+			console.error('Formatting failed: "' + errMessages.join('\n') + '"');
+			return [];
+		}
+
+		return allEdits;
 	}
 }
