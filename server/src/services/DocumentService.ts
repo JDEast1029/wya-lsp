@@ -22,6 +22,10 @@ export class DocumentService {
 		return this.documents.get(uri);
 	}
 
+	public getAllDocuments() {
+		return this.documents.all();
+	}
+	
 	get onDidClose() {
 		return this.documents.onDidClose;
 	}

@@ -1,4 +1,4 @@
-import { WLS } from './services/wls';
+import { WLS } from './services/WLS';
 
 const app = new WLS();
 

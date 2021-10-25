@@ -1,15 +1,14 @@
-import { CompletionParams, DocumentFormattingParams, TextEdit } from 'vscode-languageserver/node';
-import { BasicComponentInfo, WLSFullConfig } from './config';
-import { DocumentService } from './document';
+import { CompletionItem, CompletionParams, DocumentFormattingParams, TextEdit } from 'vscode-languageserver/node';
+import { BasicComponentInfo, WLSFullConfig, getDefaultWLSConfig } from './config';
+import { DocumentService } from './DocumentService';
 import { LanguageModes } from '../languages/LanguageModes';
 
 export interface ProjectConfig {
-	// vlsFullConfig: WLSFullConfig;
-	// isExistVeturConfig: boolean;
+	// wlsFullConfig: WLSFullConfig;
+	// isExistWLSConfig: boolean;
 	// rootPathForConfig: string;
 	// workspaceFsPath: string;
 	// rootFsPath: string;
-	// tsconfigPath: string | undefined;
 	// packagePath: string | undefined;
 	// snippetFolder: string;
 	// globalComponents: BasicComponentInfo[];

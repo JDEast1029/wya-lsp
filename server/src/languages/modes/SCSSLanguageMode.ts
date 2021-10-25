@@ -8,7 +8,6 @@ import {
 	LanguageService,
 	Stylesheet
 } from 'vscode-css-languageservice';
-import { SassFormatter, SassFormatterConfig } from 'sass-formatter';
 import { LanguageModeCache } from '../LanguageModeCache';
 import { IWyaDocumentRegions } from '../../parser/region/WyaDocumentRegions';
 export class SCSSLanguageMode implements ILanguageMode {
@@ -34,13 +33,7 @@ export class SCSSLanguageMode implements ILanguageMode {
 		return lsCompletions.items;
 	}
 
-	// TODO: 格式化 不对
 	format(document: TextDocument, range: Range, formattingOptions: FormattingOptions) {
-		return [
-			TextEdit.replace(
-				range,
-				SassFormatter.Format(document.getText(range), { ...formattingOptions }), // ...this.env.getConfig()?.sass?.format
-			)
-		];
+		return [];
 	}
 }
