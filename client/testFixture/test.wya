@@ -18,6 +18,6 @@ Component({
 	"component": true,
 	"usingComponents": {
 		
-	},
+	}
 }
 </config>
