@@ -4,7 +4,7 @@
 	"author": "JD",
 	"icon": "assets/wya.png",
 	"license": "MIT",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Microsoft/vscode-extension-samples"
@@ -30,10 +30,16 @@
 		"languages": [
 			{
 				"id": "wya",
-				"aliases": ["Wya", "wya"],
-				"extensions": [".wya"],
+				"aliases": [
+					"Wya",
+					"wya"
+				],
+				"extensions": [
+					".wya"
+				],
 				"configuration": "./languages/wya-language-configuration.json"
-			}, {
+			},
+			{
 				"id": "wya-html",
 				"aliases": [
 					"wya-html"
@@ -67,9 +73,7 @@
 		"configuration": {
 			"type": "object",
 			"title": "wls configuration",
-			"properties": {
-				
-			}
+			"properties": {}
 		}
 	},
 	"scripts": {
