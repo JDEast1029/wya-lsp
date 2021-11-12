@@ -27,7 +27,7 @@ import { getDefaultWLSConfig, getWyaFullConfig, initResult, WLSFullConfig, WyaFu
 import { ProjectService } from './ProjectService';
 import { TextEdit } from 'vscode-languageserver-textdocument';
 import { getFileFsPath, normalizeFileNameToFsPath } from '../utils/paths';
-import { findConfigFile, requireUncached } from '../utils/workspace';
+import { requireUncached } from '../utils/workspace';
 
 export class WLS {
 	private workspaces: Map<
@@ -145,10 +145,11 @@ export class WLS {
 	}
 
 	private async addWorkspace(workspace: { name: string; fsPath: string }) {
-		let wyaConfigPath = findConfigFile(workspace.fsPath, 'wya.config.js');
-		if (!wyaConfigPath) {
-			wyaConfigPath = findConfigFile(workspace.fsPath, 'wya.config.cjs');
-		}
+		let wyaConfigPath;
+		// let wyaConfigPath = findConfigFile(workspace.fsPath, 'wya.config.js');
+		// if (!wyaConfigPath) {
+		// 	wyaConfigPath = findConfigFile(workspace.fsPath, 'wya.config.cjs');
+		// }
 		const rootPathForConfig = normalizeFileNameToFsPath(
 			wyaConfigPath ? path.dirname(wyaConfigPath) : workspace.fsPath
 		);

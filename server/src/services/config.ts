@@ -8,7 +8,7 @@ import {
 	normalizeFileNameResolve,
 	normalizeAbsolutePath
   } from '../utils/paths';
-  import { findConfigFile } from '../utils/workspace';
+//   import { findConfigFile } from '../utils/workspace';
 
 export const initResult: InitializeResult = {
 	capabilities: {
@@ -158,8 +158,9 @@ export const getWyaFullConfig = async (
 	const projects = oldProjects
 		.map(project => {
 			const getFallbackPackagePath = (projectRoot: string) => {
-				const fallbackPackage = findConfigFile(projectRoot, 'package.json');
-				return fallbackPackage ? normalizeFileNameToFsPath(fallbackPackage) : undefined;
+				// const fallbackPackage = findConfigFile(projectRoot, 'package.json');
+				// return fallbackPackage ? normalizeFileNameToFsPath(fallbackPackage) : undefined;
+				return undefined;
 			};
 
 			if (typeof project === 'string') {
