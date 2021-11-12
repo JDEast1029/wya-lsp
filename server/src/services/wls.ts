@@ -81,7 +81,7 @@ export class WLS {
 					: [];
 
 		if (workspaceFolders.length === 0) {
-			console.error('No workspace path found. Vetur initialization failed.');
+			console.error('No workspace path found. Wls initialization failed.');
 			return {
 				capabilities: {}
 			};

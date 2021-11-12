@@ -11,6 +11,7 @@
 	  ["[", "]"],
 	  ["(", ")"]
 	],
+	"autoCloseBefore": "}<\"\n\t",
 	// symbols that are auto closed when typing
 	"autoClosingPairs": [
 		  { "open": "{", "close": "}" },
@@ -36,5 +37,5 @@
 		"end": "^</(template|style|script|config)>"
 	  }
 	}
-  }
+}
   
