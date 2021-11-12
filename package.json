@@ -83,7 +83,7 @@
 		"lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
 		"postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
 		"test": "sh ./scripts/e2e.sh",
-		"publish": "vsce package && vsce publish patch"
+		"publish": "npm run vscode:prepublish && vsce package && vsce publish patch"
 	},
 	"devDependencies": {
 		"@types/mocha": "^8.2.2",
