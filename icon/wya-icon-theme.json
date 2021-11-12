@@ -1,0 +1,17 @@
+{
+	"iconDefinitions": {
+		"_file_dark": {
+			"iconPath": "./wya.svg"
+		},
+		"_file_light": {
+			"iconPath": "./wya.svg"
+		}
+	},
+	"file": "_file_dark",
+	"languageIds": {
+		"wya": "_file_dark"
+	},
+	"light": {
+		"file": "_file_light",
+	}
+}

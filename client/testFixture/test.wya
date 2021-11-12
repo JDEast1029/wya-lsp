@@ -1,5 +1,4 @@
 <template>
-	<image lazy-load=""></image>
 	<mc-action-sheet wx:if="{{ true }}" actions=""></mc-action-sheet>
 </template>
 
