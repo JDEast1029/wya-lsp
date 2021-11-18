@@ -23,13 +23,11 @@ export class LanguageModes {
 		json: nullMode,
 	};
 	languageModeCache: LanguageModeCache<IWyaDocumentRegions>;
-	wxmlDocumentCache: LanguageModeCache<IWXMLDocument>;
 
 	constructor() {
 		this.languageModeCache = new LanguageModeCache<IWyaDocumentRegions>(10, 60, document => getWyaDocumentRegions(document));
-		this.wxmlDocumentCache = new LanguageModeCache<IWXMLDocument>(10, 60, (document) => parseWXMLDocument(document));
 
-		this.modes['wxml'] = new WXMLLanguageMode(this.wxmlDocumentCache);
+		this.modes['wxml'] = new WXMLLanguageMode(this.languageModeCache);
 		// this.modes['javascript'] = new JSONLanguageMode();
 		this.modes['scss'] = new SCSSLanguageMode(this.languageModeCache);
 		this.modes['json'] = new JSONLanguageMode(this.languageModeCache);

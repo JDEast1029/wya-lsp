@@ -7,7 +7,7 @@ import {
 	LanguageService, 
 	JSONDocument
 } from 'vscode-json-languageservice';
-import { CONFIG_SCHEMA, CONFIG_SCHEMA_URI } from '../config/config';
+import { CONFIG_SCHEMA, CONFIG_SCHEMA_URI } from '../completion/json';
 import { LanguageModeCache } from '../LanguageModeCache';
 import { IWyaDocumentRegions } from '../../parser/region/WyaDocumentRegions';
 /**

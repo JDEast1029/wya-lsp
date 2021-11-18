@@ -1,7 +1,8 @@
-import { CompletionItem, CompletionParams, DocumentFormattingParams, TextEdit } from 'vscode-languageserver/node';
+import { CompletionItem, Diagnostic, CompletionParams, DocumentFormattingParams, TextEdit } from 'vscode-languageserver/node';
 import { BasicComponentInfo, WLSFullConfig, getDefaultWLSConfig } from './config';
 import { DocumentService } from './DocumentService';
 import { LanguageModes } from '../languages/LanguageModes';
+import { TextDocument } from 'vscode-languageserver-textdocument';
 
 export interface ProjectConfig {
 	// wlsFullConfig: WLSFullConfig;
@@ -62,5 +63,16 @@ export class ProjectService {
 		}
 
 		return allEdits;
+	}
+
+	public async doValidation(doc: TextDocument) {
+		const diagnostics: Diagnostic[] = [];
+		for (const lmr of this.languageModes.getAllLanguageModeRangesInDocument(doc)) {
+			if (lmr.mode && lmr.mode.doValidation) {
+				const res = await lmr.mode.doValidation(doc) || [];
+				diagnostics.push(...res);
+			}
+		}
+		return diagnostics;
 	}
 }

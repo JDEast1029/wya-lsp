@@ -12,11 +12,16 @@
 		"url": "https://github.com/Microsoft/vscode-extension-samples"
 	},
 	"dependencies": {
-		"eslint": "^7.27.0",
+		"@wxml/parser": "^0.3.0",
+		"eslint": "^7.32.0",
+		"eslint-plugin-wxml": "^0.6.0",
 		"prettier": "^2.3.2"
 	},
 	"scripts": {},
 	"devDependencies": {
+		"@types/eslint": "^7.29.0",
+		"@types/eslint-scope": "^3.7.1",
+		"@types/eslint-visitor-keys": "^1.0.0",
 		"fast-glob": "^3.2.7",
 		"lodash": "^4.17.21",
 		"prettier-eslint": "^13.0.0",
