@@ -22,6 +22,12 @@ export class WXMLDataProvider implements IWXMLDataProvider {
 		this._tags.forEach(t => {
 			this._tagMap[t.name.toLowerCase()] = t;
 		});
+
+		if (customData.valueSets) {
+			customData.valueSets.forEach(vs => {
+				this._valueSetMap[vs.name] = vs.values;
+			});
+		}
 	}
 
 	getId() {
@@ -73,6 +79,13 @@ export class WXMLDataProvider implements IWXMLDataProvider {
 						a.values.forEach(v => {
 							values.push(v);
 						});
+					}
+					if (a.valueSet) {
+						if (this._valueSetMap[a.valueSet]) {
+							this._valueSetMap[a.valueSet].forEach(v => {
+								values.push(v);
+							});
+						}
 					}
 				}
 			});

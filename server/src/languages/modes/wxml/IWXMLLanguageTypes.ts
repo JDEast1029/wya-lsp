@@ -18,6 +18,11 @@ export interface IEventData {
 	description?: string | MarkupContent;
 }
 
+export interface IValueSet {
+	name: string;
+	values: IValueData[];
+}
+
 export interface ITagData {
 	name: string;
 	description?: string | MarkupContent;
@@ -36,4 +41,5 @@ export interface WXMLData {
 	tags?: ITagData[];
 	globalAttributes?: IAttributeData[];
 	globalEvents?: IEventData[];
+	valueSets?: IValueSet[];
 }

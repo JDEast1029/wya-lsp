@@ -6,68 +6,71 @@ export const mcData: WXMLData = {
 			"name": "mc-action-sheet",
 			"description": {
 				"kind": "markdown",
-				"value": ""
+				"value": "动作面板"
 			},
 			"attributes": [
 				{
 					"name": "visible",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| boolean | `false` | 否 | 是否可见"
 					}
 				},
 				{
 					"name": "cancelText",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| string | `取消` | 否 | 取消按钮文字,为空不展示底部取消按钮"
 					}
 				},
 				{
 					"name": "title",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| string | | 否 | 弹框标题"
 					}
 				},
 				{
 					"name": "description",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| string | | 否 | 弹框二级标题"
 					}
 				},
 				{
 					"name": "actions",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| array | `[]` | 否 | 面板选项列表, 每项可接受字段：`name` `extra` `color` `subname` `disabled` `onClick`"
 					}
 				},
 				{
 					"name": "closeOnClickAction",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| boolean | `true` | 否 | 选中某一项后是否关闭弹层"
 					}
-				}
+				},
+				// TODO: button,openType,popup的属性
 			],
 			"events": [
 				{
 					"name": "sure",
-					"description": ""
+					"description": "popup弹层关闭"
 				},
 				{
 					"name": "cancel",
-					"description": ""
+					"description": "点击取消的回调"
 				},
 				{
 					"name": "close",
-					"description": ""
+					"description": "弹层关闭的回调"
 				},
 				{
 					"name": "select",
-					"description": ""
+					"description": "选中某一项后触发回调"
 				}
 			],
 			"references": [
@@ -81,7 +84,7 @@ export const mcData: WXMLData = {
 			"name": "mc-button",
 			"description": {
 				"kind": "markdown",
-				"value": ""
+				"value": "各种样式的操作按钮"
 			},
 			"attributes": [
 				{
@@ -96,17 +99,39 @@ export const mcData: WXMLData = {
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					},
+					"values": [
+						{
+							"name": "default"
+						},
+						{
+							"name": "primary"
+						},
+						{
+							"name": "text"
+						},
+						{
+							"name": "success"
+						},
+						{
+							"name": "error"
+						},
+						{
+							"name": "warning"
+						},
+					]
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					},
 				},
 				{
 					"name": "square",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -114,6 +139,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "circle",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -124,7 +150,12 @@ export const mcData: WXMLData = {
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					},
+					"values": [
+						{ "name": "large" },
+						{ "name": "medium" },
+						{ "name": "small" }
+					]
 				},
 				{
 					"name": "openType",
@@ -135,6 +166,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "long",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -142,6 +174,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "plain",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -170,6 +203,11 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "lang",
+					"values": [
+						{ "name": "en" },
+						{ "name": "zh_CN" },
+						{ "name": "zh_TW" },
+					],
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -212,6 +250,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showMessageCard",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -269,7 +308,7 @@ export const mcData: WXMLData = {
 			"name": "mc-cascader",
 			"description": {
 				"kind": "markdown",
-				"value": ""
+				"value": "级联选择器"
 			},
 			"attributes": [
 				{
@@ -288,6 +327,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useTabs",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -316,6 +356,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showToolbar",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -351,6 +392,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useItemSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -358,6 +400,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "border",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -372,6 +415,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -403,11 +447,12 @@ export const mcData: WXMLData = {
 			"name": "mc-checkbox",
 			"description": {
 				"kind": "markdown",
-				"value": ""
+				"value": "复选框"
 			},
 			"attributes": [
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -422,6 +467,10 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "shape",
+					"values": [
+						{ "name": "square" },
+						{ "name": "round" },
+					],
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -443,6 +492,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "indeterminate",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -473,11 +523,12 @@ export const mcData: WXMLData = {
 			"name": "mc-checkbox-group",
 			"description": {
 				"kind": "markdown",
-				"value": ""
+				"value": "复选框组"
 			},
 			"attributes": [
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -503,7 +554,7 @@ export const mcData: WXMLData = {
 			"name": "mc-collapse",
 			"description": {
 				"kind": "markdown",
-				"value": ""
+				"value": "可以折叠/展开的内容区域"
 			},
 			"attributes": [
 				{
@@ -515,6 +566,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "accordion",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -573,6 +625,7 @@ export const mcData: WXMLData = {
 			"attributes": [
 				{
 					"name": "useSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -601,6 +654,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "auto",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -654,6 +708,11 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "mode",
+					"values": [
+						{ "name": "date" },
+						{ "name": "month" },
+						{ "name": "quarter" },
+					],
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -696,6 +755,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showToolbar",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -738,6 +798,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useItemSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -745,6 +806,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "border",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -759,6 +821,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -806,6 +869,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "mask",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -834,6 +898,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "maskCloseable",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -841,6 +906,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "closeOnClickOutside",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -878,6 +944,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -945,6 +1012,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "lazy",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -989,6 +1057,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "border",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1066,6 +1135,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useLabelSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1080,6 +1150,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "required",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1131,6 +1202,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "inherit",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1166,6 +1238,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "round",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1194,6 +1267,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "lazyLoad",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1201,6 +1275,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useErrorSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1208,6 +1283,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useLoadingSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1215,6 +1291,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showMenuByLongpress",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1222,6 +1299,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "fit",
+					"valueSet": "image-fit",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1229,6 +1307,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showError",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1236,6 +1315,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showLoading",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1373,6 +1453,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1394,6 +1475,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "autoFocus",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1401,6 +1483,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "focus",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1429,6 +1512,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "adjustPosition",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1450,6 +1534,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "readonly",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1464,6 +1549,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "password",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1478,6 +1564,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "confirmHold",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1485,6 +1572,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useClearSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1492,6 +1580,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "clearable",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1499,6 +1588,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "right",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1506,6 +1596,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "usePrependSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1513,6 +1604,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useAppendSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1520,6 +1612,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "autoHeight",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1527,6 +1620,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "fixed",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1534,6 +1628,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showConfirmBar",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1548,6 +1643,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "viewPlaceholder",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1632,6 +1728,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1653,6 +1750,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "autoFocus",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1660,6 +1758,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "focus",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1688,6 +1787,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "adjustPosition",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1695,6 +1795,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "holdKeyboard",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1709,6 +1810,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "readonly",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1730,6 +1832,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showCancel",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1789,6 +1892,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "border",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1882,6 +1986,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useLeftIconSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1896,6 +2001,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "linkType",
+					"valueSet": "navigateType",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1903,6 +2009,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "border",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1910,6 +2017,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "borderIndent",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1917,6 +2025,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1952,6 +2061,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "visible",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1966,6 +2076,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "mask",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -1973,6 +2084,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "maskClosable",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2022,6 +2134,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "footer",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2072,6 +2185,10 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "mode",
+					"values": [
+						{ "name": "closeable" },
+						{ "name": "link" },
+					],
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2086,6 +2203,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "openType",
+					"valueSet": "navigateType",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2114,6 +2232,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "scrollable",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2135,6 +2254,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "wrapable",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2165,6 +2285,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "mode",
+					"valueSet": "number-dance-mode",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2172,6 +2293,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "scrollType",
+					"valueSet": "number-dance-scroll-type",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2251,6 +2373,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "mode",
+					"valueSet": "number-dance-mode",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2258,6 +2381,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "scrollType",
+					"valueSet": "number-dance-scroll-type",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2358,6 +2482,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showToolbar",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2393,6 +2518,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useItemSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2400,6 +2526,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "border",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2414,6 +2541,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2485,6 +2613,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "placement",
+					"valueSet": "placement",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2492,6 +2621,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "closeable",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2499,6 +2629,12 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "closeIconPosition",
+					"values": [
+						{ "name": "top-right" },
+						{ "name": "top-left" },
+						{ "name": "bottom-right" },
+						{ "name": "bottom-left" },
+					],
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2541,6 +2677,7 @@ export const mcData: WXMLData = {
 			"attributes": [
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2604,6 +2741,7 @@ export const mcData: WXMLData = {
 			"attributes": [
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2641,6 +2779,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "show",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2648,6 +2787,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "scroll",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2655,6 +2795,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showScrollStatus",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2669,6 +2810,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2683,6 +2825,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "listenScroll",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2739,6 +2882,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "pull",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2778,6 +2922,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "show",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2785,6 +2930,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "scroll",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2792,6 +2938,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showScrollStatus",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2806,6 +2953,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2820,6 +2968,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "listenScroll",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2839,20 +2988,6 @@ export const mcData: WXMLData = {
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
 					}
 				},
-				{
-					"name": "pull-up-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "total",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				}
 			],
 			"events": [
 				{
@@ -2921,6 +3056,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2928,6 +3064,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useButtonSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3024,6 +3161,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useLoadingSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3031,6 +3169,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "fixed",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3082,6 +3221,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "integer",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3089,6 +3229,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3110,6 +3251,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "async",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3117,6 +3259,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disableInput",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3152,6 +3295,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "forceStep",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3159,6 +3303,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showPlus",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3166,6 +3311,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showMinus",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3173,6 +3319,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disablePlus",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3180,6 +3327,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disableMinus",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3246,6 +3394,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3290,6 +3439,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3297,6 +3447,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "autoClose",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3354,6 +3505,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3361,6 +3513,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "loading",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3410,6 +3563,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "async",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3477,6 +3631,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "sticky",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3484,6 +3639,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "animated",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3491,6 +3647,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "swipeable",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3533,6 +3690,10 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "type",
+					"values": [
+						{ "name": "line" },
+						{ "name": "card" },
+					],
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3540,6 +3701,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "border",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3547,6 +3709,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "ellipsis",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3582,6 +3745,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "lazyRender",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3618,6 +3782,7 @@ export const mcData: WXMLData = {
 			"attributes": [
 				{
 					"name": "dot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3639,6 +3804,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3697,6 +3863,10 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "mode",
+					"values": [
+						{ "name": "24" },
+						{ "name": "12" },
+					],
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3725,6 +3895,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showToolbar",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3767,6 +3938,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useItemSlot",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3774,6 +3946,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "border",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3788,6 +3961,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3824,6 +3998,7 @@ export const mcData: WXMLData = {
 			"attributes": [
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3831,6 +4006,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "multiple",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3859,6 +4035,12 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "mode",
+					"values": [
+						{ "name": "image" },
+						{ "name": "video" },
+						{ "name": "medium" },
+						{ "name": "files" },
+					],
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3887,6 +4069,11 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "sizeType",
+					"values": [
+						{ "name": "['original', 'compressed']" },
+						{ "name": "['original']" },
+						{ "name": "['compressed']" },
+					],
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3894,6 +4081,11 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "sourceType",
+					"values": [
+						{ "name": "['album', 'camera']" },
+						{ "name": "['album']" },
+						{ "name": "['camera']" },
+					],
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3901,6 +4093,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "compressed",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3922,6 +4115,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "parallel",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -3957,6 +4151,7 @@ export const mcData: WXMLData = {
 			"attributes": [
 				{
 					"name": "disabled",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4006,6 +4201,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "previewVideo",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4013,6 +4209,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "previewImage",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4020,6 +4217,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "previewFullImage",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4027,6 +4225,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "imageFit",
+					"valueSet": "image-fit",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4041,6 +4240,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "useReady",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4094,6 +4294,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "autoplay",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4108,6 +4309,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showCenterPlayBtn",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4115,6 +4317,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showMuteBtn",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4122,6 +4325,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showPlayBtn",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4129,6 +4333,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "showFullscreenBtn",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4136,6 +4341,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "controls",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4166,6 +4372,52 @@ export const mcData: WXMLData = {
 		{
 			name: "mcStyle",
 			description: "组件对外统一暴露的样式属性"
+		},
+	],
+	valueSets: [
+		{
+			"name": "boolean",
+			"values": [
+				{
+					"name": "true"
+				},
+				{
+					"name": "false"
+				}
+			]
+		},
+		{
+			"name": "number-dance-mode",
+			"values": [
+				{ "name": "scroll" },
+				{ "name": "count" },
+			],
+		},
+		{
+			"name": "number-dance-scroll-type",
+			"values": [
+				{ "name": "soft" },
+				{ "name": "hard" },
+			],
+		},
+		{
+			"name": "placement",
+			"values": [
+				{ "name": "top" },
+				{ "name": "left" },
+				{ "name": "right" },
+				{ "name": "bottom" },
+				{ "name": "center" },
+			],
+		},
+		{
+			"name": "image-fit",
+			"values": [
+				{ "name": "none" },
+				{ "name": "fill" },
+				{ "name": "cover" },
+				{ "name": "contain" },
+			]
 		},
 	]
 };
