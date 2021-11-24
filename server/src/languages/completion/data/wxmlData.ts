@@ -1,4 +1,5 @@
 import { WXMLData } from '../../modes/wxml/IWXMLLanguageTypes';
+import { commonValueSets } from './common';
 
 interface IGrammarData {
 	name: string,
@@ -5792,5 +5793,8 @@ export const wxmlData: WXMLData = {
 			"name": "touchforcechange",
 			"description": "在支持 3D Touch 的 iPhone 设备，重按时会触发"
 		}
+	],
+	valueSets: [
+		...commonValueSets,
 	]
 };

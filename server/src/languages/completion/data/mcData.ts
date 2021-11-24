@@ -1,4 +1,5 @@
 import { WXMLData } from '../../modes/wxml/IWXMLLanguageTypes';
+import { commonValueSets } from './common';
 
 export const mcData: WXMLData = {
 	tags: [
@@ -53,7 +54,110 @@ export const mcData: WXMLData = {
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| boolean | `true` | 否 | 选中某一项后是否关闭弹层"
 					}
 				},
-				// TODO: button,openType,popup的属性
+				{
+					"name": "id",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "lang",
+					"valueSet": "lang",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "businessId",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "sessionFrom",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "sendMessageTitle",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "sendMessagePath",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "sendMessageImg",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "showMessageCard",
+					"valueSet": "boolean",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "appParameter",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "ariaLabel",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "round",
+					"valueSet": "boolean",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "mask",
+					"valueSet": "boolean",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "maskClosable",
+					"valueSet": "boolean",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "openType",
+					"valueSet": "open-type",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
 			],
 			"events": [
 				{
@@ -159,6 +263,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "openType",
+					"valueSet": "open-type",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -203,11 +308,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "lang",
-					"values": [
-						{ "name": "en" },
-						{ "name": "zh_CN" },
-						{ "name": "zh_TW" },
-					],
+					"valueSet": "lang",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2001,7 +2102,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "linkType",
-					"valueSet": "navigateType",
+					"valueSet": "navigate-fn-type",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2203,7 +2304,7 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "openType",
-					"valueSet": "navigateType",
+					"valueSet": "navigate-type",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -2606,6 +2707,30 @@ export const mcData: WXMLData = {
 				},
 				{
 					"name": "leave-to-class",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "round",
+					"valueSet": "boolean",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "mask",
+					"valueSet": "boolean",
+					"description": {
+						"kind": "markdown",
+						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+					}
+				},
+				{
+					"name": "maskClosable",
+					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
 						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
@@ -4375,16 +4500,14 @@ export const mcData: WXMLData = {
 		},
 	],
 	valueSets: [
+		...commonValueSets,
 		{
-			"name": "boolean",
+			"name": "lang",
 			"values": [
-				{
-					"name": "true"
-				},
-				{
-					"name": "false"
-				}
-			]
+				{ "name": "en" },
+				{ "name": "zh_CN" },
+				{ "name": "zh_TW" },
+			],
 		},
 		{
 			"name": "number-dance-mode",
