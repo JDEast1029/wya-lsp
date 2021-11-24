@@ -1,22 +1,3 @@
 <template>
-	<mc-action-sheet wx:if="{{ true }}" actions=""></mc-action-sheet>
+	<scroll-view scroll-x="{{ true }}" />
 </template>
-
-<script>
-Component({
-	
-})
-</script>
-
-<style lang="scss">
-
-</style>
-
-<config>
-{
-	"component": true,
-	"usingComponents": {
-		
-	}
-}
-</config>

@@ -27,13 +27,6 @@
 				"language": "wya"
 			}
 		],
-		"iconThemes": [
-			{
-				"id": "wya",
-				"label": "Wya",
-				"path": "./icon/wya-icon-theme.json"
-			}
-		],
 		"languages": [
 			{
 				"id": "wya",

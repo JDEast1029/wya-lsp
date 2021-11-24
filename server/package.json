@@ -15,6 +15,7 @@
 		"@wxml/parser": "^0.3.0",
 		"eslint": "^7.32.0",
 		"eslint-plugin-wxml": "^0.6.0",
+		"lodash": "^4.17.21",
 		"prettier": "^2.3.2"
 	},
 	"scripts": {},
@@ -22,8 +23,8 @@
 		"@types/eslint": "^7.29.0",
 		"@types/eslint-scope": "^3.7.1",
 		"@types/eslint-visitor-keys": "^1.0.0",
+		"@types/lodash": "^4.14.177",
 		"fast-glob": "^3.2.7",
-		"lodash": "^4.17.21",
 		"prettier-eslint": "^13.0.0",
 		"vscode-css-languageservice": "^5.1.6",
 		"vscode-emmet-helper": "^2.6.4",

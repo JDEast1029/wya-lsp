@@ -3,14 +3,10 @@ import { TextDocument } from 'vscode-languageserver-textdocument';
 import * as emmet from 'vscode-emmet-helper';
 import { ScannerState, TokenType } from '../../../parser/scanner/constants';
 import { Scanner } from '../../../parser/scanner/Scanner';
-import { COMMON_EVENT_GRAMMARS, EVENT_PREFIX_LIST, WXML_COMMON_PROPS, WXML_GRAMMARS, WXML_TAGS_MAP } from '../../completion/wxml';
 import { IWXMLDocument } from '../../../parser/wxml/WXMLParser';
-import { MC_COMMON_PROPS, MC_TAGS_MAP } from '../../completion/mc-tags';
-import { compose, includes } from '../../../utils/utils';
-
-interface AnyFunction<T = void> {
-	(...args: any[]): T;
-}
+import { WXMLDataManager } from '../../completion/WXMLDataManager';
+import { generateDocumentation } from '../../completion/WXMLDataProvider';
+import { EVENT_PREFIX_LIST, WXML_GRAMMARS } from '../../completion/data/wxmlData';
 
 const enum Priority {
 	UserCode,
@@ -23,6 +19,8 @@ const enum Priority {
 	FrameworkGrammar,
 	Platform
 }
+
+const dataManager = new WXMLDataManager({ useDefaultDataProvider: true});
 
 const isWhiteSpace = (s: string): boolean => {
 	return /^\s*$/.test(s);
@@ -64,6 +62,7 @@ const normalizeAttributeName = (attr: string): string => {
 	return result;
 };
 export const doComplete = (document: TextDocument, wxmlDocument: IWXMLDocument, position: Position): CompletionItem[] => {
+	const dataProviders = dataManager.getDataProviders();
 	const offset =  document.offsetAt(position);
 	const node = wxmlDocument.findNodeBefore(offset);
 	const text = document.getText();
@@ -83,25 +82,28 @@ export const doComplete = (document: TextDocument, wxmlDocument: IWXMLDocument, 
 		return new Set(node.attributeNames.map(normalizeAttributeName));
 	};
 
-	const collectSuggestOpenTags = (startPos: number, endPos: number): CompletionItem[] => {
-		const creator = (priority: Priority) => (tag: string) => {
-			const insertText = tag;
-			const range = getReplaceRange(startPos, endPos);
-			return {
-				label: insertText,
-				kind: CompletionItemKind.Text,
-				filterText: insertText,
-				insertTextFormat: InsertTextFormat.Snippet,
-				sortText: priority + insertText,
-				textEdit: TextEdit.replace(range, insertText)
-			};
-		};
-		let items: CompletionItem[] = [...WXML_TAGS_MAP.keys()].map(creator(Priority.Framework));
-		items = items.concat([...MC_TAGS_MAP.keys()].map(creator(Priority.Library)));
+	const collectOpenTagSuggestions = (startPos: number, endPos: number): CompletionItem[] => {
+		const items: CompletionItem[] = [];
+		dataProviders.forEach((provider) => {
+			provider.provideTags().forEach(tag => {
+				const insertText = tag.name;
+				const range = getReplaceRange(startPos, endPos);
+				const priority = provider.getId() === 'mc' ? Priority.Library : Priority.Framework;
+				items.push({
+					label: insertText,
+					kind: CompletionItemKind.Property,
+					filterText: insertText,
+					documentation: generateDocumentation(tag, undefined, true),
+					insertTextFormat: InsertTextFormat.PlainText,
+					sortText: priority + insertText,
+					textEdit: TextEdit.replace(range, insertText),
+				});
+			});
+		});
 		return items;
 	};
 
-	const collectSuggestCloseTags = (startPos: number, endPos: number): CompletionItem[] => {
+	const collectCloseTagSuggestions = (startPos: number, endPos: number): CompletionItem[] => {
 		const range = getReplaceRange(startPos, endPos);
 		const tags = [];
 		let currentNode = node;
@@ -125,107 +127,98 @@ export const doComplete = (document: TextDocument, wxmlDocument: IWXMLDocument, 
 		});
 	};
 
-	const collectSuggestTags = (startPos: number, endPos: number): CompletionItem[] => {
+	const collectTagSuggestions = (tagStart: number, tagEnd: number): CompletionItem[] => {
 		return [
-			...collectSuggestOpenTags(startPos, endPos), 
-			...collectSuggestCloseTags(startPos, endPos)
+			...collectOpenTagSuggestions(tagStart, tagEnd), 
+			...collectCloseTagSuggestions(tagStart, tagEnd)
 		];
 	};
 
 	const collectSuggestAttributeName = (startPos: number, endPos: number): CompletionItem [] => {
 		const usedAttributes = getUsedAttributes(startPos);
 		const currentTag = scanner.lastTag;
-		const isMc = MC_TAGS_MAP.has(currentTag);
-		let props: string[] = [];
-		let events: string[] = [];
-		let propPriority: Priority;
-		let eventPriority: Priority;
-		if (isMc) {
-			props = [...(MC_TAGS_MAP.get(currentTag)?.props ?? []), ...MC_COMMON_PROPS];
-			events = MC_TAGS_MAP.get(currentTag)?.events ?? [];
-			propPriority = Priority.LibraryProp;
-			eventPriority = Priority.LibraryEvent;
-		} else {
-			props = [...(WXML_TAGS_MAP.get(currentTag)?.props ?? []), ...WXML_COMMON_PROPS];
-			events = [...(WXML_TAGS_MAP.get(currentTag)?.events ?? []), ...COMMON_EVENT_GRAMMARS];
-			propPriority = Priority.FrameworkProp;
-			eventPriority = Priority.FrameworkEvent;
-		}
 		const attributeName = scanner.getTokenText();
-		const execRegExp = new RegExp(`^(wx:|(${EVENT_PREFIX_LIST.join('|')}):?)`);
+		const execRegExp = new RegExp(`^(${EVENT_PREFIX_LIST.join('|')}):?`);
 		const execArray = execRegExp.exec(attributeName || '');
-		const filterPrefix = execArray ? execArray[0] : '';
-
+		const filterPrefix = execArray ? execArray[0] : 'bind:';
 		const value = isFollowedBy(text, endPos, ScannerState.AfterAttributeName, TokenType.DelimiterAssign) ? '' : '="$1"';
 
-		const eventPrefixResults = EVENT_PREFIX_LIST.map((event) => {
-			const insertText = event + ':';
+		const items: CompletionItem[] = [];
+
+		EVENT_PREFIX_LIST.forEach(eventPrefix => {
+			const insertText = eventPrefix + ':';
 			const range = getReplaceRange(startPos, endPos);
-			return {
+			items.push({
 				label: insertText,
-				kind: CompletionItemKind.Event,
+				kind: CompletionItemKind.Value,
 				filterText: insertText,
 				insertTextFormat: InsertTextFormat.Snippet,
 				sortText: Priority.FrameworkGrammar + insertText,
 				textEdit: TextEdit.replace(range, insertText),
-			};
+			});
 		});
-
-		const creatorCurry = (itemKind: CompletionItemKind) => (priority: Priority, eventPrefix?: string) => (text: string) => {
-			const insertText = `${eventPrefix ? eventPrefix + ':' : ''}${text}`;
-			const range = getReplaceRange(start, endPos);
-			return {
-				label: insertText,
-				kind: itemKind || CompletionItemKind.Enum,
-				filterText: insertText,
+		WXML_GRAMMARS.forEach(wxmlGrammar => {
+			let grammarValue = value;
+			if (value && wxmlGrammar.valueSet === 'block') {
+				grammarValue = value.replace(/\$1/, '{{ $1 }}');
+			}
+			const range = getReplaceRange(startPos, endPos);
+			items.push({
+				label: wxmlGrammar.name,
+				kind: CompletionItemKind.Value,
+				filterText: wxmlGrammar.name,
 				insertTextFormat: InsertTextFormat.Snippet,
-				sortText: priority + insertText,
-				textEdit: TextEdit.replace(range, insertText + value)
-			};
-		};
-		const enumCreator = creatorCurry(CompletionItemKind.Enum);
-		const methodCreator = creatorCurry(CompletionItemKind.Function);
-
-		const includeUsedAttributes = includes([...usedAttributes]);
-		const getUnusedAttrs = (attrs: string[]) => attrs.filter((attr: string) => !includeUsedAttributes(attr));
-		const createItems = (callback: AnyFunction) => (attrs: string[]) => attrs.map(callback);
-
-		let items: CompletionItem[] = [];
-		let start = startPos;
-		const propsItems: CompletionItem[] = compose(createItems(enumCreator(propPriority)), getUnusedAttrs)(props);
-		const wxmlGrammarItems: CompletionItem[] = compose(createItems(enumCreator(Priority.FrameworkGrammar)), getUnusedAttrs)(WXML_GRAMMARS);
-		const eventItems: CompletionItem[] = compose(createItems(methodCreator(eventPriority, 'bind')), getUnusedAttrs)(events);
-		items = [...propsItems, ...eventItems, ...wxmlGrammarItems];
-		const eventPrefix = EVENT_PREFIX_LIST.find((event) => filterPrefix.startsWith(event)); // 事件的前缀
-
-		if (filterPrefix === 'wx:') {
-			// 条件和列表语法的提示
-			items = wxmlGrammarItems;
-		} else if (eventPrefix) {
-			// 方法的提示
-			items = filterPrefix.startsWith('bind') 
-				? compose(createItems(methodCreator(eventPriority, eventPrefix)), getUnusedAttrs)(events)
-				: compose(createItems(methodCreator(Priority.FrameworkEvent, eventPrefix)), getUnusedAttrs)(COMMON_EVENT_GRAMMARS);
-			start = startPos + filterPrefix.length;
-		}
-
-		return [...items, ...eventPrefixResults];
+				sortText: Priority.FrameworkGrammar + wxmlGrammar.name,
+				textEdit: TextEdit.replace(range, wxmlGrammar.name + grammarValue),
+			});
+		});
+		dataProviders.forEach(provider => {
+			const isMc = provider.getId() === 'mc';
+			const propPriority: Priority = isMc ? Priority.LibraryProp : Priority.FrameworkProp;
+			const eventPriority: Priority = isMc ? Priority.LibraryEvent : Priority.FrameworkEvent;
+			
+			provider.provideAttributes(currentTag).forEach(attr => {
+				if ([...usedAttributes].includes(attr.name)) return;
+				const range = getReplaceRange(startPos, endPos);
+				let attrValue = value;
+				const attrValues = provider.provideValues(currentTag, attr.name);
+				if (attrValue && attrValues.length) {
+					const valueSchema = '$' + `{1|${attrValues.map(({name}) => name).join(',')}|}`; // 初始提供可选值
+					attrValue = attrValue.replace(/\$1/, attr.valueSet === "boolean" ? `{{ ${valueSchema} }}` : `${valueSchema}`);
+				}
+				
+				items.push({
+					label: attr.name,
+					kind: CompletionItemKind.Value,
+					filterText: attr.name,
+					insertTextFormat: InsertTextFormat.Snippet,
+					documentation: generateDocumentation(attr, undefined, true),
+					sortText: propPriority + attr.name,
+					textEdit: TextEdit.replace(range, attr.name + attrValue)
+				});
+			});
+			provider.provideEvents(currentTag).forEach(event => {
+				if ([...usedAttributes].includes(event.name)) return;
+				const insertText = filterPrefix + event.name;
+				const range = getReplaceRange(startPos, endPos);
+				items.push({
+					label: insertText,
+					kind: CompletionItemKind.Function,
+					filterText: insertText,
+					insertTextFormat: InsertTextFormat.Snippet,
+					documentation: generateDocumentation(event, undefined, true),
+					sortText: eventPriority + insertText,
+					textEdit: TextEdit.replace(range, insertText + value)
+				});
+			});
+		});
+		return items;
 	};
 
-	const collectSuggestAttributeValue = (attributeName: string, startPos: number, endPos: number = offset): CompletionItem [] => {
+	const collectAttributeValueSuggestions = (attributeName: string, startPos: number, endPos: number = offset): CompletionItem [] => {
 		if (/^wx:/.test(attributeName)) return [];
 
 		const currentTag = scanner.lastTag;
-		const isMc = MC_TAGS_MAP.has(currentTag);
-		let attrOptional: string[] = [];
-		if (isMc) {
-			const comp = MC_TAGS_MAP.get(currentTag);
-			attrOptional = comp?.propsOptional.get(attributeName) ?? [];
-		} else {
-			const comp = WXML_TAGS_MAP.get(currentTag);
-			attrOptional = comp?.propsOptional.get(attributeName) ?? [];
-		}
-
 		let range: Range;
 		let addQuotes: boolean;
 		if (endPos && offset > startPos && offset <= endPos && text[startPos] === '"') {
@@ -243,16 +236,33 @@ export const doComplete = (document: TextDocument, wxmlDocument: IWXMLDocument, 
 			addQuotes = true;
 		}
 
-		return attrOptional.map((value) => {
-			const insertText = addQuotes ? '"' + value + '"' : value;
-			return {
-				label: insertText,
-				kind: CompletionItemKind.Value,
-				filterText: insertText,
-				insertTextFormat: InsertTextFormat.Snippet,
-				textEdit: TextEdit.replace(range, insertText)
-			};
+		const items: CompletionItem[] = [];
+		dataProviders.forEach(provider => {
+			provider.provideValues(currentTag, attributeName).forEach(value => {
+				const insertText = addQuotes ? '"' + value.name + '"' : value.name;
+				items.push({
+					label: value.name,
+					kind: CompletionItemKind.Unit,
+					filterText: insertText,
+					documentation: generateDocumentation(value, undefined, true),
+					insertTextFormat: InsertTextFormat.Snippet,
+					textEdit: TextEdit.replace(range, insertText)
+				});
+			});
 		});
+
+		return items;
+	};
+
+	const collectAutoCloseTagSuggestion = (endPos: number, tag: string): CompletionItem[] => {
+		const pos = document.positionAt(endPos);
+		return [{
+			label: '</' + tag + '>',
+			kind: CompletionItemKind.Property,
+			filterText: '</' + tag + '>',
+			textEdit: TextEdit.insert(pos, '$0</' + tag + '>'),
+			insertTextFormat: InsertTextFormat.Snippet
+		}];
 	};
 
 	const getLineIndent = (offset: number) => {
@@ -274,13 +284,13 @@ export const doComplete = (document: TextDocument, wxmlDocument: IWXMLDocument, 
 		if (offset === scanner.getTokenEnd()) {
 			token = scanner.scan();
 			if (token === nextToken && scanner.tokenOffset === offset) {
-			return scanner.getTokenEnd();
+				return scanner.getTokenEnd();
 			}
 		}
 		return offset;
 	};
 
-	let currentTag: string;
+	let currentTag = '';
 	let currentAttributeName = '';
 
 	while (token !== TokenType.EOS && scanner.tokenOffset <= offset) {
@@ -288,32 +298,45 @@ export const doComplete = (document: TextDocument, wxmlDocument: IWXMLDocument, 
 			case TokenType.StartTagOpen:
 				if (offset === scanner.getTokenEnd()) {
 					const endPos = scanNextForEndPos(TokenType.StartTag);
-					return collectSuggestTags(offset, endPos); 
+					return collectTagSuggestions(offset, endPos); 
 				}
 				break;
 			case TokenType.StartTag:
 				if (scanner.tokenOffset <= offset && offset <= scanner.getTokenEnd()) {
-					return collectSuggestOpenTags(scanner.tokenOffset, scanner.getTokenEnd());
+					return collectOpenTagSuggestions(scanner.tokenOffset, scanner.getTokenEnd());
 				}
 				currentTag = scanner.getTokenText();
 				break; 
-			case TokenType.EndTagOpen:
+			case TokenType.StartTagClose:
 				if (offset <= scanner.getTokenEnd()) {
-					const endPos = scanNextForEndPos(TokenType.EndTag);
-					return collectSuggestCloseTags(offset - 1, endPos);
+					if (currentTag) {
+						return collectAutoCloseTagSuggestion(scanner.getTokenEnd(), currentTag);
+					}
 				}
 				break;
-			case TokenType.EndTag:
-				if (offset <= scanner.getTokenEnd()) {
-					let start = scanner.tokenOffset - 1;
-					while (start >= 0) {
-						const ch = text.charAt(start);
-						if (ch === '/') {
-							return collectSuggestCloseTags(start, scanner.getTokenEnd());
-						} else if (!isWhiteSpace(ch)) {
-							break;
-						}
-						start--;
+			case TokenType.AttributeName:
+				if (scanner.tokenOffset <= offset && offset <= scanner.getTokenEnd()) {
+					return collectSuggestAttributeName(scanner.tokenOffset, scanner.getTokenEnd());
+				}
+				currentAttributeName = scanner.getTokenText();
+				break;
+			case TokenType.DelimiterAssign:
+				if (scanner.getTokenEnd() === offset) {
+					return collectAttributeValueSuggestions(currentAttributeName, scanner.getTokenEnd());
+				}
+				break;
+			case TokenType.AttributeValue:
+				if (scanner.tokenOffset <= offset && offset <= scanner.getTokenEnd()) {
+					if (currentAttributeName === 'style') {
+						// TODO: {} => VSCodeEmmetConfig
+						const emmetCompletions = emmet.doComplete(document, position, 'css', {});
+						return emmetCompletions?.items ?? [];
+					} else {
+						return collectAttributeValueSuggestions(
+							currentAttributeName,
+							scanner.tokenOffset,
+							scanner.getTokenEnd()
+						);
 					}
 				}
 				break;
@@ -324,34 +347,30 @@ export const doComplete = (document: TextDocument, wxmlDocument: IWXMLDocument, 
 						case ScannerState.AfterAttributeName:
 							return collectSuggestAttributeName(offset, offset);
 						case ScannerState.BeforeAttributeValue:
-							return collectSuggestAttributeValue(currentAttributeName, scanner.getTokenEnd());
+							return collectAttributeValueSuggestions(currentAttributeName, scanner.getTokenEnd());
+						case ScannerState.AfterOpeningEndTag:
+							return collectCloseTagSuggestions(scanner.tokenOffset - 1, offset);
 					}
 				}
 				break;
-			case TokenType.AttributeName:
-				if (scanner.tokenOffset <= offset && offset <= scanner.getTokenEnd()) {
-					return collectSuggestAttributeName(scanner.tokenOffset, scanner.getTokenEnd());
+			case TokenType.EndTagOpen:
+				if (offset <= scanner.getTokenEnd()) {
+					const endPos = scanNextForEndPos(TokenType.EndTag);
+					return collectCloseTagSuggestions(offset - 1, endPos);
 				}
-				currentAttributeName = scanner.getTokenText();
 				break;
-			case TokenType.AttributeValue:
-				if (scanner.tokenOffset <= offset && offset <= scanner.getTokenEnd()) {
-					if (currentAttributeName === 'style') {
-						// TODO: {} => VSCodeEmmetConfig
-						const emmetCompletions = emmet.doComplete(document, position, 'css', {});
-						return emmetCompletions?.items ?? [];
-					} else {
-						return collectSuggestAttributeValue(
-							currentAttributeName,
-							scanner.tokenOffset,
-							scanner.getTokenEnd()
-						);
+			case TokenType.EndTag:
+				if (offset <= scanner.getTokenEnd()) {
+					let start = scanner.tokenOffset - 1;
+					while (start >= 0) {
+						const ch = text.charAt(start);
+						if (ch === '/') {
+							return collectCloseTagSuggestions(start, scanner.getTokenEnd());
+						} else if (!isWhiteSpace(ch)) {
+							break;
+						}
+						start--;
 					}
-				}
-				break;
-			case TokenType.DelimiterAssign:
-				if (scanner.getTokenEnd() === offset) {
-					return collectSuggestAttributeValue(currentAttributeName, scanner.getTokenEnd());
 				}
 				break;
 			case TokenType.Content:
