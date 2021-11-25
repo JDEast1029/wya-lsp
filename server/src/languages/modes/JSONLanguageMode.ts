@@ -1,5 +1,5 @@
 import { ILanguageMode } from './ILanguageMode';
-import { CompletionItem, Position } from 'vscode-languageserver-types';
+import { CompletionItem, Hover, Position } from 'vscode-languageserver-types';
 import { CompletionContext, FormattingOptions, Range, TextEdit } from 'vscode-languageserver/node';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import {
@@ -37,6 +37,12 @@ export class JSONLanguageMode implements ILanguageMode {
 
 	format(document: TextDocument, range: Range, options: FormattingOptions): TextEdit[] {
 		return this.languageService.format(document, range, options);
+	}
+
+	async doHover(document: TextDocument, position: Position): Promise<Hover | null> {
+		const embedded = this.embeddedLanguageModeCache.refreshAndGetMode(document);
+		const lsHovers = await this.languageService.doHover(document, position, this.jsonModeCache.refreshAndGetMode(embedded));
+		return lsHovers;
 	}
 
 	private initJsonService() {
