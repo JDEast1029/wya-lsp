@@ -20,6 +20,7 @@ export const initResult: InitializeResult = {
 		},
 		// 格式化代码
 		documentFormattingProvider : true,
+		hoverProvider : true,
 	}
 };
 

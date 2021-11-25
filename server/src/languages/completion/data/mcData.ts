@@ -4502,14 +4502,6 @@ export const mcData: WXMLData = {
 	valueSets: [
 		...commonValueSets,
 		{
-			"name": "lang",
-			"values": [
-				{ "name": "en" },
-				{ "name": "zh_CN" },
-				{ "name": "zh_TW" },
-			],
-		},
-		{
 			"name": "number-dance-mode",
 			"values": [
 				{ "name": "scroll" },

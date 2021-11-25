@@ -1,8 +1,9 @@
-import { CompletionItem, Diagnostic, CompletionParams, DocumentFormattingParams, TextEdit } from 'vscode-languageserver/node';
+import { CompletionItem, Diagnostic, CompletionParams, DocumentFormattingParams, TextEdit, TextDocumentPositionParams } from 'vscode-languageserver/node';
 import { BasicComponentInfo, WLSFullConfig, getDefaultWLSConfig } from './config';
 import { DocumentService } from './DocumentService';
 import { LanguageModes } from '../languages/LanguageModes';
 import { TextDocument } from 'vscode-languageserver-textdocument';
+import { NULL_HOVER } from '../constants';
 
 export interface ProjectConfig {
 	// wlsFullConfig: WLSFullConfig;
@@ -74,5 +75,15 @@ export class ProjectService {
 			}
 		}
 		return diagnostics;
+	}
+
+	public async doHover(params: TextDocumentPositionParams) {
+		const { textDocument, position } = params;
+		const doc = this.documentService.getDocument(textDocument.uri)!;
+		const mode = this.languageModes.getModeAtPosition(doc, position);
+		if (mode && mode.doHover) {
+			return mode.doHover(doc, position);
+		}
+		return NULL_HOVER;
 	}
 }

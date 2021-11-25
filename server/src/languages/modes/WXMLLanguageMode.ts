@@ -1,12 +1,14 @@
-import { CompletionItem, Diagnostic, DiagnosticSeverity, Range } from 'vscode-languageserver-types';
+import { CompletionItem, Diagnostic, DiagnosticSeverity, Hover, Range } from 'vscode-languageserver-types';
 import { CompletionContext } from 'vscode-languageserver/node';
 import { Position, TextDocument } from 'vscode-languageserver-textdocument';
 import { ESLint, Linter } from 'eslint';
 import { ILanguageMode } from './ILanguageMode';
 import { IWXMLDocument, parseWXMLDocument } from '../../parser/wxml/WXMLParser';
 import { LanguageModeCache } from '../LanguageModeCache';
-import { doComplete } from './wxml/complete';
 import { IWyaDocumentRegions } from '../../parser/region/WyaDocumentRegions';
+import { doComplete } from './wxml/complete';
+import { doHover } from './wxml/hover';
+import { WXMLDataManager } from '../completion/WXMLDataManager';
 
 const toDiagnostic = (error: Linter.LintMessage): Diagnostic => {
 	const line = error.line - 1;
@@ -20,6 +22,8 @@ const toDiagnostic = (error: Linter.LintMessage): Diagnostic => {
 		severity: error.severity === 1 ? DiagnosticSeverity.Warning : DiagnosticSeverity.Error
 	};
 };
+
+const dataManager = new WXMLDataManager({ useDefaultDataProvider: true});
 export class WXMLLanguageMode implements ILanguageMode {
 	languageModeCache: LanguageModeCache<IWyaDocumentRegions>;
 	embeddedLanguageModeCache: LanguageModeCache<TextDocument>;
@@ -61,7 +65,14 @@ export class WXMLLanguageMode implements ILanguageMode {
 	doComplete(document: TextDocument, position: Position, context: CompletionContext | undefined): CompletionItem[] {
 		const cachedDocument = this.embeddedLanguageModeCache.refreshAndGetMode(document);
 		const cachedWXMLDocument = this.wxmlDocumentCache.refreshAndGetMode(document);
-		return doComplete(cachedDocument, cachedWXMLDocument, position);
+		return doComplete(cachedDocument, cachedWXMLDocument, position, dataManager);
+	}
+
+	doHover(document: TextDocument, position: Position): Hover {
+		const cachedDocument = this.embeddedLanguageModeCache.refreshAndGetMode(document);
+		const cachedWXMLDocument = this.wxmlDocumentCache.refreshAndGetMode(document);
+	
+		return doHover(cachedDocument, cachedWXMLDocument, position, dataManager);
 	}
 
 	async doValidation(document: TextDocument): Promise<Diagnostic[] | null> {

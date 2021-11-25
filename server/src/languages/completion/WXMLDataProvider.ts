@@ -41,7 +41,30 @@ export class WXMLDataProvider implements IWXMLDataProvider {
 	provideAttributes(tag: string) {
 		const attributes: IAttributeData[] = [];
 		const processAttribute = (a: IAttributeData) => {
-			attributes.push(a);
+			const obj = {...a};
+			if (a.description && a.values?.length) {
+				const createDesc = (desc: string, values: IValueData[]) => {
+					return desc + '\n\n' +values.reduce((pre, cur, index, source) => {
+						if (cur.description) {
+							pre += `*   \`${cur.name}\`：`;
+							pre += typeof cur.description === 'object' ? cur.description.value : cur.description;
+							if (index < source.length -1) pre += '\n\n';
+						}
+						return pre;
+					}, '');
+				};
+				const descType = typeof obj.description;
+				if (descType === 'string') {
+					obj.description = createDesc(<string>obj.description, a.values);
+				} else if (descType === 'object') {
+					obj.description = {
+						...(<MarkupContent>obj.description),
+						value: createDesc((<MarkupContent>obj.description).value, a.values)
+					};
+				}
+				
+			}
+			attributes.push(obj);
 		};
 
 		const tagEntry = this._tagMap[tag.toLowerCase()];

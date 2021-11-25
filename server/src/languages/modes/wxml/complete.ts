@@ -20,8 +20,6 @@ const enum Priority {
 	Platform
 }
 
-const dataManager = new WXMLDataManager({ useDefaultDataProvider: true});
-
 const isWhiteSpace = (s: string): boolean => {
 	return /^\s*$/.test(s);
 };
@@ -61,7 +59,7 @@ const normalizeAttributeName = (attr: string): string => {
 
 	return result;
 };
-export const doComplete = (document: TextDocument, wxmlDocument: IWXMLDocument, position: Position): CompletionItem[] => {
+export const doComplete = (document: TextDocument, wxmlDocument: IWXMLDocument, position: Position, dataManager: WXMLDataManager): CompletionItem[] => {
 	const dataProviders = dataManager.getDataProviders();
 	const offset =  document.offsetAt(position);
 	const node = wxmlDocument.findNodeBefore(offset);

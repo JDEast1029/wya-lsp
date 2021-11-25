@@ -3,7 +3,8 @@ import {
 	CompletionParams,
 	Connection, 
 	DidChangeConfigurationParams, 
-	DocumentFormattingParams
+	DocumentFormattingParams,
+	Hover
 } from "vscode-languageserver";
 import { 
 	createConnection,
@@ -16,8 +17,6 @@ import {
 	CompletionItem,
 	CompletionItemKind,
 	TextDocumentPositionParams,
-	TextDocumentSyncKind,
-	InitializeResult
 } from "vscode-languageserver/node";
 import { accessSync, constants, existsSync } from 'fs';
 import path = require('path');
@@ -28,6 +27,7 @@ import { ProjectService } from './ProjectService';
 import { TextEdit, TextDocument } from 'vscode-languageserver-textdocument';
 import { getFileFsPath, normalizeFileNameToFsPath } from '../utils/paths';
 import { requireUncached } from '../utils/workspace';
+import { NULL_HOVER } from '../constants';
 
 export class WLS {
 	private workspaces: Map<
@@ -86,10 +86,12 @@ export class WLS {
 		this.setupWLSHandlers();
 	}
 
+	// TODO: 配置项传递下去
 	private setupWLSHandlers() {
 		this.connection.onCompletion(this.onCompletion.bind(this));
 		this.connection.onCompletionResolve(this.onCompletionResolve.bind(this));
 		this.connection.onDocumentFormatting(this.onDocumentFormatting.bind(this));
+		this.connection.onHover(this.onHover.bind(this));
 	}
 
 	private setupConfigListeners() {
@@ -131,5 +133,12 @@ export class WLS {
 		const project = new ProjectService(this.documentService, { globalSnippetDir: this.globalSnippetDir });
 	
 		return project?.onDocumentFormatting(params) ?? [];
+	}
+
+	private async onHover(params: TextDocumentPositionParams): Promise<Hover> {
+		const project = new ProjectService(this.documentService, { globalSnippetDir: this.globalSnippetDir });
+		const result = await project?.doHover(params) ?? NULL_HOVER;
+
+		return result;
 	}
 }

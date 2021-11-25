@@ -1,3 +1,4 @@
 <template>
-	<scroll-view scroll-x="{{ true }}" />
+	<cover-image referrer-policy="origin" bind:load="" />
+	<page-container position="top" />
 </template>
