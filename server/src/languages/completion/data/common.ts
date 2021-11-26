@@ -135,113 +135,134 @@ export const buttonEvents: IEventData[] = [
 ];
 
 export const mcInputAttrs: IAttributeData[] = [
-	{
-		"name": "value",
-		"description": "输入框的内容"
-	},
-	{
-		"name": "placeholder",
-		"description": "输入框为空时占位符"
-	},
-	{
-		"name": "placeholderStyle",
-		"description": "指定 placeholder 的样式，目前仅支持color,font-size和font-weight"
-	},
-	{
-		"name": "placeholderClass",
-		"description": "指定 placeholder 的样式类"
-	},
-	{
-		"name": "disabled",
-		"valueSet": "boolean",
-		"description": "禁用输入框"
-	},
-	{
-		"name": "maxlength",
-		"description": "最大输入长度，设置为 -1 的时候不限制最大长度"
-	},
-	{
-		"name": "cursorSpacing",
-		"description": "指定光标与键盘的距离。取textarea距离底部的距离和cursor-spacing指定的距离的最小值作为光标与键盘的距离"
-	},
-	{
-		"name": "autoFocus",
-		"valueSet": "boolean",
-		"description": "自动聚焦，拉起键盘"
-	},
-	{
-		"name": "focus",
-		"valueSet": "boolean",
-		"description": "获取焦点"
-	},
-	{
-		"name": "cursor",
-		"description": "指定focus时的光标位置"
-	},
-	{
-		"name": "selectionStart",
-		"description": "光标起始位置，自动聚集时有效，需与selection-end搭配使用"
-	},
-	{
-		"name": "selectionEnd",
-		"description": "光标结束位置，自动聚集时有效，需与selection-start搭配使用"
-	},
-	{
-		"name": "adjustPosition",
-		"valueSet": "boolean",
-		"description": "键盘弹起时，是否自动上推页面"
-	},
-	{
-		"name": "holdKeyboard",
-		"description": "focus时，点击页面的时候不收起键盘"
-	},
-	{
-		"name": "type",
-		"description": "input 的类型",
-		"values": [
-			{ "name": "textarea", "description": "文本框" },
-			{ "name": "text", "description": "文本输入键盘" },
-			{ "name": "number", "description": "数字输入键盘" },
-			{ "name": "idcard", "description": "身份证输入键盘" },
-			{ "name": "digit", "description": "带小数点的数字键盘" },
-			{ "name": "safe-password", "description": "密码安全输入键盘" },
-			{ "name": "password", "description": "是否是密码类型" },
-		]
-	},
-	{
-		"name": "readonly",
-		"valueSet": "boolean",
-		"description": "是否只读"
-	}
+    {
+        "name": "value",
+        "description": "输入框的内容"
+    },
+    {
+        "name": "placeholder",
+        "description": "输入框为空时占位符"
+    },
+    {
+        "name": "placeholder-style",
+        "description": "指定 placeholder 的样式，目前仅支持color,font-size和font-weight"
+    },
+    {
+        "name": "placeholder-class",
+        "description": "指定 placeholder 的样式类"
+    },
+    {
+        "name": "disabled",
+        "valueSet": "boolean",
+        "description": "禁用输入框"
+    },
+    {
+        "name": "maxlength",
+        "description": "最大输入长度，设置为 -1 的时候不限制最大长度"
+    },
+    {
+        "name": "cursor-spacing",
+        "description": "指定光标与键盘的距离。取textarea距离底部的距离和cursor-spacing指定的距离的最小值作为光标与键盘的距离"
+    },
+    {
+        "name": "auto-focus",
+        "valueSet": "boolean",
+        "description": "自动聚焦，拉起键盘"
+    },
+    {
+        "name": "focus",
+        "valueSet": "boolean",
+        "description": "获取焦点"
+    },
+    {
+        "name": "cursor",
+        "description": "指定focus时的光标位置"
+    },
+    {
+        "name": "selection-start",
+        "description": "光标起始位置，自动聚集时有效，需与selection-end搭配使用"
+    },
+    {
+        "name": "selection-end",
+        "description": "光标结束位置，自动聚集时有效，需与selection-start搭配使用"
+    },
+    {
+        "name": "adjust-position",
+        "valueSet": "boolean",
+        "description": "键盘弹起时，是否自动上推页面"
+    },
+    {
+        "name": "hold-keyboard",
+        "description": "focus时，点击页面的时候不收起键盘"
+    },
+    {
+        "name": "type",
+        "description": "input 的类型",
+        "values": [
+            {
+                "name": "textarea",
+                "description": "文本框"
+            },
+            {
+                "name": "text",
+                "description": "文本输入键盘"
+            },
+            {
+                "name": "number",
+                "description": "数字输入键盘"
+            },
+            {
+                "name": "idcard",
+                "description": "身份证输入键盘"
+            },
+            {
+                "name": "digit",
+                "description": "带小数点的数字键盘"
+            },
+            {
+                "name": "safe-password",
+                "description": "密码安全输入键盘"
+            },
+            {
+                "name": "password",
+                "description": "是否是密码类型"
+            }
+        ]
+    },
+    {
+        "name": "readonly",
+        "valueSet": "boolean",
+        "description": "是否只读"
+    }
 ];
 
 export const mcNumberDanceItemAttrs: IAttributeData[] = [
-	{
-		"name": "value",
-		"description": "数字字符串，0-9"
-	},
-	{
-		"name": "mode",
-		"valueSet": "number-dance-mode",
-		"description": "模式：scroll 滚动；count 计算，单位时间内变化"
-	},
-	{
-		"name": "scrollType",
-		"valueSet": "number-dance-scroll-type",
-		"description": "mode为scroll时数字滚动的类型"
-	},
-	{
-		"name": "duration",
-		"description": "数字变化动画过程时长"
-	},
-	{
-		"name": "itemStyle",
-		"description": "指定dance-item样式"
-	},
-	{
-		"name": "numberStyle",
-		"description": "指定数字样式"
-	},
+    {
+        "name": "value",
+        "description": "数字字符串，0-9"
+    },
+    {
+        "name": "mode",
+        "valueSet": "number-dance-mode",
+        "description": "模式：scroll 滚动；count 计算，单位时间内变化"
+    },
+    {
+        "name": "scroll-type",
+        "valueSet": "number-dance-scroll-type",
+        "description": "mode为scroll时数字滚动的类型"
+    },
+    {
+        "name": "duration",
+        "description": "数字变化动画过程时长"
+    },
+    {
+        "name": "item-style",
+        "description": "指定dance-item样式"
+    },
+    {
+        "name": "number-style",
+        "description": "指定数字样式"
+    }
 ];
 
 export const mcPopupAttrs: IAttributeData[] = [
@@ -262,7 +283,7 @@ export const mcPopupAttrs: IAttributeData[] = [
 		}
 	},
 	{
-		"name": "maskClosable",
+		"name": "mask-closable",
 		"valueSet": "boolean",
 		"description": {
 			"kind": "markdown",
@@ -272,49 +293,49 @@ export const mcPopupAttrs: IAttributeData[] = [
 ];
 
 export const mcRecycleListAttrs: IAttributeData[] = [
-	{
-		"name": "height",
-		"description": "列表高度，默认100vh"
-	},
-	{
-		"name": "show",
-		"valueSet": "boolean",
-		"description": "列表是否展示，建议搭配tab使用"
-	},
-	{
-		"name": "scroll",
-		"valueSet": "boolean",
-		"description": "是否允许上拉刷新"
-	},
-	{
-		"name": "showScrollStatus",
-		"valueSet": "boolean",
-		"description": "展示上拉刷新的状态文案"
-	},
-	{
-		"name": "scrollTop",
-		"description": "设置顶部滚动偏移量"
-	},
-	{
-		"name": "disabled",
-		"valueSet": "boolean",
-		"description": "是否禁止滑动"
-	},
-	{
-		"name": "lowerThreshold",
-		"description": "距底部/右边多远时，触发 scrolltolower 事件"
-	},
-	{
-		"name": "listenScroll",
-		"valueSet": "boolean",
-		"description": "是否对外暴露scroll事件"
-	},
-	{
-		"name": "total",
-		"description": "列表数据总页数"
-	},
-	{
-		"name": "current",
-		"description": "当前在第几页"
-	},
+    {
+        "name": "height",
+        "description": "列表高度，默认100vh"
+    },
+    {
+        "name": "show",
+        "valueSet": "boolean",
+        "description": "列表是否展示，建议搭配tab使用"
+    },
+    {
+        "name": "scroll",
+        "valueSet": "boolean",
+        "description": "是否允许上拉刷新"
+    },
+    {
+        "name": "show-scroll-status",
+        "valueSet": "boolean",
+        "description": "展示上拉刷新的状态文案"
+    },
+    {
+        "name": "scroll-top",
+        "description": "设置顶部滚动偏移量"
+    },
+    {
+        "name": "disabled",
+        "valueSet": "boolean",
+        "description": "是否禁止滑动"
+    },
+    {
+        "name": "lower-threshold",
+        "description": "距底部/右边多远时，触发 scrolltolower 事件"
+    },
+    {
+        "name": "listen-scroll",
+        "valueSet": "boolean",
+        "description": "是否对外暴露scroll事件"
+    },
+    {
+        "name": "total",
+        "description": "列表数据总页数"
+    },
+    {
+        "name": "current",
+        "description": "当前在第几页"
+    }
 ];

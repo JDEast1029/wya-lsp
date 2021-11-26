@@ -20,7 +20,7 @@ export const mcData: WXMLData = {
 					}
 				},
 				{
-					"name": "cancelText",
+					"name": "cancel-text",
 					"description": {
 						"kind": "markdown",
 						"value": "取消按钮文字,为空不展示底部取消按钮"
@@ -48,7 +48,7 @@ export const mcData: WXMLData = {
 					}
 				},
 				{
-					"name": "closeOnClickAction",
+					"name": "close-on-click-action",
 					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
@@ -65,35 +65,35 @@ export const mcData: WXMLData = {
 					}
 				},
 				{
-					"name": "sessionFrom",
+					"name": "session-from",
 					"description": {
 						"kind": "markdown",
 						"value": "会话来源，open-type=\"contact\"时有效"
 					}
 				},
 				{
-					"name": "sendMessageTitle",
+					"name": "send-message-title",
 					"description": {
 						"kind": "markdown",
 						"value": "会话内消息卡片标题，open-type=\"contact\"时有效"
 					}
 				},
 				{
-					"name": "sendMessagePath",
+					"name": "send-message-path",
 					"description": {
 						"kind": "markdown",
 						"value": "会话内消息卡片点击跳转小程序路径，open-type=\"contact\"时有效"
 					}
 				},
 				{
-					"name": "sendMessageImg",
+					"name": "send-message-img",
 					"description": {
 						"kind": "markdown",
 						"value": "会话内消息卡片图片，open-type=\"contact\"时有效"
 					}
 				},
 				{
-					"name": "showMessageCard",
+					"name": "show-message-card",
 					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
@@ -101,7 +101,7 @@ export const mcData: WXMLData = {
 					}
 				},
 				{
-					"name": "appParameter",
+					"name": "app-parameter",
 					"description": {
 						"kind": "markdown",
 						"value": "打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效"
@@ -182,7 +182,7 @@ export const mcData: WXMLData = {
 					]
 				},
 				{
-					"name": "openType",
+					"name": "open-type",
 					"valueSet": "open-type",
 					"description": "微信开放能力"
 				},
@@ -209,37 +209,37 @@ export const mcData: WXMLData = {
 					"valueSet": "lang",
 					"description": "指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。"
 				},
-				{ "name": "businessId" },
+				{ "name": "business-id" },
 				{
-					"name": "sessionFrom",
+					"name": "session-from",
 					"description": {
 						"kind": "markdown",
 						"value": "会话来源，open-type=\"contact\"时有效"
 					}
 				},
 				{
-					"name": "sendMessageTitle",
+					"name": "send-message-title",
 					"description": {
 						"kind": "markdown",
 						"value": "会话内消息卡片标题，open-type=\"contact\"时有效"
 					}
 				},
 				{
-					"name": "sendMessagePath",
+					"name": "send-message-path",
 					"description": {
 						"kind": "markdown",
 						"value": "会话内消息卡片点击跳转小程序路径，open-type=\"contact\"时有效"
 					}
 				},
 				{
-					"name": "sendMessageImg",
+					"name": "send-message-img",
 					"description": {
 						"kind": "markdown",
 						"value": "会话内消息卡片图片，open-type=\"contact\"时有效"
 					}
 				},
 				{
-					"name": "showMessageCard",
+					"name": "show-message-card",
 					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
@@ -247,7 +247,7 @@ export const mcData: WXMLData = {
 					}
 				},
 				{
-					"name": "appParameter",
+					"name": "app-parameter",
 					"description": {
 						"kind": "markdown",
 						"value": "打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效"
@@ -281,7 +281,7 @@ export const mcData: WXMLData = {
 					"description": "组件数据源"
 				},
 				{
-					"name": "useTabs",
+					"name": "use-tabs",
 					"valueSet": "boolean",
 					"description": "面板中是否采用tab的形式"
 				},
@@ -290,15 +290,15 @@ export const mcData: WXMLData = {
 					"description": "弹框的标题"
 				},
 				{
-					"name": "cancelText",
+					"name": "cancel-text",
 					"description": "取消的文案"
 				},
 				{
-					"name": "okText",
+					"name": "ok-text",
 					"description": "确定的文案"
 				},
 				{
-					"name": "showToolbar",
+					"name": "show-toolbar",
 					"valueSet": "boolean",
 					"description": "是否展示标题栏"
 				},
@@ -311,7 +311,7 @@ export const mcData: WXMLData = {
 					"description": "label 内容"
 				},
 				{
-					"name": "labelWidth",
+					"name": "label-width",
 					"description": "label的宽度"
 				},
 				{
@@ -319,7 +319,7 @@ export const mcData: WXMLData = {
 					"description": "弹层的id，默认cascader-popup"
 				},
 				{
-					"name": "useItemSlot",
+					"name": "use-item-slot",
 					"valueSet": "boolean",
 					"description": "是否启用触发弹层的的插槽"
 				},
@@ -496,16 +496,16 @@ export const mcData: WXMLData = {
 			},
 			"attributes": [
 				{
-					"name": "useSlot",
+					"name": "use-slot",
 					"valueSet": "boolean",
 					"description": "是否启用插槽"
 				},
 				{
-					"name": "targetTime",
+					"name": "target-time",
 					"description": "倒计时结束时间，支持Date, 日期字符串, 10位和13位的时间戳"
 				},
 				{
-					"name": "serverTime",
+					"name": "server-time",
 					"description": "服务器时间，支持Date, 日期字符串, 10位和13位的时间戳"
 				},
 				{
@@ -544,28 +544,37 @@ export const mcData: WXMLData = {
 					"description": "list-item 的右侧内容容器样式"
 				},
 				{
-					"name": "indicatorStyle",
+					"name": "indicator-style",
 					"description": "设置选择器中间选中框的样式"
 				},
 				{
-					"name": "indicatorClass",
+					"name": "indicator-class",
 					"description": "设置选择器中间选中框的类名"
 				},
 				{
 					"name": "mode",
 					"description": "时间选择器类型",
 					"values": [
-						{ "name": "date", "description": "日期选择" },
-						{ "name": "month", "description": "月份选择" },
-						{ "name": "quarter", "description": "季度选择" },
-					],
+						{
+							"name": "date",
+							"description": "日期选择"
+						},
+						{
+							"name": "month",
+							"description": "月份选择"
+						},
+						{
+							"name": "quarter",
+							"description": "季度选择"
+						}
+					]
 				},
 				{
-					"name": "minDate",
+					"name": "min-date",
 					"description": "可选的最小日期 默认 1940/01/01 00:00"
 				},
 				{
-					"name": "maxDate",
+					"name": "max-date",
 					"description": "可选的最大日期 默认 2030/12/31 23:59"
 				},
 				{
@@ -573,15 +582,15 @@ export const mcData: WXMLData = {
 					"description": "弹框的标题"
 				},
 				{
-					"name": "cancelText",
+					"name": "cancel-text",
 					"description": "取消的文案"
 				},
 				{
-					"name": "okText",
+					"name": "ok-text",
 					"description": "确定的文案"
 				},
 				{
-					"name": "showToolbar",
+					"name": "show-toolbar",
 					"valueSet": "boolean",
 					"description": "是否展示标题栏"
 				},
@@ -590,7 +599,7 @@ export const mcData: WXMLData = {
 					"description": "选中的值"
 				},
 				{
-					"name": "defaultValue",
+					"name": "default-value",
 					"description": "弹出面板时自动选中的值"
 				},
 				{
@@ -598,7 +607,7 @@ export const mcData: WXMLData = {
 					"description": "label 内容"
 				},
 				{
-					"name": "labelWidth",
+					"name": "label-width",
 					"description": "label 宽度"
 				},
 				{
@@ -606,7 +615,7 @@ export const mcData: WXMLData = {
 					"description": "弹层的id，默认picker-popup"
 				},
 				{
-					"name": "useItemSlot",
+					"name": "use-item-slot",
 					"valueSet": "boolean",
 					"description": "是否启用触发弹层的的插槽"
 				},
@@ -651,7 +660,7 @@ export const mcData: WXMLData = {
 			"description": "下拉菜单",
 			"attributes": [
 				{
-					"name": "activeColor",
+					"name": "active-color",
 					"description": "菜单标题和选项的选中态颜色"
 				},
 				{
@@ -660,7 +669,7 @@ export const mcData: WXMLData = {
 					"description": "是否显示蒙层"
 				},
 				{
-					"name": "zIndex",
+					"name": "z-index",
 					"description": "菜单栏 z-index 层级"
 				},
 				{
@@ -668,12 +677,12 @@ export const mcData: WXMLData = {
 					"description": "弹层的弹出方向，提供 down 和 up, 默认 down "
 				},
 				{
-					"name": "maskCloseable",
+					"name": "mask-closeable",
 					"valueSet": "boolean",
 					"description": "蒙层是否可点击关闭你"
 				},
 				{
-					"name": "closeOnClickOutside",
+					"name": "close-on-click-outside",
 					"valueSet": "boolean",
 					"description": "是否在点击外部 menu 后关闭菜单"
 				}
@@ -707,7 +716,7 @@ export const mcData: WXMLData = {
 					"description": "是否禁用菜单"
 				},
 				{
-					"name": "titleClass",
+					"name": "title-class",
 					"description": "标题额外类名"
 				},
 				{
@@ -737,7 +746,7 @@ export const mcData: WXMLData = {
 			"description": "echarts可视化组件",
 			"attributes": [
 				{
-					"name": "elementId",
+					"name": "element-id",
 					"description": "canvas id，默认mc-echarts"
 				},
 				{
@@ -775,7 +784,7 @@ export const mcData: WXMLData = {
 					"description": "表单验证规则，具体配置查看 async-validator"
 				},
 				{
-					"name": "labelWidth",
+					"name": "label-width",
 					"description": "表单域标签的宽度，所有的 FormItem 都会继承 Form 组件的 label-width 的值"
 				},
 				{
@@ -784,11 +793,11 @@ export const mcData: WXMLData = {
 					"description": "是否展示边框"
 				},
 				{
-					"name": "showMessage",
+					"name": "show-message",
 					"description": "是否显示校验错误信息"
 				},
 				{
-					"name": "labelPosition",
+					"name": "labe-position",
 					"description": "表单域标签的位置"
 				}
 			],
@@ -822,15 +831,15 @@ export const mcData: WXMLData = {
 					"description": "标签文本"
 				},
 				{
-					"name": "labelWidth",
+					"name": "label-width",
 					"description": "表单域标签的的宽度"
 				},
 				{
-					"name": "labelPosition",
+					"name": "label-position",
 					"description": "表单域标签的位置"
 				},
 				{
-					"name": "useLabelSlot",
+					"name": "use-label-slot",
 					"valueSet": "boolean",
 					"description": "label位置是否采用插槽"
 				},
@@ -848,7 +857,7 @@ export const mcData: WXMLData = {
 					"description": "表单验证规则"
 				},
 				{
-					"name": "labelFor",
+					"name": "label-for",
 					"description": "指定原生的 label 标签的 for 属性，配合控件的 element-id 属性，可以点击 label 时聚焦控件。"
 				},
 				{
@@ -920,22 +929,22 @@ export const mcData: WXMLData = {
 					"description": "圆角值，接收字符串, 单位自己设置"
 				},
 				{
-					"name": "lazyLoad",
+					"name": "lazy-load",
 					"valueSet": "boolean",
 					"description": "图片懒加载，在即将进入一定范围（上下三屏）时才开始加载"
 				},
 				{
-					"name": "useErrorSlot",
+					"name": "use-error-slot",
 					"valueSet": "boolean",
 					"description": "图片错误展示内容是否自定义"
 				},
 				{
-					"name": "useLoadingSlot",
+					"name": "use-loading-slot",
 					"valueSet": "boolean",
 					"description": "图片加载时的展示是否自定义"
 				},
 				{
-					"name": "showMenuByLongpress",
+					"name": "show-menu-by-longpress",
 					"valueSet": "boolean",
 					"description": "长按图片显示发送给朋友、收藏、保存图片、搜一搜、打开名片/前往群聊/打开小程序（若图片中包含对应二维码或小程序码）的菜单。\n支持识别的码：小程序码\n仅小程序支持识别的码：微信个人码、微信群码、企业微信个人码、 企业微信群码与企业微信互通群码；"
 				},
@@ -945,12 +954,12 @@ export const mcData: WXMLData = {
 					"description": "图片裁剪、缩放的模式"
 				},
 				{
-					"name": "showError",
+					"name": "show-error",
 					"valueSet": "boolean",
 					"description": "是否显示图片加载错误"
 				},
 				{
-					"name": "showLoading",
+					"name": "show-loading",
 					"valueSet": "boolean",
 					"description": "是否显示图片加载中"
 				},
@@ -1017,7 +1026,7 @@ export const mcData: WXMLData = {
 					"description": "裁剪区域定位， 格式 {x: number, y: number}"
 				},
 				{
-					"name": "elementId",
+					"name": "element-id",
 					"description": "画布的id, 默认 import-mc-imgs-crop"
 				}
 			],
@@ -1047,17 +1056,17 @@ export const mcData: WXMLData = {
 					"description": "是否为密码输入框"
 				},
 				{
-					"name": "confirmType",
+					"name": "confirm-type",
 					"valueSet": "confirm-type",
 					"description": "设置键盘右下角按钮的文字，仅在type='text'时生效"
 				},
 				{
-					"name": "confirmHold",
+					"name": "confirm-hold",
 					"valueSet": "boolean",
 					"description": "点击键盘右下角按钮时是否保持键盘不收起"
 				},
 				{
-					"name": "useClearSlot",
+					"name": "use-clear-slot",
 					"valueSet": "boolean",
 					"description": "清除按钮是否自定义"
 				},
@@ -1072,17 +1081,17 @@ export const mcData: WXMLData = {
 					"description": "输入框内容是否向右对齐"
 				},
 				{
-					"name": "usePrependSlot",
+					"name": "use-prepend-slot",
 					"valueSet": "boolean",
 					"description": "输入框前面是否使用插槽"
 				},
 				{
-					"name": "useAppendSlot",
+					"name": "use-append-slot",
 					"valueSet": "boolean",
 					"description": "输入框后面是否使用插槽"
 				},
 				{
-					"name": "autoHeight",
+					"name": "auto-height",
 					"valueSet": "boolean",
 					"description": "是否自动增高，设置auto-height时，style.height不生效"
 				},
@@ -1092,16 +1101,16 @@ export const mcData: WXMLData = {
 					"description": "如果 textarea 是在一个 position:fixed 的区域，需要显示指定属性 fixed 为 true"
 				},
 				{
-					"name": "showConfirmBar",
+					"name": "show-confirm-bar",
 					"valueSet": "boolean",
 					"description": "是否显示键盘上方带有”完成“按钮那一栏"
 				},
 				{
-					"name": "textareaStyle",
+					"name": "textarea-style",
 					"description": "指定textarea文本框的样式"
 				},
 				{
-					"name": "viewPlaceholder",
+					"name": "view-placeholder",
 					"valueSet": "boolean",
 					"description": "是否将当前的textarea样式copy出来用view展示"
 				}
@@ -1160,11 +1169,11 @@ export const mcData: WXMLData = {
 					"description": "指定 input 的样式类"
 				},
 				{
-					"name": "cancelText",
+					"name": "cancel-text",
 					"description": "取消按钮的文案, 默认 取消"
 				},
 				{
-					"name": "showCancel",
+					"name": "show-cancel",
 					"valueSet": "boolean",
 					"description": "是否显示取消按钮"
 				}
@@ -1220,7 +1229,7 @@ export const mcData: WXMLData = {
 					"description": "是否展示边框"
 				},
 				{
-					"name": "labelWidth",
+					"name": "label-width",
 					"description": "label内容的宽度"
 				}
 			],
@@ -1253,7 +1262,7 @@ export const mcData: WXMLData = {
 					"description": "label 内容"
 				},
 				{
-					"name": "labelWidth",
+					"name": "label-width",
 					"description": "item内label的宽度,优先级高于list内的labelWidth"
 				},
 				{
@@ -1265,7 +1274,7 @@ export const mcData: WXMLData = {
 					"description": "跳转的页面路由，搭配linkType使用"
 				},
 				{
-					"name": "leftIcon",
+					"name": "left-icon",
 					"description": "左侧的icon"
 				},
 				{
@@ -1273,7 +1282,7 @@ export const mcData: WXMLData = {
 					"description": "是否展示右侧箭头"
 				},
 				{
-					"name": "useLeftIconSlot",
+					"name": "use-left-icon-slot",
 					"valueSet": "boolean",
 					"description": "左侧icon是否定义"
 				},
@@ -1282,7 +1291,7 @@ export const mcData: WXMLData = {
 					"description": "左侧缩进距离， 默认 32，单位rpx"
 				},
 				{
-					"name": "linkType",
+					"name": "link-type",
 					"valueSet": "navigate-fn-type",
 					"description": "wx路由跳转方法"
 				},
@@ -1292,7 +1301,7 @@ export const mcData: WXMLData = {
 					"description": "是否显示边框"
 				},
 				{
-					"name": "borderIndent",
+					"name": "border-indent",
 					"valueSet": "boolean",
 					"description": "为true时，mc-list-item__wrapper的position为relative"
 				},
@@ -1342,16 +1351,16 @@ export const mcData: WXMLData = {
 					"description": "是否显示蒙层"
 				},
 				{
-					"name": "maskClosable",
+					"name": "mask-closable",
 					"valueSet": "boolean",
 					"description": "点击蒙层时是否可以关闭弹框"
 				},
 				{
-					"name": "maskStyle",
+					"name": "mask-style",
 					"description": "指定蒙层样式"
 				},
 				{
-					"name": "zIndex",
+					"name": "z-index",
 					"description": "弹框的z-index值"
 				},
 				{
@@ -1363,11 +1372,11 @@ export const mcData: WXMLData = {
 					"description": "弹框的内容"
 				},
 				{
-					"name": "okText",
+					"name": "ok-text",
 					"description": "确定按钮的文案"
 				},
 				{
-					"name": "cancelText",
+					"name": "cancel-text",
 					"description": "取消按钮的文案"
 				},
 				{
@@ -1422,7 +1431,7 @@ export const mcData: WXMLData = {
 					"description": "页面路由，当mode = link时有效"
 				},
 				{
-					"name": "openType",
+					"name": "open-type",
 					"valueSet": "navigate-type",
 					"description": "navigator组件中的微信开放能力"
 				},
@@ -1444,7 +1453,7 @@ export const mcData: WXMLData = {
 					"description": "通知文本颜色"
 				},
 				{
-					"name": "backgroundColor",
+					"name": "background-color",
 					"description": "滚动条背景"
 				},
 				{
@@ -1480,11 +1489,11 @@ export const mcData: WXMLData = {
 					"description": "整数位3位分隔符, 默认 ,"
 				},
 				{
-					"name": "separatorStyle",
+					"name": "separator-style",
 					"description": "指定分隔符的样式"
 				},
 				{
-					"name": "decimalStyle",
+					"name": "decimal-style",
 					"description": "指定小数的样式"
 				}
 			],
@@ -1527,11 +1536,11 @@ export const mcData: WXMLData = {
 					"description": "展示的列数, 默认 0,展示数据源原有的列数"
 				},
 				{
-					"name": "indicatorStyle",
+					"name": "indicator-style",
 					"description": "设置选择器中间选中框的样式"
 				},
 				{
-					"name": "indicatorClass",
+					"name": "indicator-class",
 					"description": "置选择器中间选中框的类名"
 				},
 				{
@@ -1539,15 +1548,15 @@ export const mcData: WXMLData = {
 					"description": "弹框的标题"
 				},
 				{
-					"name": "okText",
+					"name": "ok-text",
 					"description": "确定按钮的文案"
 				},
 				{
-					"name": "cancelText",
+					"name": "cancel-text",
 					"description": "取消按钮的文案"
 				},
 				{
-					"name": "showToolbar",
+					"name": "show-toolbar",
 					"valueSet": "boolean",
 					"description": "是否显示顶部标题栏"
 				},
@@ -1560,7 +1569,7 @@ export const mcData: WXMLData = {
 					"description": "label 内容"
 				},
 				{
-					"name": "labelWidth",
+					"name": "label-width",
 					"description": "item内label的宽度,优先级高于list内的labelWidth"
 				},
 				{
@@ -1568,7 +1577,7 @@ export const mcData: WXMLData = {
 					"description": "弹层的id，默认picker-popup"
 				},
 				{
-					"name": "useItemSlot",
+					"name": "use-item-slot",
 					"valueSet": "boolean",
 					"description": "是否启用触发弹层的的插槽"
 				},
@@ -1648,21 +1657,21 @@ export const mcData: WXMLData = {
 					"description": "是否显示关闭图标"
 				},
 				{
-					"name": "closeIconPosition",
+					"name": "close-icon-position",
 					"description": "关闭图片的位置",
 					"values": [
 						{ "name": "top-right" },
 						{ "name": "top-left" },
 						{ "name": "bottom-right" },
-						{ "name": "bottom-left" },
-					],
+						{ "name": "bottom-left" }
+					]
 				},
 				{
-					"name": "maskStyle",
+					"name": "mask-style",
 					"description": "指定蒙层的样式"
 				},
 				{
-					"name": "zIndex",
+					"name": "z-index",
 					"description": "指定蒙层的样式类"
 				}
 			],
@@ -1766,7 +1775,7 @@ export const mcData: WXMLData = {
 					"description": "Y轴偏移值 -10, 单位px"
 				},
 				{
-					"name": "refreshHeight",
+					"name": "refresh-height",
 					"description": "下拉刷新区域的高度, 默认120, 单位rpx"
 				},
 				{
@@ -1828,7 +1837,7 @@ export const mcData: WXMLData = {
 					"description": "富文本内容"
 				},
 				{
-					"name": "imagePadding",
+					"name": "image-padding",
 					"description": "图片边距, 默认 5, 单位为px，内部做不同屏幕的视频"
 				}
 			],
@@ -1854,16 +1863,16 @@ export const mcData: WXMLData = {
 					"description": "是否禁用滑块"
 				},
 				{
-					"name": "useButtonSlot",
+					"name": "use-button-slot",
 					"valueSet": "boolean",
 					"description": "是否使用按钮插槽"
 				},
 				{
-					"name": "activeColor",
+					"name": "active-color",
 					"description": "进度条激活态颜色"
 				},
 				{
-					"name": "inactiveColor",
+					"name": "inactive-color",
 					"description": "进度条默认颜色"
 				},
 				{
@@ -1879,7 +1888,7 @@ export const mcData: WXMLData = {
 					"description": "步长"
 				},
 				{
-					"name": "barHeight",
+					"name": "bar-height",
 					"description": "进度条高度, 默认 4, 单位为rpx"
 				}
 			],
@@ -1921,7 +1930,7 @@ export const mcData: WXMLData = {
 					"description": "图标颜色"
 				},
 				{
-					"name": "useLoadingSlot",
+					"name": "use-loading-slot",
 					"valueSet": "boolean",
 					"description": "是否使用中间旋转的icon插槽"
 				},
@@ -1970,11 +1979,11 @@ export const mcData: WXMLData = {
 					"description": "是否禁用"
 				},
 				{
-					"name": "inputWidth",
+					"name": "input-width",
 					"description": "输入框的宽度"
 				},
 				{
-					"name": "buttonSize",
+					"name": "button-size",
 					"description": "组件高度，number类型是单位为px，string类型时可为rpx "
 				},
 				{
@@ -1983,12 +1992,12 @@ export const mcData: WXMLData = {
 					"description": "是否对外暴露async事件，失焦以及操作\"+\"、\"-\"才会触发async"
 				},
 				{
-					"name": "disableInput",
+					"name": "disable-input",
 					"valueSet": "boolean",
 					"description": "输入框是否可编辑"
 				},
 				{
-					"name": "decimalLength",
+					"name": "decimal-length",
 					"description": "小数点位数 "
 				},
 				{
@@ -2004,27 +2013,27 @@ export const mcData: WXMLData = {
 					"description": "步长, 默认 1"
 				},
 				{
-					"name": "forceStep",
+					"name": "force-step",
 					"valueSet": "boolean",
 					"description": "强制step, 即输入的内容也必须是step的倍数"
 				},
 				{
-					"name": "showPlus",
+					"name": "show-plus",
 					"valueSet": "boolean",
 					"description": "是否展示 + "
 				},
 				{
-					"name": "showMinus",
+					"name": "show-minus",
 					"valueSet": "boolean",
 					"description": "是否展示 - "
 				},
 				{
-					"name": "disablePlus",
+					"name": "disable-plus",
 					"valueSet": "boolean",
 					"description": "是否禁用 + "
 				},
 				{
-					"name": "disableMinus",
+					"name": "disable-minus",
 					"valueSet": "boolean",
 					"description": "是否禁用 - "
 				}
@@ -2075,11 +2084,11 @@ export const mcData: WXMLData = {
 			"description": "Sticky 组件与 CSS 中position: sticky属性实现的效果一致，当组件在屏幕范围内时，会按照正常的布局排列，当组件滚出屏幕范围时，始终会固定在屏幕顶部。",
 			"attributes": [
 				{
-					"name": "offsetTop",
+					"name": "offset-top",
 					"description": "吸顶时与顶部的距离，单位px"
 				},
 				{
-					"name": "zIndex",
+					"name": "z-index",
 					"description": "吸顶时的 z-index"
 				},
 				{
@@ -2123,7 +2132,7 @@ export const mcData: WXMLData = {
 					"description": "是否禁用"
 				},
 				{
-					"name": "autoClose",
+					"name": "auto-close",
 					"valueSet": "boolean",
 					"description": "点击按钮时是否自动关闭, 默认 true"
 				}
@@ -2171,27 +2180,27 @@ export const mcData: WXMLData = {
 					"description": "是否禁用"
 				},
 				{
-					"name": "activeColor",
+					"name": "active-color",
 					"description": "打开时的背景色"
 				},
 				{
-					"name": "inactiveColor",
+					"name": "inactive-color",
 					"description": "关闭时的背景色"
 				},
 				{
-					"name": "trueValue",
+					"name": "true-value",
 					"description": "打开时的值"
 				},
 				{
-					"name": "falseValue",
+					"name": "false-value",
 					"description": "关闭时的值"
 				},
 				{
-					"name": "openText",
+					"name": "open-text",
 					"description": "打开时的文案，未做"
 				},
 				{
-					"name": "closeText",
+					"name": "close-text",
 					"description": "关闭时的文案，未做"
 				},
 				{
@@ -2257,19 +2266,19 @@ export const mcData: WXMLData = {
 					"description": "是否开启手势滑动切换"
 				},
 				{
-					"name": "lineWidth",
+					"name": "line-width",
 					"description": "底部条宽度，默认单位px"
 				},
 				{
-					"name": "lineHeight",
+					"name": "line-height",
 					"description": "底部条高度，默认单位px"
 				},
 				{
-					"name": "titleActiveColor",
+					"name": "title-active-color",
 					"description": "标题选中态颜色"
 				},
 				{
-					"name": "titleInactiveColor",
+					"name": "title-inactive-color",
 					"description": "标题默认态颜色"
 				},
 				{
@@ -2279,8 +2288,14 @@ export const mcData: WXMLData = {
 				{
 					"name": "type",
 					"values": [
-						{ "name": "line", "description": "下划线式" },
-						{ "name": "card", "description": "卡片式" },
+						{
+							"name": "line",
+							"description": "下划线式"
+						},
+						{
+							"name": "card",
+							"description": "卡片式"
+						}
 					],
 					"description": "样式风格, 默认 line"
 				},
@@ -2299,19 +2314,19 @@ export const mcData: WXMLData = {
 					"description": "动画时间，单位秒"
 				},
 				{
-					"name": "zIndex",
+					"name": "z-index",
 					"description": "z-index 层级"
 				},
 				{
-					"name": "swipeThreshold",
+					"name": "swipe-threshold",
 					"description": "滚动阈值，标签数量超过阈值且总宽度超过标签栏宽度时开始横向滚动, 默认 4"
 				},
 				{
-					"name": "offsetTop",
+					"name": "offset-top",
 					"description": "粘性定位布局下与顶部的最小距离，单位px"
 				},
 				{
-					"name": "lazyRender",
+					"name": "lazy-render",
 					"valueSet": "boolean",
 					"description": "是否开启标签页内容延迟渲染, 未做"
 				}
@@ -2370,11 +2385,11 @@ export const mcData: WXMLData = {
 					"description": "指定 list-item 内容区域的的样式类"
 				},
 				{
-					"name": "indicatorStyle",
+					"name": "indicator-style",
 					"description": "设置选择器中间选中框的样式"
 				},
 				{
-					"name": "indicatorClass",
+					"name": "indicator-class",
 					"description": "置选择器中间选中框的类名"
 				},
 				{
@@ -2382,15 +2397,15 @@ export const mcData: WXMLData = {
 					"description": "弹框的标题"
 				},
 				{
-					"name": "okText",
+					"name": "ok-text",
 					"description": "确定按钮的文案"
 				},
 				{
-					"name": "cancelText",
+					"name": "cancel-text",
 					"description": "取消按钮的文案"
 				},
 				{
-					"name": "showToolbar",
+					"name": "show-toolbar",
 					"valueSet": "boolean",
 					"description": "是否显示顶部标题栏"
 				},
@@ -2398,7 +2413,7 @@ export const mcData: WXMLData = {
 					"name": "mode",
 					"values": [
 						{ "name": "24", "description": "24小时制" },
-						{ "name": "12", "description": "12小时制" },
+						{ "name": "12", "description": "12小时制" }
 					],
 					"description": "时间选择器类型"
 				},
@@ -2407,7 +2422,7 @@ export const mcData: WXMLData = {
 					"description": "选中的值"
 				},
 				{
-					"name": "defaultValue",
+					"name": "default-value",
 					"description": "弹出面板时自动选中的值"
 				},
 				{
@@ -2415,7 +2430,7 @@ export const mcData: WXMLData = {
 					"description": "label 内容"
 				},
 				{
-					"name": "labelWidth",
+					"name": "label-width",
 					"description": "label 宽度"
 				},
 				{
@@ -2423,7 +2438,7 @@ export const mcData: WXMLData = {
 					"description": "弹层的id，默认picker-popup"
 				},
 				{
-					"name": "useItemSlot",
+					"name": "use-item-slot",
 					"valueSet": "boolean",
 					"description": "是否启用触发弹层的的插槽"
 				},
@@ -2512,7 +2527,7 @@ export const mcData: WXMLData = {
 					"description": "一次性最多选择的文件数量, 默认 100, multiple = true时有效"
 				},
 				{
-					"name": "sizeType",
+					"name": "size-type",
 					"values": [
 						{ "name": "['original', 'compressed']" },
 						{ "name": "['original']" },
@@ -2521,7 +2536,7 @@ export const mcData: WXMLData = {
 					"description": "所选的图片的尺寸; original: 原图; compressed: 压缩图"
 				},
 				{
-					"name": "sourceType",
+					"name": "source-type",
 					"values": [
 						{ "name": "['album', 'camera']" },
 						{ "name": "['album']" },
@@ -2535,7 +2550,7 @@ export const mcData: WXMLData = {
 					"description": "是否压缩所选择的视频文件; 当 mode = video时生效"
 				},
 				{
-					"name": "maxDuration",
+					"name": "max-duration",
 					"description": "拍摄视频最长拍摄时间，默认 60, 单位秒, 当mode = video 或 media时生效"
 				},
 				{
@@ -2579,15 +2594,15 @@ export const mcData: WXMLData = {
 					"description": "允许上传的数量"
 				},
 				{
-					"name": "uploadText",
+					"name": "upload-text",
 					"description": "上传按钮底部的文案"
 				},
 				{
-					"name": "previewSize",
+					"name": "preview-size",
 					"description": "预览文件的大小, 默认150; 单位rpx"
 				},
 				{
-					"name": "dataSource",
+					"name": "data-source",
 					"description": "选取的文件数组"
 				},
 				{
@@ -2595,26 +2610,26 @@ export const mcData: WXMLData = {
 					"description": "选择器的类型，默认图片, 其他还未开发"
 				},
 				{
-					"name": "previewVideo",
+					"name": "preview-video",
 					"valueSet": "boolean",
 					"description": "选取的视频是否允许预览"
 				},
 				{
-					"name": "previewImage",
+					"name": "preview-image",
 					"valueSet": "boolean",
 					"description": "选取的图片是否允许预览"
 				},
 				{
-					"name": "imageFit",
+					"name": "image-fit",
 					"valueSet": "image-fit",
 					"description": "图片裁剪、缩放的模式"
 				},
 				{
-					"name": "uploadOpts",
+					"name": "upload-opts",
 					"description": "上传组件的属性，参考mc-upload"
 				},
 				{
-					"name": "useReady",
+					"name": "use-ready",
 					"valueSet": "boolean",
 					"description": "组件在视图层布局完成后是否对外暴露ready事件"
 				}
@@ -2641,11 +2656,11 @@ export const mcData: WXMLData = {
 			"description": "视频播放器, 用于解决iOS并发的video导致黑屏的情况，后续也可以作为自定义播放器",
 			"attributes": [
 				{
-					"name": "spinOpts",
+					"name": "spin-opts",
 					"description": "mc-spin组件的属性, 默认 { size: 50 }"
 				},
 				{
-					"name": "playStyle",
+					"name": "play-style",
 					"description": "指定播放按钮的样式"
 				},
 				{
@@ -2662,22 +2677,22 @@ export const mcData: WXMLData = {
 					"description": "视频封面的图片网络资源地址或云文件ID（2.3.0）。若 controls 属性值为 false 则设置 poster 无效"
 				},
 				{
-					"name": "showCenterPlayBtn",
+					"name": "show-center-play-btn",
 					"valueSet": "boolean",
 					"description": "是否显示视频中间的播放按钮"
 				},
 				{
-					"name": "showMuteBtn",
+					"name": "show-mute-btn",
 					"valueSet": "boolean",
 					"description": "是否显示静音按钮"
 				},
 				{
-					"name": "showPlayBtn",
+					"name": "show-play-btn",
 					"valueSet": "boolean",
 					"description": "是否显示视频底部控制栏的播放按钮"
 				},
 				{
-					"name": "showFullscreenBtn",
+					"name": "show-fullscreen-btn",
 					"valueSet": "boolean",
 					"description": "是否显示全屏按钮"
 				},
@@ -2687,7 +2702,7 @@ export const mcData: WXMLData = {
 					"description": "是否显示默认播放控件（播放/暂停按钮、播放进度、时间）"
 				},
 				{
-					"name": "pictureInPictureMode",
+					"name": "picture-in-picture-mode",
 					"description": "设置小窗模式： push, pop，空字符串或通过数组形式设置多种模式（如： [\"push\", \"pop\"]）"
 				}
 			],
@@ -2706,7 +2721,7 @@ export const mcData: WXMLData = {
 			description: "组件对外统一暴露的类名"
 		},
 		{
-			name: "mcStyle",
+			name: "mc-style",
 			description: "组件对外统一暴露的样式属性"
 		},
 	],
