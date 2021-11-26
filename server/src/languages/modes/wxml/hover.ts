@@ -10,21 +10,6 @@ import { EVENT_PREFIX_LIST } from '../../completion/data/wxmlData';
 import { IAttributeData } from './IWXMLLanguageTypes';
 
 const TRIVIAL_TOKEN = [TokenType.StartTagOpen, TokenType.EndTagOpen, TokenType.Whitespace];
-const trimQuotes = (s: string) => {
-	if (s.length <= 1) {
-		return s.replace(/['"]/, '');
-	}
-
-	if (s[0] === `'` || s[0] === `"`) {
-		s = s.slice(1);
-	}
-
-	if (s[s.length - 1] === `'` || s[s.length - 1] === `"`) {
-		s = s.slice(0, -1);
-	}
-
-	return s;
-};
 
 export const doHover =  (document: TextDocument, wxmlDocument: IWXMLDocument, position: Position, dataManager: WXMLDataManager): Hover => {
 	const dataProviders = dataManager.getDataProviders();
