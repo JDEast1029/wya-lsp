@@ -42,24 +42,25 @@ export class WXMLDataProvider implements IWXMLDataProvider {
 		const attributes: IAttributeData[] = [];
 		const processAttribute = (a: IAttributeData) => {
 			const obj = {...a};
-			if (a.description && a.values?.length) {
+			const values = this.provideValues(tag, a.name);
+			if (a.description && values?.length) {
 				const createDesc = (desc: string, values: IValueData[]) => {
-					return desc + '\n\n' +values.reduce((pre, cur, index, source) => {
+					return desc + '\n' +values.reduce((pre, cur, index, source) => {
 						if (cur.description) {
 							pre += `*   \`${cur.name}\`：`;
 							pre += typeof cur.description === 'object' ? cur.description.value : cur.description;
-							if (index < source.length -1) pre += '\n\n';
+							if (index < source.length -1) pre += '\n';
 						}
 						return pre;
 					}, '');
 				};
 				const descType = typeof obj.description;
 				if (descType === 'string') {
-					obj.description = createDesc(<string>obj.description, a.values);
+					obj.description = createDesc(<string>obj.description, values);
 				} else if (descType === 'object') {
 					obj.description = {
 						...(<MarkupContent>obj.description),
-						value: createDesc((<MarkupContent>obj.description).value, a.values)
+						value: createDesc((<MarkupContent>obj.description).value, values)
 					};
 				}
 				

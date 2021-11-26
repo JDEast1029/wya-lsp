@@ -1,5 +1,5 @@
 import { WXMLData } from '../../modes/wxml/IWXMLLanguageTypes';
-import { commonValueSets } from './common';
+import { buttonEvents, commonValueSets } from './common';
 
 interface IGrammarData {
 	name: string,
@@ -1284,30 +1284,7 @@ export const wxmlData: WXMLData = {
 				}
 			],
 			"events": [
-				{
-					"name": "getuserinfo",
-					"description": "用户点击该按钮时，会返回获取到的用户信息，回调的detail数据与wx.getUserInfo返回的一致，open-type=\"getUserInfo\"时有效"
-				},
-				{
-					"name": "contact",
-					"description": "客服消息回调，open-type=\"contact\"时有效"
-				},
-				{
-					"name": "getphonenumber",
-					"description": "获取用户手机号回调，open-type=getPhoneNumber时有效"
-				},
-				{
-					"name": "error",
-					"description": "当使用开放能力时，发生错误的回调，open-type=launchApp时有效"
-				},
-				{
-					"name": "opensetting",
-					"description": "在打开授权设置页后回调，open-type=openSetting时有效"
-				},
-				{
-					"name": "launchapp",
-					"description": "打开 APP 成功的回调，open-type=launchApp时有效"
-				}
+				...buttonEvents
 			],
 			"references": [
 				{
@@ -1574,6 +1551,7 @@ export const wxmlData: WXMLData = {
 				},
 				{
 					"name": "confirm-type",
+					"valueSet": "confirm-type",
 					"description": {
 						"kind": "markdown",
 						"value": "**v1.1.0**\n\n设置键盘右下角按钮的文字，仅在type='text'时生效"

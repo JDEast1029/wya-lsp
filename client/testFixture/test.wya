@@ -1,4 +1,10 @@
 <template>
 	<cover-image referrer-policy="origin" bind:load="" />
-	<page-container position="top" />
 </template>
+
+<config>
+{
+	"backgroundColor": "",
+	"restartStrategy": "homePageAndLatestPage"
+}
+</config>

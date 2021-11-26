@@ -1,5 +1,5 @@
 import { WXMLData } from '../../modes/wxml/IWXMLLanguageTypes';
-import { commonValueSets } from './common';
+import { buttonEvents, commonValueSets, mcInputAttrs, mcNumberDanceItemAttrs, mcPopupAttrs, mcRecycleListAttrs } from './common';
 
 export const mcData: WXMLData = {
 	tags: [
@@ -10,40 +10,41 @@ export const mcData: WXMLData = {
 				"value": "动作面板"
 			},
 			"attributes": [
+				...mcPopupAttrs,
 				{
 					"name": "visible",
 					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| boolean | `false` | 否 | 是否可见"
+						"value": "是否可见"
 					}
 				},
 				{
 					"name": "cancelText",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| string | `取消` | 否 | 取消按钮文字,为空不展示底部取消按钮"
+						"value": "取消按钮文字,为空不展示底部取消按钮"
 					}
 				},
 				{
 					"name": "title",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| string | | 否 | 弹框标题"
+						"value": "弹框标题"
 					}
 				},
 				{
 					"name": "description",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| string | | 否 | 弹框二级标题"
+						"value": "弹框二级标题"
 					}
 				},
 				{
 					"name": "actions",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| array | `[]` | 否 | 面板选项列表, 每项可接受字段：`name` `extra` `color` `subname` `disabled` `onClick`"
+						"value": "面板选项列表, 每项可接受字段：`name` `extra` `color` `subname` `disabled` `onClick`"
 					}
 				},
 				{
@@ -51,57 +52,44 @@ export const mcData: WXMLData = {
 					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| boolean | `true` | 否 | 选中某一项后是否关闭弹层"
+						"value": "选中某一项后是否关闭弹层"
 					}
 				},
-				{
-					"name": "id",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
+				{ "name": "id" },
 				{
 					"name": "lang",
 					"valueSet": "lang",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "businessId",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。"
 					}
 				},
 				{
 					"name": "sessionFrom",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "会话来源，open-type=\"contact\"时有效"
 					}
 				},
 				{
 					"name": "sendMessageTitle",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "会话内消息卡片标题，open-type=\"contact\"时有效"
 					}
 				},
 				{
 					"name": "sendMessagePath",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "会话内消息卡片点击跳转小程序路径，open-type=\"contact\"时有效"
 					}
 				},
 				{
 					"name": "sendMessageImg",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "会话内消息卡片图片，open-type=\"contact\"时有效"
 					}
 				},
 				{
@@ -109,53 +97,14 @@ export const mcData: WXMLData = {
 					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示\"可能要发送的小程序\"提示，用户点击后可以快速发送小程序消息，open-type=\"contact\"时有效"
 					}
 				},
 				{
 					"name": "appParameter",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "ariaLabel",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "round",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "mask",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "maskClosable",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "openType",
-					"valueSet": "open-type",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效"
 					}
 				},
 			],
@@ -191,162 +140,102 @@ export const mcData: WXMLData = {
 				"value": "各种样式的操作按钮"
 			},
 			"attributes": [
-				{
-					"name": "id",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
+				{ "name": "id" },
 				{
 					"name": "type",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "按钮的样式类型"
 					},
 					"values": [
-						{
-							"name": "default"
-						},
-						{
-							"name": "primary"
-						},
-						{
-							"name": "text"
-						},
-						{
-							"name": "success"
-						},
-						{
-							"name": "error"
-						},
-						{
-							"name": "warning"
-						},
+						{ "name": "default", "description": "白色" },
+						{ "name": "primary", "description": "蓝色" },
+						{ "name": "text", "description": "文字类型，无边框" },
+						{ "name": "success", "description": "绿色" },
+						{ "name": "error", "description": "红色" },
+						{ "name": "warning", "description": "黄色" },
 					]
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					},
+					"description": "是否禁用",
 				},
 				{
 					"name": "square",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否为方形"
 				},
 				{
 					"name": "circle",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否为圆角"
 				},
 				{
 					"name": "size",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					},
+					"description": "按钮尺寸",
 					"values": [
-						{ "name": "large" },
-						{ "name": "medium" },
-						{ "name": "small" }
+						{ "name": "large", "description": "超大按钮" },
+						{ "name": "normal", "description": "正常大小" },
+						{ "name": "small", "description": "小型" },
+						{ "name": "mini", "description": "迷你" },
 					]
 				},
 				{
 					"name": "openType",
 					"valueSet": "open-type",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "微信开放能力"
 				},
 				{
 					"name": "long",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否为长按钮，铺满全屏"
 				},
 				{
 					"name": "plain",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "wait",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "背景为白色"
 				},
 				{
 					"name": "icon",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "按钮的图标类型，值为mc-icon内设置的"
 				},
 				{
 					"name": "color",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "按钮边框以及背景的颜色"
 				},
 				{
 					"name": "lang",
 					"valueSet": "lang",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。"
 				},
-				{
-					"name": "businessId",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
+				{ "name": "businessId" },
 				{
 					"name": "sessionFrom",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "会话来源，open-type=\"contact\"时有效"
 					}
 				},
 				{
 					"name": "sendMessageTitle",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "会话内消息卡片标题，open-type=\"contact\"时有效"
 					}
 				},
 				{
 					"name": "sendMessagePath",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "会话内消息卡片点击跳转小程序路径，open-type=\"contact\"时有效"
 					}
 				},
 				{
 					"name": "sendMessageImg",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "会话内消息卡片图片，open-type=\"contact\"时有效"
 					}
 				},
 				{
@@ -354,49 +243,23 @@ export const mcData: WXMLData = {
 					"valueSet": "boolean",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示\"可能要发送的小程序\"提示，用户点击后可以快速发送小程序消息，open-type=\"contact\"时有效"
 					}
 				},
 				{
 					"name": "appParameter",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效"
 					}
 				},
-				{
-					"name": "ariaLabel",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				}
 			],
 			"events": [
 				{
 					"name": "click",
-					"description": ""
+					"description": "点击事件"
 				},
-				{
-					"name": "getuserinfo",
-					"description": ""
-				},
-				{
-					"name": "getphonenumber",
-					"description": ""
-				},
-				{
-					"name": "error",
-					"description": ""
-				},
-				{
-					"name": "launchapp",
-					"description": ""
-				},
-				{
-					"name": "opensetting",
-					"description": ""
-				}
+				...buttonEvents
 			],
 			"references": [
 				{
@@ -407,134 +270,90 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-cascader",
-			"description": {
-				"kind": "markdown",
-				"value": "级联选择器"
-			},
+			"description": "级联选择器",
 			"attributes": [
 				{
 					"name": "content-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "list-item上的自定义样式"
 				},
 				{
 					"name": "dataSource",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "组件数据源"
 				},
 				{
 					"name": "useTabs",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "面板中是否采用tab的形式"
 				},
 				{
 					"name": "title",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹框的标题"
 				},
 				{
 					"name": "cancelText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "取消的文案"
 				},
 				{
 					"name": "okText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "确定的文案"
 				},
 				{
 					"name": "showToolbar",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否展示标题栏"
 				},
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "选中的值"
 				},
 				{
 					"name": "label",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "label 内容"
 				},
 				{
 					"name": "labelWidth",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "label的宽度"
 				},
 				{
 					"name": "tag",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹层的id，默认cascader-popup"
 				},
 				{
 					"name": "useItemSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否启用触发弹层的的插槽"
 				},
 				{
 					"name": "border",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示边框"
 				},
 				{
 					"name": "extra",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "item右边的内容"
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				}
 			],
 			"events": [
 				{
+					"name": "ready",
+					"description": "组件在视图层布局完成后执行"
+				},
+				{
 					"name": "change",
-					"description": ""
+					"description": "点击确定后触发"
 				},
 				{
 					"name": "cancel",
-					"description": ""
+					"description": "点击取消按钮后触发"
 				},
 				{
 					"name": "close",
-					"description": ""
+					"description": "弹层关闭后触发"
 				}
 			],
 			"references": [
@@ -546,25 +365,16 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-checkbox",
-			"description": {
-				"kind": "markdown",
-				"value": "复选框"
-			},
+			"description": "多选项目",
 			"attributes": [
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				},
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "checkbox标识，选中时触发checkbox-group的 change 事件，并携带 checkbox 的 value"
 				},
 				{
 					"name": "shape",
@@ -572,47 +382,30 @@ export const mcData: WXMLData = {
 						{ "name": "square" },
 						{ "name": "round" },
 					],
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "复选框的形状，提供 square 和 round"
 				},
 				{
 					"name": "color",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "checkbox的颜色，同css的color"
 				},
 				{
 					"name": "label",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "只在组合使用时有效。指定当前选项的 value 值，组合会自动判断是否选中"
 				},
 				{
 					"name": "indeterminate",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否支持半选"
 				},
 				{
 					"name": "name",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "原生 `name` 属性"
 					}
 				}
 			],
-			"events": [
-				{
-					"name": "change",
-					"description": ""
-				}
-			],
+			"events": [],
 			"references": [
 				{
 					"name": "wya-mc组件库",
@@ -622,28 +415,24 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-checkbox-group",
-			"description": {
-				"kind": "markdown",
-				"value": "复选框组"
-			},
+			"description": "多项选择器，内部由多个mc-checkbox组成。",
 			"attributes": [
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				},
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定选中项目的集合，"
 				}
 			],
-			"events": [],
+			"events": [
+				{
+					"name": "change",
+					"description": "在选项状态发生改变时触发。"
+				}
+			],
 			"references": [
 				{
 					"name": "wya-mc组件库",
@@ -653,31 +442,22 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-collapse",
-			"description": {
-				"kind": "markdown",
-				"value": "可以折叠/展开的内容区域"
-			},
+			"description": "可以折叠/展开的内容区域",
 			"attributes": [
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "当前激活的面板"
 				},
 				{
 					"name": "accordion",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否开启手风琴模式，开启后每次至多展开一个面板"
 				}
 			],
 			"events": [
 				{
 					"name": "change",
-					"description": ""
+					"description": "切换面板时触发，返回当前已展开的面板的 key, 格式为数组"
 				}
 			],
 			"references": [
@@ -689,24 +469,15 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-collapse-item",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "折叠的item",
 			"attributes": [
 				{
 					"name": "content-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "内容容器的自定义类名"
 				},
 				{
 					"name": "name",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "当前面板的 name，与 mc-collapse 的 value 对应，不填为索引值"
 				}
 			],
 			"events": [],
@@ -727,49 +498,34 @@ export const mcData: WXMLData = {
 				{
 					"name": "useSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否启用插槽"
 				},
 				{
 					"name": "targetTime",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "倒计时结束时间，支持Date, 日期字符串, 10位和13位的时间戳"
 				},
 				{
 					"name": "serverTime",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "服务器时间，支持Date, 日期字符串, 10位和13位的时间戳"
 				},
 				{
 					"name": "format",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "格式(DD:HH:mm:ss:ms), 默认 HH:mm:ss"
 				},
 				{
 					"name": "auto",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "倒计时是否自动开始"
 				}
 			],
 			"events": [
 				{
 					"name": "change",
-					"description": ""
+					"description": "时间变动时触发"
 				},
 				{
 					"name": "finish",
-					"description": ""
+					"description": "倒计时结束时触发"
 				}
 			],
 			"references": [
@@ -781,170 +537,106 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-date-picker",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "日期选择器",
 			"attributes": [
 				{
 					"name": "content-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "list-item 的右侧内容容器样式"
 				},
 				{
 					"name": "indicatorStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "设置选择器中间选中框的样式"
 				},
 				{
 					"name": "indicatorClass",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "设置选择器中间选中框的类名"
 				},
 				{
 					"name": "mode",
+					"description": "时间选择器类型",
 					"values": [
-						{ "name": "date" },
-						{ "name": "month" },
-						{ "name": "quarter" },
+						{ "name": "date", "description": "日期选择" },
+						{ "name": "month", "description": "月份选择" },
+						{ "name": "quarter", "description": "季度选择" },
 					],
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
 				},
 				{
 					"name": "minDate",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "可选的最小日期 默认 1940/01/01 00:00"
 				},
 				{
 					"name": "maxDate",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "可选的最大日期 默认 2030/12/31 23:59"
 				},
 				{
 					"name": "title",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹框的标题"
 				},
 				{
 					"name": "cancelText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "取消的文案"
 				},
 				{
 					"name": "okText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "确定的文案"
 				},
 				{
 					"name": "showToolbar",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否展示标题栏"
 				},
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "选中的值"
 				},
 				{
 					"name": "defaultValue",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹出面板时自动选中的值"
 				},
 				{
 					"name": "label",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "label 内容"
 				},
 				{
 					"name": "labelWidth",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "label 宽度"
 				},
 				{
 					"name": "tag",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹层的id，默认picker-popup"
 				},
 				{
 					"name": "useItemSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否启用触发弹层的的插槽"
 				},
 				{
 					"name": "border",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "item是否展示边框"
 				},
 				{
 					"name": "extra",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "item右边的内容"
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				}
 			],
 			"events": [
 				{
-					"name": "cancel",
-					"description": ""
+					"name": "change",
+					"description": "点击确定后触发"
 				},
 				{
-					"name": "change",
-					"description": ""
+					"name": "cancel",
+					"description": "点击取消按钮后触发"
 				},
 				{
 					"name": "close",
-					"description": ""
-				},
-				{
-					"name": "cancel",
-					"description": ""
+					"description": "弹层关闭后触发"
 				}
 			],
 			"references": [
@@ -956,62 +648,34 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-dropdown-menu",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "下拉菜单",
 			"attributes": [
 				{
 					"name": "activeColor",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "菜单标题和选项的选中态颜色"
 				},
 				{
 					"name": "mask",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示蒙层"
 				},
 				{
 					"name": "zIndex",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "duration",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "菜单栏 z-index 层级"
 				},
 				{
 					"name": "direction",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹层的弹出方向，提供 down 和 up, 默认 down "
 				},
 				{
 					"name": "maskCloseable",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "蒙层是否可点击关闭你"
 				},
 				{
 					"name": "closeOnClickOutside",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否在点击外部 menu 后关闭菜单"
 				}
 			],
 			"events": [],
@@ -1031,49 +695,34 @@ export const mcData: WXMLData = {
 			"attributes": [
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "当前选中项对应的 value"
 				},
 				{
 					"name": "title",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "菜单项标题"
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用菜单"
 				},
 				{
 					"name": "titleClass",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "标题额外类名"
 				},
 				{
 					"name": "options",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "选项数组"
 				}
 			],
 			"events": [
 				{
 					"name": "change",
-					"description": ""
+					"description": "点击选项导致 value 变化时触发"
 				},
 				{
 					"name": "close",
-					"description": ""
+					"description": "关闭菜单栏时触发"
 				}
 			],
 			"references": [
@@ -1085,39 +734,24 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-echarts",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "echarts可视化组件",
 			"attributes": [
 				{
 					"name": "elementId",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "canvas id，默认mc-echarts"
 				},
 				{
 					"name": "echarts",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "echarts库，使用mc-echarts，需要提供getApp().require的方法，由外部进行按需加载"
 				},
 				{
 					"name": "options",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "echarts的配置项"
 				},
 				{
 					"name": "lazy",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否延迟初始化"
 				}
 			],
 			"events": [],
@@ -1130,59 +764,38 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-form",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "表单",
 			"attributes": [
 				{
 					"name": "model",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "表单数据对象"
 				},
 				{
 					"name": "rules",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "表单验证规则，具体配置查看 async-validator"
 				},
 				{
 					"name": "labelWidth",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "表单域标签的宽度，所有的 FormItem 都会继承 Form 组件的 label-width 的值"
 				},
 				{
 					"name": "border",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否展示边框"
 				},
 				{
 					"name": "showMessage",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示校验错误信息"
 				},
 				{
 					"name": "labelPosition",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "表单域标签的位置"
 				}
 			],
 			"events": [
 				{
 					"name": "ready",
-					"description": ""
+					"description": "组件在视图层布局完成后执行"
 				}
 			],
 			"references": [
@@ -1194,89 +807,53 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-form-item",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "表单Item",
 			"attributes": [
 				{
 					"name": "label-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 label 的样式类"
 				},
 				{
 					"name": "content-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 右侧content 的样式类"
 				},
 				{
 					"name": "label",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "标签文本"
 				},
 				{
 					"name": "labelWidth",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "表单域标签的的宽度"
 				},
 				{
 					"name": "labelPosition",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "表单域标签的位置"
 				},
 				{
 					"name": "useLabelSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "label位置是否采用插槽"
 				},
 				{
 					"name": "prop",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "对应表单域 model 里的字段"
 				},
 				{
 					"name": "required",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否必填，如不设置，则会根据校验规则自动生成"
 				},
 				{
 					"name": "rules",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "表单验证规则"
 				},
 				{
 					"name": "labelFor",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定原生的 label 标签的 for 属性，配合控件的 element-id 属性，可以点击 label 时聚焦控件。"
 				},
 				{
 					"name": "indent",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "item缩进的距离，默认32rpx"
 				}
 			],
 			"events": [],
@@ -1289,31 +866,25 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-icon",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "图标",
 			"attributes": [
 				{
 					"name": "type",
 					"description": {
 						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
+						"value": "icon的类型\n\n[icon集](https://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.13&manage_type=myprojects&projectId=1119857&keyword=&project_type=&page=)"
 					}
 				},
 				{
 					"name": "inherit",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否使用svg预设的颜色"
 				}
 			],
 			"events": [
 				{
 					"name": "click",
-					"description": ""
+					"description": "点击事件"
 				}
 			],
 			"references": [
@@ -1325,112 +896,83 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-image",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "图片",
 			"attributes": [
 				{
 					"name": "src",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "图片链接"
 				},
 				{
 					"name": "round",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否为圆角"
 				},
 				{
 					"name": "width",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "宽度，默认100px, 接收字符串, 单位自己设置"
 				},
 				{
 					"name": "height",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "高度，默认100px, 接收字符串, 单位自己设置"
 				},
 				{
 					"name": "radius",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "圆角值，接收字符串, 单位自己设置"
 				},
 				{
 					"name": "lazyLoad",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "图片懒加载，在即将进入一定范围（上下三屏）时才开始加载"
 				},
 				{
 					"name": "useErrorSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "图片错误展示内容是否自定义"
 				},
 				{
 					"name": "useLoadingSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "图片加载时的展示是否自定义"
 				},
 				{
 					"name": "showMenuByLongpress",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "长按图片显示发送给朋友、收藏、保存图片、搜一搜、打开名片/前往群聊/打开小程序（若图片中包含对应二维码或小程序码）的菜单。\n支持识别的码：小程序码\n仅小程序支持识别的码：微信个人码、微信群码、企业微信个人码、 企业微信群码与企业微信互通群码；"
 				},
 				{
 					"name": "fit",
 					"valueSet": "image-fit",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "图片裁剪、缩放的模式"
 				},
 				{
 					"name": "showError",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示图片加载错误"
 				},
 				{
 					"name": "showLoading",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示图片加载中"
 				},
 				{
 					"name": "alt",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "替代文本"
 				}
 			],
-			"events": [],
+			"events": [
+				{
+					"name": "load",
+					"description": "图片加载完毕时触发"
+				},
+				{
+					"name": "error",
+					"description": "图片加载失败时触发"
+				},
+				{
+					"name": "click",
+					"description": "点击图片时触发"
+				},
+			],
 			"references": [
 				{
 					"name": "wya-mc组件库",
@@ -1440,73 +982,43 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-imgs-crop",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "图片裁剪",
 			"attributes": [
 				{
 					"name": "src",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "图片链接"
 				},
 				{
 					"name": "scale",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "缩放的倍数， 默认 1"
 				},
 				{
 					"name": "rotate",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "旋转的角度倍数, 默认 0"
 				},
 				{
 					"name": "border",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "裁剪的边框 [x, y]"
 				},
 				{
 					"name": "height",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "裁剪区域高, 默认750"
 				},
 				{
 					"name": "width",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "裁剪区域宽, 默认750"
 				},
 				{
 					"name": "color",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "边框的背景色RGBA, 默认 [0, 0, 0, 0.5]"
 				},
 				{
 					"name": "position",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "裁剪区域定位， 格式 {x: number, y: number}"
 				},
 				{
 					"name": "elementId",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "画布的id, 默认 import-mc-imgs-crop"
 				}
 			],
 			"events": [],
@@ -1524,265 +1036,108 @@ export const mcData: WXMLData = {
 				"value": ""
 			},
 			"attributes": [
-				{
-					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "placeholder",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "placeholderStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "placeholderClass",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "disabled",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "maxlength",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "cursorSpacing",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "autoFocus",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "focus",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "cursor",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "selectionStart",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "selectionEnd",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "adjustPosition",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "holdKeyboard",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "type",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "readonly",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
+				...mcInputAttrs,
 				{
 					"name": "mc-input-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 input 的样式类"
 				},
 				{
 					"name": "password",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否为密码输入框"
 				},
 				{
 					"name": "confirmType",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"valueSet": "confirm-type",
+					"description": "设置键盘右下角按钮的文字，仅在type='text'时生效"
 				},
 				{
 					"name": "confirmHold",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "点击键盘右下角按钮时是否保持键盘不收起"
 				},
 				{
 					"name": "useClearSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "清除按钮是否自定义"
 				},
 				{
 					"name": "clearable",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "显示清空按钮"
 				},
 				{
 					"name": "right",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "输入框内容是否向右对齐"
 				},
 				{
 					"name": "usePrependSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "输入框前面是否使用插槽"
 				},
 				{
 					"name": "useAppendSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "输入框后面是否使用插槽"
 				},
 				{
 					"name": "autoHeight",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否自动增高，设置auto-height时，style.height不生效"
 				},
 				{
 					"name": "fixed",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "如果 textarea 是在一个 position:fixed 的区域，需要显示指定属性 fixed 为 true"
 				},
 				{
 					"name": "showConfirmBar",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示键盘上方带有”完成“按钮那一栏"
 				},
 				{
 					"name": "textareaStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定textarea文本框的样式"
 				},
 				{
 					"name": "viewPlaceholder",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否将当前的textarea样式copy出来用view展示"
 				}
 			],
 			"events": [
 				{
 					"name": "blur",
-					"description": ""
+					"description": "输入框失焦时触发"
 				},
 				{
 					"name": "focus",
-					"description": ""
+					"description": "输入框聚焦时触发"
 				},
 				{
 					"name": "confirm",
-					"description": ""
+					"description": "点击完成按钮时触发，event.detail = { value }"
 				},
 				{
 					"name": "keyboardheightchange",
-					"description": ""
+					"description": "键盘高度发生变化的时候触发此事件，event.detail = {height: height, duration: duration}"
 				},
 				{
 					"name": "linechange",
-					"description": ""
+					"description": "输入框行数变化时调用，event.detail = {height: 0, heightRpx: 0, lineCount: 0}， type 为 textarea时有效"
 				},
 				{
 					"name": "clear",
-					"description": ""
+					"description": "点击清除按钮事触发"
 				},
 				{
 					"name": "input",
-					"description": ""
+					"description": "键盘输入时触发，event.detail = {value, cursor, keyCode}，keyCode 为键值，2.1.0 起支持，处理函数可以直接 return 一个字符串，将替换输入框的内容。"
 				},
 				{
 					"name": "change",
-					"description": ""
+					"description": "键盘输入时触发，event.detail = {value, cursor, keyCode}，keyCode 为键值，2.1.0 起支持，处理函数可以直接 return 一个字符串，将替换输入框的内容。"
 				}
 			],
 			"references": [
@@ -1799,175 +1154,49 @@ export const mcData: WXMLData = {
 				"value": ""
 			},
 			"attributes": [
-				{
-					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "placeholder",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "placeholderStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "placeholderClass",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "disabled",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "maxlength",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "cursorSpacing",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "autoFocus",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "focus",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "cursor",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "selectionStart",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "selectionEnd",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "adjustPosition",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "holdKeyboard",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "type",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "readonly",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
+				...mcInputAttrs,
 				{
 					"name": "mc-input-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 input 的样式类"
 				},
 				{
 					"name": "cancelText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "取消按钮的文案, 默认 取消"
 				},
 				{
 					"name": "showCancel",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示取消按钮"
 				}
 			],
 			"events": [
 				{
 					"name": "blur",
-					"description": ""
+					"description": "输入框失焦时触发"
 				},
 				{
 					"name": "focus",
-					"description": ""
+					"description": "输入框聚焦时触发"
 				},
 				{
 					"name": "confirm",
-					"description": ""
+					"description": "点击完成按钮时触发，event.detail = { value }"
 				},
 				{
 					"name": "keyboardheightchange",
-					"description": ""
+					"description": "键盘高度发生变化的时候触发此事件，event.detail = {height: height, duration: duration}"
 				},
 				{
 					"name": "clear",
-					"description": ""
+					"description": "点击清除按钮事触发"
 				},
 				{
 					"name": "input",
-					"description": ""
+					"description": "键盘输入时触发，event.detail = {value, cursor, keyCode}，keyCode 为键值，2.1.0 起支持，处理函数可以直接 return 一个字符串，将替换输入框的内容。"
 				},
 				{
 					"name": "change",
-					"description": ""
+					"description": "键盘输入时触发，event.detail = {value, cursor, keyCode}，keyCode 为键值，2.1.0 起支持，处理函数可以直接 return 一个字符串，将替换输入框的内容。"
 				}
 			],
 			"references": [
@@ -1979,32 +1208,20 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-list",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "手机端展示数据列表",
 			"attributes": [
 				{
 					"name": "title",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "list块的标题"
 				},
 				{
 					"name": "border",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否展示边框"
 				},
 				{
 					"name": "labelWidth",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "label内容的宽度"
 				}
 			],
 			"events": [],
@@ -2017,126 +1234,78 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-list-item",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "ListItem",
 			"attributes": [
 				{
 					"name": "label-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 label 的样式类"
 				},
 				{
 					"name": "wrapper-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 list-item 容器的样式类"
 				},
 				{
 					"name": "content-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 list-item 内容区域的的样式类"
 				},
 				{
 					"name": "label",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "label 内容"
 				},
 				{
 					"name": "labelWidth",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "item内label的宽度,优先级高于list内的labelWidth"
 				},
 				{
 					"name": "content",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "右边的内容"
 				},
 				{
 					"name": "url",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "跳转的页面路由，搭配linkType使用"
 				},
 				{
 					"name": "leftIcon",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "左侧的icon"
 				},
 				{
 					"name": "arrow",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否展示右侧箭头"
 				},
 				{
 					"name": "useLeftIconSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "左侧icon是否定义"
 				},
 				{
 					"name": "indent",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "左侧缩进距离， 默认 32，单位rpx"
 				},
 				{
 					"name": "linkType",
 					"valueSet": "navigate-fn-type",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "wx路由跳转方法"
 				},
 				{
 					"name": "border",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示边框"
 				},
 				{
 					"name": "borderIndent",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "为true时，mc-list-item__wrapper的position为relative"
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				}
 			],
 			"events": [
 				{
 					"name": "click",
-					"description": ""
+					"description": "点击时触发"
 				}
 			],
 			"references": [
@@ -2148,119 +1317,81 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-modal",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "模态对话框",
 			"attributes": [
 				{
 					"name": "wrapper-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定内容区域的样式类"
 				},
 				{
 					"name": "visible",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否可见"
 				},
 				{
 					"name": "mode",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹框类型",
+					"values": [
+						{ "name": "alert", "description": "警示框" },
+						{ "name": "operation", "description": "操作框, 未做" },
+					]
 				},
 				{
 					"name": "mask",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示蒙层"
 				},
 				{
 					"name": "maskClosable",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "点击蒙层时是否可以关闭弹框"
 				},
 				{
 					"name": "maskStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定蒙层样式"
 				},
 				{
 					"name": "zIndex",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹框的z-index值"
 				},
 				{
 					"name": "title",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹框的标题"
 				},
 				{
 					"name": "content",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹框的内容"
 				},
 				{
 					"name": "okText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "确定按钮的文案"
 				},
 				{
 					"name": "cancelText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "取消按钮的文案"
 				},
 				{
 					"name": "footer",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否展示底部按钮"
 				},
 				{
 					"name": "actions",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "当 mode = operation时有效，各个按钮的信息， 未做"
 				}
 			],
 			"events": [
 				{
 					"name": "close",
-					"description": ""
+					"description": "点击取消按钮时触发"
 				},
 				{
 					"name": "ok",
-					"description": ""
+					"description": "点击确定按钮时触发"
 				},
 				{
 					"name": "cancel",
-					"description": ""
+					"description": "弹框关闭时触发"
 				}
 			],
 			"references": [
@@ -2272,97 +1403,62 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-notice-bar",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "用于循环播放展示一组消息通知",
 			"attributes": [
 				{
 					"name": "text",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "通知文本内容"
 				},
 				{
 					"name": "mode",
+					"description": "通知栏模式",
 					"values": [
 						{ "name": "closeable" },
 						{ "name": "link" },
 					],
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
 				},
 				{
 					"name": "url",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "页面路由，当mode = link时有效"
 				},
 				{
 					"name": "openType",
 					"valueSet": "navigate-type",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "closePosition",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "navigator组件中的微信开放能力"
 				},
 				{
 					"name": "delay",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "动画延迟时间 (s), 默认1"
 				},
 				{
 					"name": "speed",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "滚动速率 (px/s), 默认 50"
 				},
 				{
 					"name": "scrollable",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否开启滚动播放，内容长度溢出时默认开启"
 				},
 				{
 					"name": "color",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "通知文本颜色"
 				},
 				{
 					"name": "backgroundColor",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "滚动条背景"
 				},
 				{
 					"name": "wrapable",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否开启文本换行，只在禁用滚动时生效"
 				}
 			],
-			"events": [],
+			"events": [
+				{
+					"name": "click",
+					"description": "点击通知栏时触发"
+				}
+			],
 			"references": [
 				{
 					"name": "wya-mc组件库",
@@ -2372,82 +1468,24 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-number-dance",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "数字滚动组件",
 			"attributes": [
-				{
-					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "mode",
-					"valueSet": "number-dance-mode",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "scrollType",
-					"valueSet": "number-dance-scroll-type",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "duration",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "itemStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "numberStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
+				...mcNumberDanceItemAttrs,
 				{
 					"name": "delay",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "相邻数字之间动画结束时间延迟，从左到右"
 				},
 				{
 					"name": "separator",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "整数位3位分隔符, 默认 ,"
 				},
 				{
 					"name": "separatorStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定分隔符的样式"
 				},
 				{
 					"name": "decimalStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定小数的样式"
 				}
 			],
 			"events": [],
@@ -2460,55 +1498,9 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-number-dance-item",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "数字滚动的item",
 			"attributes": [
-				{
-					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "mode",
-					"valueSet": "number-dance-mode",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "scrollType",
-					"valueSet": "number-dance-scroll-type",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "duration",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "itemStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "numberStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				}
+				...mcNumberDanceItemAttrs,
 			],
 			"events": [],
 			"references": [
@@ -2520,147 +1512,93 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-picker",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "选择器",
 			"attributes": [
 				{
 					"name": "content-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 list-item 内容区域的的样式类"
 				},
 				{
 					"name": "dataSource",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "对象数组，配置每一列显示的数据, 前后列有对应关系为tree结构(带children)，无关系为二维数组"
 				},
 				{
 					"name": "cols",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "展示的列数, 默认 0,展示数据源原有的列数"
 				},
 				{
 					"name": "indicatorStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "设置选择器中间选中框的样式"
 				},
 				{
 					"name": "indicatorClass",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "置选择器中间选中框的类名"
 				},
 				{
 					"name": "title",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "cancelText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹框的标题"
 				},
 				{
 					"name": "okText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "确定按钮的文案"
+				},
+				{
+					"name": "cancelText",
+					"description": "取消按钮的文案"
 				},
 				{
 					"name": "showToolbar",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示顶部标题栏"
 				},
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "选中的值"
 				},
 				{
 					"name": "label",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "label 内容"
 				},
 				{
 					"name": "labelWidth",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "item内label的宽度,优先级高于list内的labelWidth"
 				},
 				{
 					"name": "tag",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹层的id，默认picker-popup"
 				},
 				{
 					"name": "useItemSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否启用触发弹层的的插槽"
 				},
 				{
 					"name": "border",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示边框"
 				},
 				{
 					"name": "extra",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "item右边的内容"
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				}
 			],
 			"events": [
 				{
 					"name": "cancel",
-					"description": ""
+					"description": "弹框关闭时触发"
 				},
 				{
 					"name": "change",
-					"description": ""
+					"description": "点击确定后触发"
 				},
 				{
 					"name": "close",
-					"description": ""
+					"description": "点击取消按钮时触发"
 				}
 			],
 			"references": [
@@ -2672,118 +1610,66 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-popup",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "弹出层",
 			"attributes": [
+				...mcPopupAttrs,
 				{
 					"name": "enter-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定进入动画的样式类"
+				},
+				{
+					"name": "enter-active-class",
+					"description": ""
 				},
 				{
 					"name": "enter-to-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": ""
 				},
 				{
 					"name": "leave-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定离开动画的样式类"
 				},
 				{
 					"name": "leave-active-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": ""
 				},
 				{
 					"name": "leave-to-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "round",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "mask",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "maskClosable",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": ""
 				},
 				{
 					"name": "placement",
 					"valueSet": "placement",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹出位置，可选值为 top bottom right left center"
 				},
 				{
 					"name": "closeable",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示关闭图标"
 				},
 				{
 					"name": "closeIconPosition",
+					"description": "关闭图片的位置",
 					"values": [
 						{ "name": "top-right" },
 						{ "name": "top-left" },
 						{ "name": "bottom-right" },
 						{ "name": "bottom-left" },
 					],
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
 				},
 				{
 					"name": "maskStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定蒙层的样式"
 				},
 				{
 					"name": "zIndex",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定蒙层的样式类"
 				}
 			],
 			"events": [
 				{
 					"name": "close",
-					"description": ""
+					"description": "蒙层关闭时触发"
 				}
 			],
 			"references": [
@@ -2795,61 +1681,35 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-radio",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "单选项目。",
 			"attributes": [
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "否禁用"
 				},
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "radio 标识。当该radio 选中时，radio-group 的 change 事件会携带radio的value"
 				},
 				{
 					"name": "label",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "radio的内容描述，为false时，可以自定义"
 				},
 				{
 					"name": "color",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "选中时的颜色"
 				},
 				{
 					"name": "name",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "标识符"
 				},
 				{
 					"name": "iconStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 icon 的样式  "
 				}
 			],
-			"events": [
-				{
-					"name": "change",
-					"description": ""
-				}
-			],
+			"events": [],
 			"references": [
 				{
 					"name": "wya-mc组件库",
@@ -2859,28 +1719,24 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-radio-group",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "单项选择器，内部由多个 radio 组成",
 			"attributes": [
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				},
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定当前选中的项目数据, 与mc-radio中的name对应"
 				}
 			],
-			"events": [],
+			"events": [
+				{
+					"name": "change",
+					"description": "当绑定值变化时触发的事件"
+				}
+			],
 			"references": [
 				{
 					"name": "wya-mc组件库",
@@ -2890,138 +1746,43 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-recycle-list",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "下拉刷新上拉加载列表",
 			"attributes": [
-				{
-					"name": "height",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "show",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "scroll",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "showScrollStatus",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "scrollTop",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "disabled",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "lowerThreshold",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "listenScroll",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "total",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "current",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
+				...mcRecycleListAttrs,
 				{
 					"name": "pull-down-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定下拉区域的样式类"
 				},
 				{
 					"name": "pull-up-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定上拉区域的样式类"
 				},
 				{
 					"name": "core-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定核心滚动区域（不包含下拉刷新区域）的样式类"
 				},
 				{
 					"name": "pauseY",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "Y轴偏移值 -10, 单位px"
 				},
 				{
 					"name": "refreshHeight",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "下拉刷新区域的高度, 默认120, 单位rpx"
 				},
 				{
 					"name": "pull",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否允许下拉刷新"
 				}
 			],
 			"events": [
 				{
 					"name": "loadData",
-					"description": ""
+					"description": "获取列表数据, 返回格式 { list: [], page: { total: 0, current: 0, count: 0 }}"
 				},
 				{
 					"name": "scroll",
-					"description": ""
+					"description": "滚动时触发，event.detail = {scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY}"
 				}
 			],
 			"references": [
@@ -3033,99 +1794,22 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-recycle-list-core",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "上拉加载列表",
 			"attributes": [
-				{
-					"name": "height",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "show",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "scroll",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "showScrollStatus",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "scrollTop",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "disabled",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "lowerThreshold",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "listenScroll",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "total",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "current",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
+				...mcRecycleListAttrs
 			],
 			"events": [
 				{
 					"name": "ready",
-					"description": ""
+					"description": "组件在视图层布局完成后执行"
 				},
 				{
 					"name": "loadData",
-					"description": ""
+					"description": "获取列表数据, 返回格式 { list: [], page: { total: 0, current: 0, count: 0 }}"
 				},
 				{
 					"name": "scroll",
-					"description": ""
+					"description": "滚动时触发，event.detail = {scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY}"
 				}
 			],
 			"references": [
@@ -3137,24 +1821,15 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-rich-text",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "富文本",
 			"attributes": [
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "富文本内容"
 				},
 				{
 					"name": "imagePadding",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "图片边距, 默认 5, 单位为px，内部做不同屏幕的视频"
 				}
 			],
 			"events": [],
@@ -3167,93 +1842,63 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-slider",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "滑动输入条，用于在给定的范围内选择一个值。",
 			"attributes": [
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "当前进度百分比"
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用滑块"
 				},
 				{
 					"name": "useButtonSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否使用按钮插槽"
 				},
 				{
 					"name": "activeColor",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "进度条激活态颜色"
 				},
 				{
 					"name": "inactiveColor",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "进度条默认颜色"
 				},
 				{
 					"name": "max",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "最大值"
 				},
 				{
 					"name": "min",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "最小值"
 				},
 				{
 					"name": "step",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "步长"
 				},
 				{
 					"name": "barHeight",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "进度条高度, 默认 4, 单位为rpx"
 				}
 			],
 			"events": [
 				{
 					"name": "drag-start",
-					"description": ""
+					"description": "开始拖动时触发"
 				},
 				{
 					"name": "drag-end",
-					"description": ""
+					"description": "结束拖动时触发"
 				},
 				{
 					"name": "drag",
-					"description": ""
+					"description": "拖动进度条时触发"
 				},
 				{
 					"name": "change",
-					"description": ""
+					"description": "进度值改变后触发"
 				}
 			],
 			"references": [
@@ -3265,40 +1910,25 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-spin",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "旋转动画组件，用于加载中提示",
 			"attributes": [
 				{
 					"name": "size",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "图标大小"
 				},
 				{
 					"name": "color",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "图标颜色"
 				},
 				{
 					"name": "useLoadingSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否使用中间旋转的icon插槽"
 				},
 				{
 					"name": "fixed",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "未开发"
 				}
 			],
 			"events": [],
@@ -3311,182 +1941,126 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-stepper",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "步进器",
 			"attributes": [
 				{
 					"name": "input-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定input的样式类"
 				},
 				{
 					"name": "plus-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 +按钮 的样式类"
 				},
 				{
 					"name": "minus-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 -按钮 的样式类"
 				},
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "当前值"
 				},
 				{
 					"name": "integer",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "输入框是否为输入整数"
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				},
 				{
 					"name": "inputWidth",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "输入框的宽度"
 				},
 				{
 					"name": "buttonSize",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "组件高度，number类型是单位为px，string类型时可为rpx "
 				},
 				{
 					"name": "async",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否对外暴露async事件，失焦以及操作\"+\"、\"-\"才会触发async"
 				},
 				{
 					"name": "disableInput",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "输入框是否可编辑"
 				},
 				{
 					"name": "decimalLength",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "小数点位数 "
 				},
 				{
 					"name": "min",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "最小值, 默认 0"
 				},
 				{
 					"name": "max",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "最大债, 默认 MAX_SAFE_INTEGER"
 				},
 				{
 					"name": "step",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "步长, 默认 1"
 				},
 				{
 					"name": "forceStep",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "强制step, 即输入的内容也必须是step的倍数"
 				},
 				{
 					"name": "showPlus",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否展示 + "
 				},
 				{
 					"name": "showMinus",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否展示 - "
 				},
 				{
 					"name": "disablePlus",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用 + "
 				},
 				{
 					"name": "disableMinus",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用 - "
 				}
 			],
 			"events": [
 				{
-					"name": "focus",
-					"description": ""
+					"name": "blur",
+					"description": "输入框失焦时触发"
 				},
 				{
-					"name": "blur",
-					"description": ""
+					"name": "focus",
+					"description": "输入框聚焦时触发"
 				},
 				{
 					"name": "tip",
-					"description": ""
+					"description": "超过最大或最小值时触发"
 				},
 				{
 					"name": "overlimit",
-					"description": ""
+					"description": "点击不可用的按钮时触发"
 				},
 				{
-					"name": "type",
-					"description": ""
+					"name": "minus",
+					"description": "按 - 时触发"
+				},
+				{
+					"name": "plus",
+					"description": "按 + 时触发"
 				},
 				{
 					"name": "change",
-					"description": ""
+					"description": "当绑定值变化时触发的事件"
 				},
 				{
 					"name": "async",
-					"description": ""
+					"description": "async 为true时触发"
 				}
 			],
 			"references": [
@@ -3498,35 +2072,28 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-sticky",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "Sticky 组件与 CSS 中position: sticky属性实现的效果一致，当组件在屏幕范围内时，会按照正常的布局排列，当组件滚出屏幕范围时，始终会固定在屏幕顶部。",
 			"attributes": [
 				{
 					"name": "offsetTop",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "吸顶时与顶部的距离，单位px"
 				},
 				{
 					"name": "zIndex",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "吸顶时的 z-index"
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				}
 			],
-			"events": [],
+			"events": [
+				{
+					"name": "scroll",
+					"description": "滚动时触发 event.detail = { scrollTop: 距离顶部位置, isFixed: 是否吸顶 }"
+				}
+			],
 			"references": [
 				{
 					"name": "wya-mc组件库",
@@ -3536,61 +2103,43 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-swipe-action",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "可以左右滑动来展示操作按钮的单元格组件。",
 			"attributes": [
 				{
 					"name": "left",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "左侧的操作按钮 { label: 按钮名称, extraClass: 指定按钮样式类 }"
 				},
 				{
 					"name": "right",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "右侧的操作按钮 { label: 按钮名称, extraClass: 指定按钮样式类 }"
 				},
 				{
 					"name": "threshold",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "触发状态改变的阈值（滑动距离），单位为px"
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				},
 				{
 					"name": "autoClose",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "点击按钮时是否自动关闭, 默认 true"
 				}
 			],
 			"events": [
 				{
 					"name": "action",
-					"description": ""
+					"description": "点击时触发"
 				},
 				{
-					"name": "status",
-					"description": ""
+					"name": "close",
+					"description": "关闭时触发, event.detail = undefined"
 				},
 				{
 					"name": "open",
-					"description": ""
+					"description": "打开时触发, event.detail = { position: ‘left’ | ‘right’ }"
 				}
 			],
 			"references": [
@@ -3602,107 +2151,63 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-switch",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "用于在打开和关闭状态之间进行切换。",
 			"attributes": [
 				{
 					"name": "content-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "未开发"
 				},
 				{
 					"name": "inner-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "未开发"
 				},
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "当前开关的值"
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "loading",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				},
 				{
 					"name": "activeColor",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "打开时的背景色"
 				},
 				{
 					"name": "inactiveColor",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "关闭时的背景色"
 				},
 				{
 					"name": "trueValue",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "打开时的值"
 				},
 				{
 					"name": "falseValue",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "关闭时的值"
 				},
 				{
 					"name": "openText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "打开时的文案，未做"
 				},
 				{
 					"name": "closeText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "关闭时的文案，未做"
 				},
 				{
 					"name": "async",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "操作是否为异步"
 				}
 			],
 			"events": [
 				{
 					"name": "click",
-					"description": ""
+					"description": "async = true时，点击时触发"
 				},
 				{
 					"name": "change",
-					"description": ""
+					"description": "开关状态切换回调"
 				}
 			],
 			"references": [
@@ -3714,181 +2219,119 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-tabs",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "选项卡组件，用于在不同的内容区域之间进行切换。",
 			"attributes": [
 				{
 					"name": "nav-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定标签栏样式类"
 				},
 				{
 					"name": "tab-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定标签样式类， 未做"
 				},
 				{
 					"name": "tab-active-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定标签激活态样式类， 未做"
 				},
 				{
 					"name": "line-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定标签激活时底部线条的样式类， 未做"
 				},
 				{
 					"name": "color",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "标签主题色"
 				},
 				{
 					"name": "sticky",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否使用粘性定位布局"
 				},
 				{
 					"name": "animated",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否开启切换标签内容时的转场动画"
 				},
 				{
 					"name": "swipeable",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否开启手势滑动切换"
 				},
 				{
 					"name": "lineWidth",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "底部条宽度，默认单位px"
 				},
 				{
 					"name": "lineHeight",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "底部条高度，默认单位px"
 				},
 				{
 					"name": "titleActiveColor",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "标题选中态颜色"
 				},
 				{
 					"name": "titleInactiveColor",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "标题默认态颜色"
 				},
 				{
 					"name": "active",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "当前选中标签的标识符"
 				},
 				{
 					"name": "type",
 					"values": [
-						{ "name": "line" },
-						{ "name": "card" },
+						{ "name": "line", "description": "下划线式" },
+						{ "name": "card", "description": "卡片式" },
 					],
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "样式风格, 默认 line"
 				},
 				{
 					"name": "border",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否展示外边框，仅在 line 风格下生效"
 				},
 				{
 					"name": "ellipsis",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否省略过长的标题文字"
 				},
 				{
 					"name": "duration",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "动画时间，单位秒"
 				},
 				{
 					"name": "zIndex",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "z-index 层级"
 				},
 				{
 					"name": "swipeThreshold",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "滚动阈值，标签数量超过阈值且总宽度超过标签栏宽度时开始横向滚动, 默认 4"
 				},
 				{
 					"name": "offsetTop",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "粘性定位布局下与顶部的最小距离，单位px"
 				},
 				{
 					"name": "lazyRender",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否开启标签页内容延迟渲染, 未做"
 				}
 			],
 			"events": [
 				{
 					"name": "disabled",
-					"description": ""
+					"description": "禁用状态下点击标签时触发"
 				},
 				{
 					"name": "click",
-					"description": ""
+					"description": "点击标签时触发"
 				},
 				{
 					"name": "scroll",
-					"description": ""
+					"description": "滚动时触发"
+				},
+				{
+					"name": "change",
+					"description": "当前激活的标签改变时触发"
 				}
 			],
 			"references": [
@@ -3900,54 +2343,11 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-tabs-pane",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "Tab面板",
 			"attributes": [
 				{
-					"name": "dot",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "info",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "title",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "disabled",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "titleStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
 					"name": "name",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "用于标识当前面板，对应 value，默认为其索引值"
 				}
 			],
 			"events": [],
@@ -3967,144 +2367,93 @@ export const mcData: WXMLData = {
 			"attributes": [
 				{
 					"name": "content-class",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定 list-item 内容区域的的样式类"
 				},
 				{
 					"name": "indicatorStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "设置选择器中间选中框的样式"
 				},
 				{
 					"name": "indicatorClass",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "mode",
-					"values": [
-						{ "name": "24" },
-						{ "name": "12" },
-					],
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "置选择器中间选中框的类名"
 				},
 				{
 					"name": "title",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "cancelText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹框的标题"
 				},
 				{
 					"name": "okText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "确定按钮的文案"
+				},
+				{
+					"name": "cancelText",
+					"description": "取消按钮的文案"
 				},
 				{
 					"name": "showToolbar",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示顶部标题栏"
+				},
+				{
+					"name": "mode",
+					"values": [
+						{ "name": "24", "description": "24小时制" },
+						{ "name": "12", "description": "12小时制" },
+					],
+					"description": "时间选择器类型"
 				},
 				{
 					"name": "value",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "选中的值"
 				},
 				{
 					"name": "defaultValue",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹出面板时自动选中的值"
 				},
 				{
 					"name": "label",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "label 内容"
 				},
 				{
 					"name": "labelWidth",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "label 宽度"
 				},
 				{
 					"name": "tag",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "弹层的id，默认picker-popup"
 				},
 				{
 					"name": "useItemSlot",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否启用触发弹层的的插槽"
 				},
 				{
 					"name": "border",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "item是否展示边框"
 				},
 				{
 					"name": "extra",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "item右边的内容"
 				},
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				}
 			],
 			"events": [
 				{
 					"name": "cancel",
-					"description": ""
+					"description": "弹框关闭时触发"
 				},
 				{
 					"name": "change",
-					"description": ""
+					"description": "点击确定后触发"
 				},
 				{
 					"name": "close",
-					"description": ""
+					"description": "点击取消按钮时触发"
 				}
 			],
 			"references": [
@@ -4116,81 +2465,51 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-upload",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "上传功能",
 			"attributes": [
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				},
 				{
 					"name": "multiple",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否多选"
 				},
 				{
 					"name": "url",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "上传请求的地址"
 				},
 				{
 					"name": "headers",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "上传请求携带的头部信息"
 				},
 				{
 					"name": "name",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "后端接手file文件的字段"
 				},
 				{
 					"name": "mode",
 					"values": [
-						{ "name": "image" },
-						{ "name": "video" },
-						{ "name": "medium" },
-						{ "name": "files" },
+						{ "name": "image", "description": "图片" },
+						{ "name": "video", "description": "视频" },
+						{ "name": "medium", "description": "音频" },
+						{ "name": "files", "description": "文件" },
 					],
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "文件的归类"
 				},
 				{
 					"name": "accept",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "文件格式"
 				},
 				{
 					"name": "size",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "限制上传文件大小, 默认不限制（单位：mb）"
 				},
 				{
 					"name": "max",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "一次性最多选择的文件数量, 默认 100, multiple = true时有效"
 				},
 				{
 					"name": "sizeType",
@@ -4199,10 +2518,7 @@ export const mcData: WXMLData = {
 						{ "name": "['original']" },
 						{ "name": "['compressed']" },
 					],
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "所选的图片的尺寸; original: 原图; compressed: 压缩图"
 				},
 				{
 					"name": "sourceType",
@@ -4211,53 +2527,35 @@ export const mcData: WXMLData = {
 						{ "name": "['album']" },
 						{ "name": "['camera']" },
 					],
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "选择图片的来源; album: 从相册选图; camera: 使用相机"
 				},
 				{
 					"name": "compressed",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否压缩所选择的视频文件; 当 mode = video时生效"
 				},
 				{
 					"name": "maxDuration",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "拍摄视频最长拍摄时间，默认 60, 单位秒, 当mode = video 或 media时生效"
 				},
 				{
 					"name": "camera",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "默认拉起的是前置或者后置摄像头。部分 Android 手机下由于系统 ROM 不支持无法生效"
 				},
 				{
 					"name": "parallel",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否启用并行上传, 默认true"
 				},
 				{
 					"name": "fns",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "上传的回调，可设置: enhancer, onPostBefore, onPostAfter, onError, onBegin, onFileBefore, onFileStart, onFileSuccess, onFileError, onComplete"
 				}
 			],
 			"events": [
 				{
 					"name": "ready",
-					"description": ""
+					"description": "组件在视图层布局完成后执行"
 				}
 			],
 			"references": [
@@ -4269,117 +2567,66 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-upload-picker",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "文件上传选择器",
 			"attributes": [
 				{
 					"name": "disabled",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否禁用"
 				},
 				{
 					"name": "max",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "允许上传的数量"
 				},
 				{
 					"name": "uploadText",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "上传按钮底部的文案"
 				},
 				{
 					"name": "previewSize",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "name",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "预览文件的大小, 默认150; 单位rpx"
 				},
 				{
 					"name": "dataSource",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "选取的文件数组"
 				},
 				{
 					"name": "picker",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "选择器的类型，默认图片, 其他还未开发"
 				},
 				{
 					"name": "previewVideo",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "选取的视频是否允许预览"
 				},
 				{
 					"name": "previewImage",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
-				},
-				{
-					"name": "previewFullImage",
-					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "选取的图片是否允许预览"
 				},
 				{
 					"name": "imageFit",
 					"valueSet": "image-fit",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "图片裁剪、缩放的模式"
 				},
 				{
 					"name": "uploadOpts",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "上传组件的属性，参考mc-upload"
 				},
 				{
 					"name": "useReady",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "组件在视图层布局完成后是否对外暴露ready事件"
 				}
 			],
 			"events": [
 				{
 					"name": "ready",
-					"description": ""
+					"description": "组件在视图层布局完成后执行"
 				},
 				{
 					"name": "change",
-					"description": ""
+					"description": "dataSource值变动后触发"
 				}
 			],
 			"references": [
@@ -4391,93 +2638,57 @@ export const mcData: WXMLData = {
 		},
 		{
 			"name": "mc-video",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "视频播放器, 用于解决iOS并发的video导致黑屏的情况，后续也可以作为自定义播放器",
 			"attributes": [
 				{
 					"name": "spinOpts",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "mc-spin组件的属性, 默认 { size: 50 }"
 				},
 				{
 					"name": "playStyle",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "指定播放按钮的样式"
 				},
 				{
 					"name": "src",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "视频连接"
 				},
 				{
 					"name": "autoplay",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否自动播放"
 				},
 				{
 					"name": "poster",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "视频封面的图片网络资源地址或云文件ID（2.3.0）。若 controls 属性值为 false 则设置 poster 无效"
 				},
 				{
 					"name": "showCenterPlayBtn",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示视频中间的播放按钮"
 				},
 				{
 					"name": "showMuteBtn",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示静音按钮"
 				},
 				{
 					"name": "showPlayBtn",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示视频底部控制栏的播放按钮"
 				},
 				{
 					"name": "showFullscreenBtn",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示全屏按钮"
 				},
 				{
 					"name": "controls",
 					"valueSet": "boolean",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "是否显示默认播放控件（播放/暂停按钮、播放进度、时间）"
 				},
 				{
 					"name": "pictureInPictureMode",
-					"description": {
-						"kind": "markdown",
-						"value": "| 类型 | 默认值 | 必填 | 说明 \n| ---- | ---- | ---- | ---- \n| | | |"
-					}
+					"description": "设置小窗模式： push, pop，空字符串或通过数组形式设置多种模式（如： [\"push\", \"pop\"]）"
 				}
 			],
 			"events": [],
@@ -4504,34 +2715,34 @@ export const mcData: WXMLData = {
 		{
 			"name": "number-dance-mode",
 			"values": [
-				{ "name": "scroll" },
-				{ "name": "count" },
+				{ "name": "scroll", "description": "滚动" },
+				{ "name": "count", "description": "计算" },
 			],
 		},
 		{
 			"name": "number-dance-scroll-type",
 			"values": [
-				{ "name": "soft" },
-				{ "name": "hard" },
+				{ "name": "soft", "description": "由当前数字通过transition的方式切换到目标数字（比较柔和）" },
+				{ "name": "hard", "description": "会进行duration时长的animation动画后切换到目标数字，比如适用那种抽奖的场景" },
 			],
 		},
 		{
 			"name": "placement",
 			"values": [
-				{ "name": "top" },
-				{ "name": "left" },
-				{ "name": "right" },
-				{ "name": "bottom" },
-				{ "name": "center" },
+				{ "name": "top", "description": "从顶部弹出" },
+				{ "name": "left", "description": "从左侧弹出" },
+				{ "name": "right", "description": "从右侧弹出" },
+				{ "name": "bottom", "description": "从底部弹出" },
+				{ "name": "center", "description": "从中间弹出" },
 			],
 		},
 		{
 			"name": "image-fit",
 			"values": [
-				{ "name": "none" },
-				{ "name": "fill" },
-				{ "name": "cover" },
-				{ "name": "contain" },
+				{ "name": "none", "description": "裁剪模式，不缩放图片，只显示图片的中间区域" },
+				{ "name": "fill", "description": "缩放模式，不保持纵横比缩放图片，使图片的宽高完全拉伸至填满 image 元素" },
+				{ "name": "cover", "description": "缩放模式，保持纵横比缩放图片，只保证图片的短边能完全显示出来。也就是说，图片通常只在水平或垂直方向是完整的，另一个方向将会发生截取。" },
+				{ "name": "contain", "description": "缩放模式，保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来。" },
 			]
 		},
 	]
