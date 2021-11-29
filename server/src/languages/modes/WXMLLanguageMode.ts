@@ -49,7 +49,22 @@ export class WXMLLanguageMode implements ILanguageMode {
 			},
 			plugins: ['wxml'],
 			rules: {
-				"wxml/no-vue-directive": "error"
+				"wxml/no-vue-directive": "error",
+				"wxml/colon-style-event-binding": "error",
+				"wxml/empty-tag-self-closing": "error",
+				"wxml/max-len": ["warn", 150],
+				"wxml/no-const-and-let-in-wxs": "error",
+				"wxml/no-duplicate-attributes": "error",
+				"wxml/no-dynamic-wx-key": "error",
+				"wxml/no-unexpected-string-bool": "error",
+				"wxml/no-unnecessary-block": "error",
+				"wxml/no-wx-for-with-wx-else": "error",
+				"wxml/no-wx-for-with-wx-if": "error",
+				"wxml/no-wx-if-string": "error",
+				"wxml/quotes": ["error", "double"],
+				"wxml/report-wxml-syntax-error": "error",
+				"wxml/wx-key": "error",
+				"wxml/wxs-module-prop": "error"
 			}
 		};
 		baseConfig.ignorePatterns = ['!.*'];

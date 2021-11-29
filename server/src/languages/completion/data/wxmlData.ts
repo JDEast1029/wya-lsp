@@ -2291,10 +2291,7 @@ export const wxmlData: WXMLData = {
 		},
 		{
 			"name": "navigator",
-			"description": {
-				"kind": "markdown",
-				"value": ""
-			},
+			"description": "导航",
 			"attributes": [
 				{
 					"name": "target",
